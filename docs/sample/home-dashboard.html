@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Dashboard - Sample</title>
+  <link rel="stylesheet" href="./home-dashboard.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div>
+        <h1>Procurement Dashboard</h1>
+        <p>Overview of PR, PO, and GR activities</p>
+      </div>
+      <nav class="quick-actions">
+        <a href="#">+ New PR</a>
+        <a href="#">+ New PO</a>
+        <a href="#">+ New GR</a>
+      </nav>
+    </header>
+
+    <section class="kpi-grid">
+      <article class="card">
+        <h2>Open PR</h2>
+        <p class="value">14</p>
+      </article>
+      <article class="card">
+        <h2>Open PO</h2>
+        <p class="value">9</p>
+      </article>
+      <article class="card">
+        <h2>Pending GR</h2>
+        <p class="value">6</p>
+      </article>
+      <article class="card">
+        <h2>Today Receipts</h2>
+        <p class="value">3</p>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <article class="card">
+        <div class="card-head">
+          <h2>Recent Purchase Requisitions</h2>
+          <a href="#">View all</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>PR No</th>
+              <th>Requester</th>
+              <th>Status</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PR-0001</td>
+              <td>Budi</td>
+              <td>APPROVED</td>
+              <td>2026-02-21</td>
+            </tr>
+            <tr>
+              <td>PR-0002</td>
+              <td>Sari</td>
+              <td>SUBMITTED</td>
+              <td>2026-02-21</td>
+            </tr>
+            <tr>
+              <td>PR-0003</td>
+              <td>Andi</td>
+              <td>DRAFT</td>
+              <td>2026-02-20</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Recent Purchase Orders</h2>
+          <a href="#">View all</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>PO No</th>
+              <th>Vendor</th>
+              <th>Status</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PO-0008</td>
+              <td>PT Maju</td>
+              <td>SUBMITTED</td>
+              <td>2026-02-21</td>
+            </tr>
+            <tr>
+              <td>PO-0007</td>
+              <td>PT Sumber</td>
+              <td>DRAFT</td>
+              <td>2026-02-20</td>
+            </tr>
+            <tr>
+              <td>PO-0006</td>
+              <td>PT Jaya</td>
+              <td>SUBMITTED</td>
+              <td>2026-02-20</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Recent Goods Receipts</h2>
+        <a href="#">View all</a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>GR No</th>
+            <th>PO No</th>
+            <th>Status</th>
+            <th>Receipt Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GR-0012</td>
+            <td>PO-0008</td>
+            <td>POSTED</td>
+            <td>2026-02-21</td>
+          </tr>
+          <tr>
+            <td>GR-0011</td>
+            <td>PO-0006</td>
+            <td>DRAFT</td>
+            <td>2026-02-21</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
