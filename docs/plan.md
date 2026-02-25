@@ -11,6 +11,13 @@ MVP flow:
 
 Out of scope: production hardening, SSO, advanced approval matrix, reporting, notifications, and full enterprise compliance controls.
 
+Workshop implementation strategy:
+1. Core schema migration from this ERD is pre-provided in repository and applied by participants.
+2. Home/Dashboard + PR module (list/create/detail + PR APIs) are prebuilt and working.
+3. Participant backlog focus is PO module only (PO list/create/detail + PO APIs + PO validations).
+4. GR module is not implemented during workshop and is left for further exploration.
+5. Bookmark feature is post-backlog and practiced via GitHub Issue-driven development.
+
 ---
 
 ## 2) Final Tech Stack
@@ -52,6 +59,9 @@ Use this as the mental model of what we are building in the frontend.
 ```mermaid
 flowchart TD
   HOME[Home / Dashboard]
+  PRL[PR List Page]
+  POL[PO List Page]
+  GRL[GR List Page]
   PRC[PR Create Page]
   PRD[PR Detail Page]
   POC[PO Create Page]
@@ -59,9 +69,16 @@ flowchart TD
   GRC[GR Create Page]
   GRD[GR Detail Page]
 
-  HOME --> PRC
-  HOME --> POC
-  HOME --> GRC
+  HOME --> PRL
+  HOME --> POL
+  HOME --> GRL
+
+  PRL --> PRC
+  PRL --> PRD
+  POL --> POC
+  POL --> POD
+  GRL --> GRC
+  GRL --> GRD
 
   PRC --> PRD
   PRD --> POC
@@ -93,6 +110,8 @@ Page purpose summary:
 
 ## 4) API Scope (REST)
 
+Target system APIs (full procurement flow):
+
 ### Requisition
 - `POST /api/requisitions`
 - `POST /api/requisitions/:id/submit`
@@ -100,69 +119,258 @@ Page purpose summary:
 - `GET /api/requisitions/:id`
 - `GET /api/requisitions/:id/open-lines`
 
+Workshop status: prebuilt in baseline.
+
 ### Purchase Order
 - `POST /api/purchase-orders`
 - `POST /api/purchase-orders/:id/submit`
 - `GET /api/purchase-orders/:id`
 - `GET /api/purchase-orders/:id/open-lines`
 
+Workshop status: participant implementation backlog (primary focus).
+
 ### Goods Receipt
 - `POST /api/goods-receipts`
 - `POST /api/goods-receipts/:id/post`
 - `GET /api/goods-receipts/:id`
 
+Workshop status: out of implementation scope (further exploration).
+
 ---
 
-## 5) Data Model (Minimal)
-- `PurchaseRequisition`, `PRLine`
-- `PurchaseOrder`, `POLine`
-- `PRLineAllocation` (for PR line split to PO line)
-- `GoodsReceipt`, `GRLine`
+## 5) Data Model (MVP)
 
-Required business rules:
-1. PO allocated qty <= PR line remaining qty
-2. GR received qty <= PO line open qty
-3. Status transitions follow workshop flow only
+The model is intentionally small and only supports PR -> PO -> GR flow.
+
+### 5.1) Core Tables
+
+1. `purchase_requisitions` (PR header)
+  - `id` (PK)
+  - `pr_number` (UNIQUE)
+  - `requester_name`
+  - `department`
+  - `title`
+  - `needed_by_date`
+  - `notes` (nullable)
+  - `status` (`DRAFT | SUBMITTED | APPROVED`)
+  - `created_at`, `updated_at`
+
+2. `pr_lines` (PR item lines)
+  - `id` (PK)
+  - `requisition_id` (FK -> `purchase_requisitions.id`)
+  - `line_no`
+  - `item_code`, `item_name`
+  - `qty_requested` (numeric > 0)
+  - `uom`
+  - `est_unit_price` (numeric >= 0)
+  - `site`
+  - `required_date`
+  - `budget_center`
+  - `created_at`, `updated_at`
+  - UNIQUE(`requisition_id`, `line_no`)
+
+3. `purchase_orders` (PO header)
+  - `id` (PK)
+  - `po_number` (UNIQUE)
+  - `vendor_name`
+  - `po_date`
+  - `currency_code`
+  - `payment_terms`
+  - `notes` (nullable)
+  - `status` (`DRAFT | SUBMITTED`)
+  - `created_at`, `updated_at`
+
+4. `po_lines` (PO item lines)
+  - `id` (PK)
+  - `purchase_order_id` (FK -> `purchase_orders.id`)
+  - `line_no`
+  - `item_code`, `item_name`
+  - `qty_ordered` (numeric > 0)
+  - `uom`
+  - `unit_price` (numeric >= 0)
+  - `delivery_address`
+  - `delivery_date`
+  - `created_at`, `updated_at`
+  - UNIQUE(`purchase_order_id`, `line_no`)
+
+5. `pr_line_allocations` (bridge PR line -> PO line)
+  - `id` (PK)
+  - `pr_line_id` (FK -> `pr_lines.id`)
+  - `po_line_id` (FK -> `po_lines.id`)
+  - `qty_allocated` (numeric > 0)
+  - `created_at`
+  - UNIQUE(`pr_line_id`, `po_line_id`)
+
+6. `goods_receipts` (GR header)
+  - `id` (PK)
+  - `gr_number` (UNIQUE)
+  - `purchase_order_id` (FK -> `purchase_orders.id`)
+  - `receipt_date`
+  - `notes` (nullable)
+  - `status` (`DRAFT | POSTED`)
+  - `created_at`, `updated_at`
+
+7. `gr_lines` (GR item lines)
+  - `id` (PK)
+  - `goods_receipt_id` (FK -> `goods_receipts.id`)
+  - `po_line_id` (FK -> `po_lines.id`)
+  - `line_no`
+  - `qty_received` (numeric > 0)
+  - `created_at`, `updated_at`
+  - UNIQUE(`goods_receipt_id`, `line_no`)
+
+### 5.2) ERD (MVP)
+
+```mermaid
+erDiagram
+   purchase_requisitions ||--|{ pr_lines : has
+   purchase_orders ||--|{ po_lines : has
+   pr_lines ||--o{ pr_line_allocations : allocated_to
+   po_lines ||--o{ pr_line_allocations : receives_allocation
+   purchase_orders ||--o{ goods_receipts : has
+   goods_receipts ||--|{ gr_lines : has
+   po_lines ||--o{ gr_lines : received_by
+
+   purchase_requisitions {
+    bigint id PK
+    string pr_number UK
+    string requester_name
+    string department
+    string title
+    date needed_by_date
+    string notes
+    string status
+    timestamp created_at
+    timestamp updated_at
+   }
+
+   pr_lines {
+    bigint id PK
+    bigint requisition_id FK
+    int line_no
+    string item_code
+    string item_name
+    numeric qty_requested
+    string uom
+    numeric est_unit_price
+    string site
+    date required_date
+    string budget_center
+    timestamp created_at
+    timestamp updated_at
+   }
+
+   purchase_orders {
+    bigint id PK
+    string po_number UK
+    string vendor_name
+    date po_date
+    string currency_code
+    string payment_terms
+    string notes
+    string status
+    timestamp created_at
+    timestamp updated_at
+   }
+
+   po_lines {
+    bigint id PK
+    bigint purchase_order_id FK
+    int line_no
+    string item_code
+    string item_name
+    numeric qty_ordered
+    string uom
+    numeric unit_price
+    string delivery_address
+    date delivery_date
+    timestamp created_at
+    timestamp updated_at
+   }
+
+   pr_line_allocations {
+    bigint id PK
+    bigint pr_line_id FK
+    bigint po_line_id FK
+    numeric qty_allocated
+    timestamp created_at
+   }
+
+   goods_receipts {
+    bigint id PK
+    string gr_number UK
+    bigint purchase_order_id FK
+    date receipt_date
+    string notes
+    string status
+    timestamp created_at
+    timestamp updated_at
+   }
+
+   gr_lines {
+    bigint id PK
+    bigint goods_receipt_id FK
+    bigint po_line_id FK
+    int line_no
+    numeric qty_received
+    timestamp created_at
+    timestamp updated_at
+   }
+```
+
+### 5.3) Rule Mapping to Data Model
+
+1. PO allocated qty <= PR line remaining qty  
+  - Check: SUM(`pr_line_allocations.qty_allocated`) per `pr_line_id` <= `pr_lines.qty_requested`
+
+2. GR received qty <= PO line open qty  
+  - Check: SUM(`gr_lines.qty_received`) per `po_line_id` <= `po_lines.qty_ordered`
+
+3. Status transitions follow workshop flow only  
+  - PR: `DRAFT -> SUBMITTED -> APPROVED`  
+  - PO: `DRAFT -> SUBMITTED`  
+  - GR: `DRAFT -> POSTED`
 
 ---
 
 ## 6) Workshop Agenda (5 Hours)
 
-### Hour 1 — Setup + Skeleton
-- Create backend/frontend folders
-- Start PostgreSQL via Docker Compose
-- Scaffold Fastify + Vue + base routes
+### Hour 1 — Setup + Baseline Boot
+- Clone repo, start PostgreSQL via Docker Compose
+- Apply pre-provided core migration script
+- Configure backend/frontend `.env` and run baseline app
+- Verify Home/Dashboard + PR module are already working
 
-### Hour 2 — PR Module
-- Implement PR create/submit/approve
-- Add PR detail endpoint
-- Add first Jest unit tests
+### Hour 2 — PO Backlog: API + Data Rules
+- Implement PO create/submit/detail/open-lines endpoints
+- Implement allocation validation (allocated qty <= PR remaining qty)
+- Keep handlers thin and move rules to PO service
 
-### Hour 3 — PO Module
-- Implement open PR lines + PO creation
-- Implement allocation validation
-- Add Jest tests for edge cases
+### Hour 3 — PO Backlog: UI Pages
+- Build PO list/create/detail pages on top of baseline navigation
+- Connect pages to PO APIs
+- Validate create-from-approved-PR-line flow
 
-### Hour 4 — GR Module + UI
-- Implement GR create/post
-- Build Vue pages/forms for PR, PO, GR
-- Show linked documents in PR detail page
+### Hour 4 — PO-focused Testing + GitHub Review
+- Add Jest tests focused on PO rules and status transitions
+- Add Playwright flow for PO pages integrated with baseline PR data
+- Open PR and use Copilot review + code quality checks
 
-### Hour 5 — Playwright + Demo
-- Add 1 Playwright happy-path spec (PR -> PO -> GR)
-- Run full demo
-- Recap Copilot prompting patterns and refactoring flow
+### Hour 5 — Optional Extension + Exploration
+- Implement Bookmark feature from GitHub Issue (optional, post-backlog)
+- Demo completed PO backlog
+- GR module left as self-paced exploration using this plan
 
 ---
 
 ## 7) Testing Strategy
 - Jest for service-level and route validation tests
-- Playwright for one end-to-end journey
+- Playwright for PO-focused end-to-end journey on top of baseline PR
 
 Suggested minimum:
 1. Jest: reject over-allocation
-2. Jest: reject over-receiving
-3. Playwright: complete happy path and verify final PR tracking values
+2. Jest: reject invalid PO status transition
+3. Playwright: PR baseline data -> PO create -> PO submit -> PO detail assertions
 
 ---
 
@@ -205,6 +413,8 @@ VITE_API_BASE_URL=http://localhost:3000
 
 ## 10) Done Criteria
 - App runs locally with Docker PostgreSQL + Fastify + Vue
-- End-to-end flow works: PR -> PO -> GR
-- Quantity validations are enforced
-- Jest and Playwright each run at least one meaningful test
+- Baseline Home/Dashboard + PR pages/APIs run without modification
+- PO backlog is implemented (PO list/create/detail + required PO endpoints)
+- PO quantity validations are enforced
+- Jest and Playwright each run at least one PO-focused meaningful test
+- Bookmark feature is captured as a GitHub Issue (or implemented if time allows)

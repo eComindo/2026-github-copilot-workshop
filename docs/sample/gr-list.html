@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GR List Page - Sample</title>
+  <link rel="stylesheet" href="./list-page.css" />
+</head>
+<body>
+  <main class="container">
+    <a class="back-link" href="./home-dashboard.html">← Back to Dashboard</a>
+
+    <header class="page-header">
+      <div>
+        <h1>Goods Receipt - List</h1>
+        <p>Browse receipts and open posted or draft receipt details.</p>
+      </div>
+      <nav class="actions">
+        <a href="./gr-create.html">+ New GR</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>GR No</th>
+            <th>PO No</th>
+            <th>Status</th>
+            <th>Receipt Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GR-0013</td>
+            <td>PO-0010</td>
+            <td>POSTED</td>
+            <td>2026-02-25</td>
+            <td><a href="./gr-detail.html">View Detail</a></td>
+          </tr>
+          <tr>
+            <td>GR-0012</td>
+            <td>PO-0008</td>
+            <td>DRAFT</td>
+            <td>2026-02-24</td>
+            <td><a href="./gr-detail.html">View Detail</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,12 +1,14 @@
 # Copilot Instructions for This Workshop
 
 ## Objective
-Build a procurement MVP for a 5-hour workshop that demonstrates Copilot usage across SDLC.
+Run a 5-hour Copilot workshop using a prebuilt baseline and a focused backlog sprint.
 
 Reference plan: `docs/plan.md`.
 
 ## Scope Constraints (Strict)
-- Build only PR -> PO -> GR workflow.
+- Baseline provided in repo: database schema + Home/Dashboard + PR module (list/create/detail + required PR APIs).
+- Participant implementation scope: PO module only (PO list/create/detail + PO APIs + PO validations).
+- GR module is out of implementation scope during the workshop and treated as further exploration.
 - Keep business scope minimal and teachable.
 - Avoid enterprise-only features (SSO, workflow engine, reporting, notifications, advanced compliance).
 - Prefer clarity and small modules over abstraction-heavy architecture.
@@ -21,14 +23,14 @@ Reference plan: `docs/plan.md`.
 - Do not use Prisma.
 
 ## API Requirements
-- Implement only the endpoints listed in `docs/plan.md`.
-- Enforce status transitions:
-	- PR: `DRAFT -> SUBMITTED -> APPROVED`
-	- PO: `DRAFT -> SUBMITTED`
-	- GR: `DRAFT -> POSTED`
-- Enforce validations:
-	1) PO allocation qty <= PR line remaining qty
-	2) GR received qty <= PO line open qty
+- Maintain compatibility with endpoints listed in `docs/plan.md`.
+- For participant backlog, prioritize PO endpoints:
+	- `POST /api/purchase-orders`
+	- `POST /api/purchase-orders/:id/submit`
+	- `GET /api/purchase-orders/:id`
+	- `GET /api/purchase-orders/:id/open-lines`
+- Enforce PO rule: allocation qty <= PR line remaining qty.
+- GR endpoints/rules can be left untouched during workshop implementation.
 
 ## Code Style Guidance
 - Keep files short and readable for workshop participants.
@@ -37,9 +39,12 @@ Reference plan: `docs/plan.md`.
 - Favor service functions for business rules and thin route handlers.
 
 ## Testing Expectations
-- Add focused Jest tests for business validations.
-- Add one Playwright happy-path test for PR -> PO -> GR flow.
+- Add focused Jest tests for PO business validations (especially over-allocation and status transition).
+- Add Playwright coverage focused on PO pages/flow integrated with existing baseline PR data.
 - Do not over-invest in test framework complexity.
+
+## Optional Extension
+- Bookmark feature (PR|PO|GR) is an optional post-backlog exercise and should be driven via GitHub Issue creation workflow.
 
 ## Workshop-First Principle
 When there is a trade-off between production robustness and workshop clarity, choose workshop clarity.

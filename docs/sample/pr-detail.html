@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PR Detail Page - Sample</title>
+  <link rel="stylesheet" href="./detail-page.css" />
+</head>
+<body>
+  <main class="container">
+    <a class="back-link" href="./pr-list.html">← Back to PR List</a>
+    <header class="page-header">
+      <h1>Purchase Requisition Detail</h1>
+      <p>PR-0004</p>
+    </header>
+
+    <section class="card grid-3">
+      <div><p class="label">Status</p><p class="value">APPROVED</p></div>
+      <div><p class="label">Requester</p><p class="value">Sari</p></div>
+      <div><p class="label">Department</p><p class="value">Maintenance</p></div>
+    </section>
+
+    <section class="card">
+      <h2>PR Lines</h2>
+      <table>
+        <thead>
+          <tr><th>Line</th><th>Item</th><th>Requested Qty</th><th>Allocated Qty</th><th>Remaining Qty</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Bearing 6205</td><td>20</td><td>10</td><td>10</td></tr>
+          <tr><td>2</td><td>Safety Gloves</td><td>50</td><td>20</td><td>30</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

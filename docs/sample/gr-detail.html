@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GR Detail Page - Sample</title>
+  <link rel="stylesheet" href="./detail-page.css" />
+</head>
+<body>
+  <main class="container">
+    <a class="back-link" href="./gr-list.html">← Back to GR List</a>
+    <header class="page-header">
+      <h1>Goods Receipt Detail</h1>
+      <p>GR-0013</p>
+    </header>
+
+    <section class="card grid-3">
+      <div><p class="label">Status</p><p class="value">POSTED</p></div>
+      <div><p class="label">PO Number</p><p class="value">PO-0010</p></div>
+      <div><p class="label">Receipt Date</p><p class="value">2026-02-25</p></div>
+    </section>
+
+    <section class="card">
+      <h2>GR Lines</h2>
+      <table>
+        <thead>
+          <tr><th>Line</th><th>Item</th><th>Received Qty</th><th>UOM</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Bearing 6205</td><td>4</td><td>PCS</td></tr>
+          <tr><td>2</td><td>Safety Gloves</td><td>8</td><td>PAIR</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

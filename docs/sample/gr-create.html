@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GR Create Page - Sample</title>
+  <link rel="stylesheet" href="./pr-create.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <h1>Goods Receipt - Create</h1>
+      <p>Receive items against submitted PO lines.</p>
+    </header>
+
+    <form action="#" method="post">
+      <section class="card">
+        <h2>GR Header</h2>
+        <div class="grid-2">
+          <label>
+            PO Number
+            <input type="text" name="poNumber" placeholder="e.g. PO-0010" required />
+          </label>
+          <label>
+            Receipt Date
+            <input type="date" name="receiptDate" required />
+          </label>
+          <label class="full-width">
+            Notes
+            <textarea name="notes" rows="3" placeholder="Optional notes"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>PO Open Lines</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Item</th>
+                <th>Ordered Qty</th>
+                <th>Received Qty</th>
+                <th>Open Qty</th>
+                <th>Receive Now</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Bearing 6205</td>
+                <td>10</td>
+                <td>4</td>
+                <td>6</td>
+                <td><input type="number" min="0" max="6" step="0.01" placeholder="0" /></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Safety Gloves</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td><input type="number" min="0" max="20" step="1" placeholder="0" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="form-actions">
+        <button type="button">Save as Draft</button>
+        <button type="submit">Post GR</button>
+      </footer>
+    </form>
+  </main>
+</body>
+</html>

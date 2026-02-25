@@ -6,7 +6,7 @@ environments: Web
 status: Published
 feedback link: https://example.com/feedback
 
-# GitHub Copilot Workshop: Build a Procurement MVP in 5 Hours
+# GitHub Copilot Workshop: Build a Procurement MVP
 
 ## About this workshop
 Duration: 10
@@ -14,16 +14,18 @@ Duration: 10
 Welcome! In this workshop, participants build a real-world procurement MVP using GitHub Copilot in both VS Code and GitHub.
 
 Application scope:
-- Purchase Requisition (PR): create, submit, approve
-- Purchase Order (PO): create from approved PR lines, submit
-- Goods Receipt (GR): create from PO lines, post
-- Tracking: PR detail page showing linked PO/GR and quantities
+- Baseline provided: Home/Dashboard + PR module (list/create/detail + APIs)
+- Participant backlog: PO module (list/create/detail + APIs)
+- Optional extension: Bookmark feature (`PR | PO | GR`) via GitHub Issue workflow
+- Further exploration: GR module (self-paced after workshop)
 
 Tech stack:
 - Backend: Fastify + JavaScript
 - Frontend: Vue 3 + Vite + JavaScript
 - Database: PostgreSQL in Docker
 - Testing: Jest + Playwright
+- Design: Figma + Figma MCP
+
 
 ---
 
@@ -38,8 +40,8 @@ To keep focus and reduce context switching, we use 3 blocks only:
    - Confirm MVP and implementation plan
 
 2. **VS Code block (60-225 min)**
-   - Build app end-to-end with Copilot
-   - Add Jest + Playwright tests
+   - Deliver PO backlog with Copilot
+   - Add PO-focused Jest + Playwright tests
 
 3. **GitHub block (225-300 min)**
    - PR summary + Copilot review
@@ -105,6 +107,39 @@ Migration file used by all participants:
 
 ---
 
+## Configure Local `.env` Credentials (Baseline Required)
+Duration: 10
+
+Create backend `.env`:
+
+```env
+PORT=3000
+DATABASE_URL=postgres://workshop:workshop@localhost:5432/procurement_mvp
+```
+
+Create frontend `.env`:
+
+```env
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+Run baseline apps and verify prebuilt modules:
+
+```bash
+# backend
+npm run dev
+
+# frontend (new terminal)
+npm run dev
+```
+
+Baseline expectation:
+- Home/Dashboard works
+- PR list/create/detail pages work
+- PR APIs already connected to provided database
+
+---
+
 ## Use GitHub Spaces for Onboarding + Brainstorming
 Duration: 20
 
@@ -146,7 +181,7 @@ Prompt:
 ```text
 Validate this plan for a 5-hour JavaScript workshop.
 Return a strict task sequence with checkpoints every 30-45 minutes.
-Do not add features outside PR -> PO -> GR scope.
+Assume Home/Dashboard and PR module are already provided; focus implementation on PO backlog.
 ```
 
 Then switch to Agent mode:
@@ -159,6 +194,8 @@ Save the refined checklist to docs/runbook.md.
 
 ## Figma MCP: Design-to-Code Exercise
 Duration: 20
+
+This step is optional in the new strategy because PR module is already provided in baseline.
 
 Target page for Figma MCP in this workshop:
 **PR Create page** (best balance of complexity and business value).
@@ -178,127 +215,148 @@ Use simple workshop styling and keep component structure beginner-friendly.
 
 Expected result:
 - Base Vue component scaffold from Figma
-- Participants wire API calls in the next coding block
+- Participants compare generated output with existing baseline PR implementation
 
 ---
 
-## VS Code Build Block: Scaffold Backend + Frontend
+## VS Code Build Block: Baseline Review + PO Backlog Start
 Duration: 25
 
-### Backend (Fastify, JavaScript)
-Prompt example:
+Context for participants:
+- Do not scaffold from zero.
+- Use repository baseline as-is (DB + Home/Dashboard + PR module already working).
 
-```text
-Scaffold a Fastify backend in JavaScript for procurement MVP.
-Create route modules for requisitions, purchase-orders, and goods-receipts.
-Keep handlers thin and move business rules to service functions.
-```
-
-### Frontend (Vue, JavaScript)
-Prompt example:
-
-```text
-Scaffold a Vue 3 + Vite JavaScript app with pages for PR Create, PO Create, GR Create, and PR Detail.
-Add a simple API client module for REST calls.
-```
-
----
-
-## Implement PR Module
-Duration: 25
-
-Endpoints:
-- `POST /api/requisitions`
-- `POST /api/requisitions/:id/submit`
-- `POST /api/requisitions/:id/approve`
-- `GET /api/requisitions/:id`
-- `GET /api/requisitions/:id/open-lines`
-
-Rules:
-- `DRAFT -> SUBMITTED -> APPROVED`
+Tasks:
+- Explore existing project structure.
+- Identify extension points for PO routes/services/pages.
+- Confirm existing API client and page routing patterns.
 
 Prompt example:
 
 ```text
-Implement requisition service + routes in JavaScript.
-Add payload validation and clear error responses.
+Analyze this repository and summarize what is already implemented.
+Assume dashboard and PR module are complete.
+Propose a minimal implementation plan for PO list/create/detail pages and PO endpoints only.
 ```
 
 ---
 
-## Implement PO + GR Modules
-Duration: 30
+## Implement PO Module (Backlog Core)
+Duration: 45
 
-PO endpoints:
+PO endpoints (participant scope):
 - `POST /api/purchase-orders`
 - `POST /api/purchase-orders/:id/submit`
 - `GET /api/purchase-orders/:id`
 - `GET /api/purchase-orders/:id/open-lines`
 
-GR endpoints:
-- `POST /api/goods-receipts`
-- `POST /api/goods-receipts/:id/post`
-- `GET /api/goods-receipts/:id`
-
-Rules:
+Required PO rule:
 1. PO allocation qty <= PR line remaining qty
-2. GR received qty <= PO line open qty
 
 Prompt example:
 
 ```text
-Implement PO and GR services with strict quantity validation.
-Return 422 for business rule violations with readable messages.
+Implement purchase order module in Fastify JavaScript.
+Create PO service + routes for create, submit, detail, and open-lines.
+Enforce over-allocation validation against PR remaining quantities.
+Return 422 for business rule violations with clear messages.
 ```
 
 ---
 
-## Connect Figma-based UI to APIs
-Duration: 25
+## Build PO Pages and Connect to API
+Duration: 35
 
-Tasks:
-- Wire PR Create page to requisition endpoints
-- Build PO/GR minimal forms reusing same patterns
-- Add PR Detail page with linked PO/GR quantities
+PO pages (participant scope):
+- PO List page
+- PO Create page (from approved PR open lines)
+- PO Detail page
 
 Prompt example:
 
 ```text
-Integrate the generated Vue PR form with backend APIs.
-Keep code simple and use reusable form helpers where useful.
+Add PO list/create/detail pages in Vue using the existing baseline patterns.
+Connect pages to purchase order APIs and keep UI simple for workshop clarity.
 ```
 
 ---
 
-## Add Jest Unit Tests
+## Add PO-focused Jest Tests
 Duration: 20
 
 Minimum tests:
 1. Reject over-allocation in PO creation
-2. Reject over-receiving in GR posting
-3. Reject invalid status transitions
+2. Reject invalid PO status transition
+3. Accept valid allocation and transition path
 
 Prompt example:
 
 ```text
-Create Jest tests for procurement business rules.
-Focus only on service-level validation logic.
+Create Jest tests focused on PO service validation and status transition rules.
+Do not add GR tests in this workshop scope.
 ```
 
 ---
 
-## Follow up migration
+## Slide: Bookmark Feature (Part 1 - Create GitHub Issue)
+Duration: 8
 
-We can ask Copilot to create migration file for us.
+Goal:
+- Treat Bookmark as post-backlog optional extension.
+- Drive implementation from a GitHub Issue (not ad-hoc coding).
 
-Optional mini-exercise (10-15 minutes, if time allows):
-- Ask Copilot to generate one small follow-up migration, for example adding a helpful index.
+Task:
+- Create Issue: "Add Bookmark feature for PR/PO/GR".
+- Ask Copilot on GitHub to draft acceptance criteria and technical checklist.
 
 Prompt example:
 
 ```text
-Create a new SQL migration file that adds an index for faster lookup on PR and PO status columns.
-Keep backward compatibility and include IF NOT EXISTS checks.
+Create a GitHub Issue for an optional Bookmark feature in this procurement app.
+Scope: user can bookmark PR/PO/GR entity from detail page.
+Include acceptance criteria, backend tasks, frontend tasks, and migration task.
+Keep this outside mandatory workshop backlog.
+```
+
+---
+
+## Slide: Bookmark Feature (Part 2 - Implement from Issue: Migration + API)
+Duration: 12
+
+Task:
+- Use the Issue as single source of truth.
+- Generate and apply SQL migration.
+- Implement minimal backend model/repository/service/routes.
+
+Suggested endpoints:
+- `POST /api/bookmarks`
+- `GET /api/bookmarks?user=<name>`
+- `DELETE /api/bookmarks/:id`
+
+Prompt example:
+
+```text
+Using the GitHub Issue acceptance criteria, implement bookmarks backend in Fastify JavaScript.
+Generate migration SQL and add routes for create/list/delete bookmarks.
+Validate entity_type as PR|PO|GR and prevent duplicate bookmark per user+entity.
+```
+
+---
+
+## Slide: Bookmark Feature (Part 3 - Implement from Issue: Frontend)
+Duration: 12
+
+Task:
+- Add bookmark button/icon on PR/PO/GR detail pages.
+- Implement toggle behavior based on backend API.
+- Keep UI minimal and consistent with baseline.
+
+Prompt example:
+
+```text
+Using the GitHub Issue checklist, add bookmark toggle button/icon to PR/PO/GR detail pages.
+Wire to bookmarks APIs and show bookmarked vs not-bookmarked state.
+Keep implementation simple and workshop-friendly.
 ```
 
 ---
@@ -306,27 +364,40 @@ Keep backward compatibility and include IF NOT EXISTS checks.
 ## Add Playwright E2E Test
 Duration: 20
 
-Create one happy-path test:
+Create one PO-focused test on top of baseline PR data:
 
 ```mermaid
 flowchart LR
-   A[PR Create] --> B[Submit PR]
-   B --> C[Approve PR]
-   C --> D[PO Create from PR Lines]
-   D --> E[Submit PO]
-   E --> F[GR Create from PO Lines]
-   F --> G[Post GR]
-   G --> H[Verify PR Detail Quantities]
+   A[Use Existing Approved PR] --> B[Open PO Create]
+   B --> C[Allocate PR Open Lines]
+   C --> D[Submit PO]
+   D --> E[Open PO Detail]
+   E --> F[Verify PO Status and Quantities]
 ```
 
-Flow summary: PR create -> submit -> approve -> PO create -> submit -> GR create -> post -> verify PR detail quantities.
+Flow summary: use seeded/baseline approved PR -> create PO -> submit PO -> verify PO detail values.
 
 Prompt example:
 
 ```text
-Create one Playwright end-to-end test for the full PR -> PO -> GR flow.
-Use stable selectors and clear assertions for quantities and statuses.
+Create one Playwright end-to-end test focused on PO backlog flow.
+Use baseline approved PR data, then create and submit PO, and assert status + quantities on PO detail page.
+Keep selectors stable and assertions clear.
 ```
+
+---
+
+## Further Exploration (Optional): GR Module
+Duration: 10
+
+Not part of mandatory workshop backlog.
+
+Self-paced challenge:
+- Implement GR create/detail/post endpoints
+- Build GR list/create/detail pages
+- Add validation: received qty <= PO open qty
+
+Use `docs/plan.md` as implementation reference.
 
 ---
 
@@ -380,10 +451,10 @@ Run on push and pull_request for main and feature branches.
 Duration: 10
 
 What participants accomplished:
-- Built procurement MVP with JavaScript stack
+- Started from a working baseline with JavaScript stack
+- Delivered PO backlog module end-to-end
 - Used Copilot Spaces for onboarding + brainstorming
-- Used Figma MCP for design-to-code
-- Added unit tests and Playwright e2e
+- Added PO-focused unit tests and Playwright e2e
 - Used GitHub Copilot review + CodeQL/code scanning
 
 Suggested next iteration:

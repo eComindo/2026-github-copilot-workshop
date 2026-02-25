@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PO Create Page - Sample</title>
+  <link rel="stylesheet" href="./po-create.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <h1>Purchase Order - Create</h1>
+      <p>Pick approved PR lines and allocate order quantities.</p>
+    </header>
+
+    <form class="po-form" action="#" method="post">
+      <section class="card">
+        <h2>PO Header</h2>
+        <div class="grid-2">
+          <label>
+            Vendor
+            <select name="vendor" required>
+              <option value="">Select vendor</option>
+              <option>PT Maju Bersama</option>
+              <option>PT Sumber Baja</option>
+              <option>PT Nusantara Teknik</option>
+            </select>
+          </label>
+
+          <label>
+            PO Date
+            <input type="date" name="poDate" required />
+          </label>
+
+          <label>
+            Currency
+            <select name="currency" required>
+              <option>IDR</option>
+              <option>USD</option>
+            </select>
+          </label>
+
+          <label>
+            Payment Terms
+            <input type="text" name="paymentTerms" placeholder="e.g. NET 30" required />
+          </label>
+
+          <label class="full-width">
+            Notes
+            <textarea name="notes" rows="3" placeholder="Optional notes for supplier"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Approved PR Lines</h2>
+          <button type="button">Refresh Open Lines</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Select</th>
+                <th>PR No</th>
+                <th>PR Line</th>
+                <th>Item Code</th>
+                <th>Item Name</th>
+                <th>UOM</th>
+                <th>Requested Qty</th>
+                <th>Allocated Qty</th>
+                <th>Remaining Qty</th>
+                <th>Order Qty</th>
+                <th>Delivery Site</th>
+                <th>Delivery Date</th>
+                <th>Unit Price</th>
+                <th>Line Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" name="line1_selected" checked /></td>
+                <td>PR-0001</td>
+                <td>1</td>
+                <td>ITEM-001</td>
+                <td>Bearing 6205</td>
+                <td>PCS</td>
+                <td>20</td>
+                <td>5</td>
+                <td>15</td>
+                <td><input type="number" name="line1_orderQty" min="0" max="15" step="0.01" value="10" required /></td>
+                <td><input type="text" name="line1_deliveryAddress" placeholder="e.g. Warehouse A" required /></td>
+                <td><input type="date" name="line1_deliveryDate" required /></td>
+                <td><input type="number" name="line1_unitPrice" min="0" step="0.01" value="150000" required /></td>
+                <td>1,500,000</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="line2_selected" /></td>
+                <td>PR-0001</td>
+                <td>2</td>
+                <td>ITEM-009</td>
+                <td>Grease High Temp</td>
+                <td>TUBE</td>
+                <td>12</td>
+                <td>0</td>
+                <td>12</td>
+                <td><input type="number" name="line2_orderQty" min="0" max="12" step="0.01" placeholder="0" /></td>
+                <td><input type="text" name="line2_deliveryAddress" placeholder="e.g. Site B" /></td>
+                <td><input type="date" name="line2_deliveryDate" /></td>
+                <td><input type="number" name="line2_unitPrice" min="0" step="0.01" placeholder="0" /></td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="line3_selected" checked /></td>
+                <td>PR-0004</td>
+                <td>1</td>
+                <td>ITEM-015</td>
+                <td>Safety Gloves</td>
+                <td>PAIR</td>
+                <td>50</td>
+                <td>10</td>
+                <td>40</td>
+                <td><input type="number" name="line3_orderQty" min="0" max="40" step="1" value="20" required /></td>
+                <td><input type="text" name="line3_deliveryAddress" placeholder="e.g. Main Plant" required /></td>
+                <td><input type="date" name="line3_deliveryDate" required /></td>
+                <td><input type="number" name="line3_unitPrice" min="0" step="0.01" value="32000" required /></td>
+                <td>640,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card summary-card">
+        <div>
+          <p class="summary-label">Selected Lines</p>
+          <p class="summary-value">2</p>
+        </div>
+        <div>
+          <p class="summary-label">Estimated Total</p>
+          <p class="summary-value">IDR 2,140,000</p>
+        </div>
+      </section>
+
+      <footer class="form-actions">
+        <button type="button">Save as Draft</button>
+        <button type="submit">Submit PO</button>
+      </footer>
+    </form>
+  </main>
+</body>
+</html>

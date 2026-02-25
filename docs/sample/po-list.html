@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PO List Page - Sample</title>
+  <link rel="stylesheet" href="./list-page.css" />
+</head>
+<body>
+  <main class="container">
+    <a class="back-link" href="./home-dashboard.html">← Back to Dashboard</a>
+
+    <header class="page-header">
+      <div>
+        <h1>Purchase Order - List</h1>
+        <p>Browse purchase orders and open each order detail.</p>
+      </div>
+      <nav class="actions">
+        <a href="./po-create.html">+ New PO</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>PO No</th>
+            <th>Vendor</th>
+            <th>Status</th>
+            <th>PO Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PO-0010</td>
+            <td>PT Maju Bersama</td>
+            <td>SUBMITTED</td>
+            <td>2026-02-24</td>
+            <td><a href="./po-detail.html">View Detail</a></td>
+          </tr>
+          <tr>
+            <td>PO-0009</td>
+            <td>PT Nusantara Teknik</td>
+            <td>DRAFT</td>
+            <td>2026-02-24</td>
+            <td><a href="./po-detail.html">View Detail</a></td>
+          </tr>
+          <tr>
+            <td>PO-0008</td>
+            <td>PT Sumber Baja</td>
+            <td>SUBMITTED</td>
+            <td>2026-02-23</td>
+            <td><a href="./po-detail.html">View Detail</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
