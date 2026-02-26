@@ -12,11 +12,22 @@ MVP flow:
 Out of scope: production hardening, SSO, advanced approval matrix, reporting, notifications, and full enterprise compliance controls.
 
 Workshop implementation strategy:
-1. Core schema migration from this ERD is pre-provided in repository and applied by participants.
+1. Core schema migration + sample seed are pre-provided in repository and bootstrapped via Docker init for participants.
 2. Home/Dashboard + PR module (list/create/detail + PR APIs) are prebuilt and working.
 3. Participant backlog focus is PO module only (PO list/create/detail + PO APIs + PO validations).
 4. GR module is not implemented during workshop and is left for further exploration.
 5. Bookmark feature is post-backlog and practiced via GitHub Issue-driven development.
+
+DB bootstrap command (participant-ready):
+
+```bash
+docker compose down -v
+docker compose up -d db
+```
+
+Bootstrap SQL files:
+- `db/migrations/001_init_procurement_mvp.sql`
+- `db/seeds/002_seed_procurement_mvp.sql`
 
 ---
 

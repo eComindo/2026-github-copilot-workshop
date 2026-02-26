@@ -92,18 +92,49 @@ git checkout -b feature/procurement-mvp
 docker compose up -d db
 ```
 
-5. Apply the pre-provided baseline migration (required):
+5. Bootstrap workshop database (schema + sample data):
 
 ```bash
-docker compose exec -T db psql -U workshop -d procurement_mvp < db/migrations/001_init_procurement_mvp.sql
+docker compose down -v
+docker compose up -d db
 ```
 
-Migration file used by all participants:
+Bootstrap files used by all participants:
 - `db/migrations/001_init_procurement_mvp.sql`
+- `db/seeds/002_seed_procurement_mvp.sql`
+
+6. Quick verification:
+
+```bash
+docker compose exec -T db psql -U workshop -d procurement_mvp -c "SELECT pr_number, status FROM purchase_requisitions ORDER BY pr_number;"
+```
 
 > aside positive
 >
-> We pre-provide the baseline migration so everyone uses the same schema and we avoid workshop delays from migration drift.
+> We pre-provide baseline migration + seed and run them automatically via Docker init so everyone starts with the same working dataset.
+
+---
+
+## DB Bootstrap for Participants
+Duration: 5
+
+Use this reset flow if your local DB state is inconsistent, or before each new workshop batch:
+
+```bash
+docker compose down -v
+docker compose up -d db
+```
+
+What this does:
+- Recreates PostgreSQL volume from scratch
+- Applies baseline schema migration
+- Inserts workshop sample data for Home/Dashboard + PR baseline
+
+Verification command:
+
+```bash
+docker compose exec -T db psql -U workshop -d procurement_mvp -c "SELECT COUNT(*) FROM purchase_requisitions;"
+```
 
 ---
 

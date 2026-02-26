@@ -23,6 +23,25 @@ Canonical workshop document: [docs/plan.md](docs/plan.md)
 docker compose up -d db
 ```
 
+## DB Bootstrap for Participants
+
+The PostgreSQL container now initializes the workshop baseline automatically:
+- Runs schema migration: `db/migrations/001_init_procurement_mvp.sql`
+- Runs sample seed data: `db/seeds/002_seed_procurement_mvp.sql`
+
+Use this when starting fresh:
+
+```bash
+docker compose down -v
+docker compose up -d db
+```
+
+Verify database is ready:
+
+```bash
+docker compose exec -T db psql -U workshop -d procurement_mvp -c "SELECT pr_number, status FROM purchase_requisitions ORDER BY pr_number;"
+```
+
 ### 2) Backend (to be scaffolded in workshop)
 ```bash
 cd backend
