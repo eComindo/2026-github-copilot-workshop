@@ -1,0 +1,20 @@
+{
+  "name": "001-core-procurement-system",
+  "version": "1.0.0",
+  "description": "Hands-on 5-hour workshop to build a web-based procurement MVP and practice Copilot across SDLC.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Use npm run test:e2e\"",
+    "test:e2e": "playwright test",
+    "test:e2e:list": "playwright test --list",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "author": "Arie M. Prasetyo",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

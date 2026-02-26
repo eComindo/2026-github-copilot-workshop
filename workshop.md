@@ -192,30 +192,73 @@ Save the refined checklist to docs/runbook.md.
 
 ---
 
-## Figma MCP: Design-to-Code Exercise
-Duration: 20
+## Figma MCP Setup (Before PO Build)
+Duration: 10
 
-This step is optional in the new strategy because PR module is already provided in baseline.
+Before implementing PO module pages, make sure Figma MCP is available in Copilot.
 
-Target page for Figma MCP in this workshop:
-**PR Create page** (best balance of complexity and business value).
+Checklist:
+- Confirm Figma MCP is installed/available in current Copilot environment
+- Confirm access to workshop Figma file and node/page IDs
+- Confirm participants can call MCP from Copilot chat
 
-Why this page:
-- Shows realistic enterprise form + line items table
-- Reusable UI patterns for PO/GR pages
-- Clear mapping from design to API payload
-
-Suggested facilitator prompt:
+Prompt example:
 
 ```text
-Using Figma MCP, generate Vue UI code for a Purchase Requisition Create page.
-Include: header fields, dynamic line items table, add/remove row action, submit button.
-Use simple workshop styling and keep component structure beginner-friendly.
+Check that Figma MCP is available in this environment.
+If available, show the steps to generate Vue code from the provided Figma node for PO Create page.
+Keep the output beginner-friendly.
 ```
 
 Expected result:
-- Base Vue component scaffold from Figma
-- Participants compare generated output with existing baseline PR implementation
+- Everyone is ready to generate PO Create UI from the same Figma source
+
+---
+
+## Generate PO Create Page from Figma (via Figma MCP)
+Duration: 20
+
+Participants start the PO module by generating **PO Create page** from Figma using MCP.
+
+Scope for generated page:
+- Header section (vendor, PO date, notes)
+- Line table section (approved PR open lines, allocate qty, unit price)
+- Actions (save draft, submit)
+
+Prompt example:
+
+```text
+Using Figma MCP, generate Vue code for the PO Create page from the provided Figma node.
+Include reusable components for header form and line allocation table.
+Do not implement API calls yet.
+Keep structure simple for workshop participants.
+```
+
+Expected result:
+- PO Create page and base UI components are generated from Figma
+
+---
+
+## Add Unit Tests for Figma-generated Vue Components
+Duration: 15
+
+Once PO Create page/components are generated, ask participants to add component-level unit tests.
+
+Minimum test targets:
+1. Header component renders required fields
+2. Line table component adds/removes line rows
+3. Allocation input blocks invalid values at UI validation layer
+
+Prompt example:
+
+```text
+Create unit tests for the generated Vue PO Create components.
+Focus on rendering, line add/remove behavior, and basic allocation input validation.
+Keep tests simple and readable for beginners.
+```
+
+Expected result:
+- Participants see how Copilot generates tests for UI components before API integration
 
 ---
 
@@ -269,14 +312,15 @@ Duration: 35
 
 PO pages (participant scope):
 - PO List page
-- PO Create page (from approved PR open lines)
+- PO Create page (already generated from Figma MCP, now wire to API)
 - PO Detail page
 
 Prompt example:
 
 ```text
-Add PO list/create/detail pages in Vue using the existing baseline patterns.
-Connect pages to purchase order APIs and keep UI simple for workshop clarity.
+Implement PO list/detail pages in Vue using existing baseline patterns.
+For PO Create page, keep the generated Figma components and wire them to purchase order APIs.
+Keep UI simple for workshop clarity.
 ```
 
 ---
@@ -361,10 +405,38 @@ Keep implementation simple and workshop-friendly.
 
 ---
 
+## Create Dedicated Playwright Spec for PO Module
+Duration: 12
+
+Before running Playwright, participants create one dedicated E2E spec file for the PO module built in previous slides.
+
+Target file:
+- `tests/e2e/po-module.spec.js`
+
+Required scenarios:
+1. Happy path: create + submit PO from baseline approved PR data
+2. Negative path: reject over-allocation qty
+
+Prompt example:
+
+```text
+Create tests/e2e/po-module.spec.js using @playwright/test.
+Add:
+1) happy path: create + submit PO from approved PR and verify PO detail
+2) negative path: reject allocation qty that exceeds PR remaining qty
+Use stable selectors and clear assertions.
+```
+
+Expected outcome:
+- Participants understand test intent before execution
+- One dedicated PO module spec is ready to run
+
+---
+
 ## Add Playwright E2E Test
 Duration: 20
 
-Create one PO-focused test on top of baseline PR data:
+Run the dedicated PO spec and check the generated artifacts:
 
 ```mermaid
 flowchart LR
@@ -373,16 +445,37 @@ flowchart LR
    C --> D[Submit PO]
    D --> E[Open PO Detail]
    E --> F[Verify PO Status and Quantities]
+   F --> G[Open HTML Report]
+   G --> H[Inspect Screenshots, Traces, Videos]
 ```
 
-Flow summary: use seeded/baseline approved PR -> create PO -> submit PO -> verify PO detail values.
+Flow summary: create PO spec -> run Playwright -> verify PO result -> inspect report and artifacts.
 
 Prompt example:
 
 ```text
-Create one Playwright end-to-end test focused on PO backlog flow.
-Use baseline approved PR data, then create and submit PO, and assert status + quantities on PO detail page.
-Keep selectors stable and assertions clear.
+Refine tests/e2e/po-module.spec.js for readability and stable selectors.
+Keep two scenarios only: happy path and over-allocation rejection.
+```
+
+Run commands:
+
+```bash
+npx playwright test tests/e2e/po-module.spec.js
+npx playwright show-report
+```
+
+Artifact locations:
+- HTML report: `playwright-report/index.html`
+- Screenshots, traces, videos: `test-results/`
+
+How participants open artifacts:
+- VS Code Explorer: open `playwright-report/` and `test-results/`
+- Terminal (macOS):
+
+```bash
+open playwright-report/index.html
+open test-results
 ```
 
 ---
