@@ -3,10 +3,10 @@
 Hands-on 5-hour workshop to build a web-based procurement MVP and practice Copilot across SDLC.
 
 ## Workshop Scope
-- PR: create, submit, approve
-- PO: create from approved PR lines, submit
-- GR: create from PO lines, post
-- Tracking: PR detail shows linked PO/GR and quantities
+- Baseline provided in repo: database schema + Home/Dashboard + PR module (list/create/detail + PR APIs)
+- Participant implementation backlog: PO module only (list/create/detail + PO APIs + PO validations)
+- GR module: out of implementation scope during workshop (further exploration)
+- Optional extension: bookmark feature (`PR | PO | GR`) as post-backlog exercise
 
 Canonical workshop document: [docs/plan.md](docs/plan.md)
 
@@ -57,26 +57,31 @@ npm run dev
 ```
 
 ## Expected Endpoints
+Baseline (already implemented in repo):
 - `POST /api/requisitions`
 - `POST /api/requisitions/:id/submit`
 - `POST /api/requisitions/:id/approve`
 - `GET /api/requisitions/:id`
 - `GET /api/requisitions/:id/open-lines`
+
+Participant backlog focus (to implement in workshop):
 - `POST /api/purchase-orders`
 - `POST /api/purchase-orders/:id/submit`
 - `GET /api/purchase-orders/:id`
 - `GET /api/purchase-orders/:id/open-lines`
+
+Further exploration (not implemented during workshop):
 - `POST /api/goods-receipts`
 - `POST /api/goods-receipts/:id/post`
 - `GET /api/goods-receipts/:id`
 
 ## Validation Rules
 1. PO allocation qty must not exceed PR line remaining qty.
-2. GR received qty must not exceed PO line open qty.
-3. Status transition rules must be enforced.
+2. PO status transition rules must be enforced.
+3. GR validations are optional exploration after workshop backlog.
 
 ## Suggested Workshop Output
-- Running Fastify API + Vue app + Docker PostgreSQL
-- One complete PR -> PO -> GR demo
-- Jest tests for critical validations
-- One Playwright happy-path test
+- Running baseline PR module + participant-completed PO module on Docker PostgreSQL
+- PO happy path demo: create PO from approved PR open lines, submit, and view detail
+- Focused Jest tests for PO business validations (over-allocation + status transition)
+- Playwright coverage focused on PO flow integrated with baseline PR data
