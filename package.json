@@ -7,6 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
     "test": "echo \"Use npm run test:e2e\"",
     "test:e2e": "playwright test",
     "test:e2e:list": "playwright test --list",
@@ -15,6 +18,7 @@
   "author": "Arie M. Prasetyo",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.58.2"
+    "@playwright/test": "^1.58.2",
+    "concurrently": "^9.2.1"
   }
 }

@@ -17,6 +17,7 @@ Workshop implementation strategy:
 3. Participant backlog focus is PO module only (PO list/create/detail + PO APIs + PO validations).
 4. GR module is not implemented during workshop and is left for further exploration.
 5. Bookmark feature is post-backlog and practiced via GitHub Issue-driven development.
+6. DB bootstrap is prepared for Windows/macOS/Linux hosts by using POSIX `sh` init script + LF normalization for `.sh` and `.sql` files.
 
 DB bootstrap command (participant-ready):
 
@@ -28,6 +29,9 @@ docker compose up -d db
 Bootstrap SQL files:
 - `db/migrations/001_init_procurement_mvp.sql`
 - `db/seeds/002_seed_procurement_mvp.sql`
+
+Bootstrap entrypoint script:
+- `docker/postgres/init/00-init-mvp-db.sh`
 
 ---
 
@@ -397,13 +401,13 @@ services:
       POSTGRES_USER: workshop
       POSTGRES_PASSWORD: workshop
     ports:
-      - "5432:5432"
+      - "5433:5432"
 ```
 
 ### Backend env
 ```env
 PORT=3000
-DATABASE_URL=postgres://workshop:workshop@localhost:5432/procurement_mvp
+DATABASE_URL=postgres://workshop:workshop@localhost:5433/procurement_mvp
 ```
 
 ### Frontend env

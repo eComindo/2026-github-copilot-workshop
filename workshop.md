@@ -102,6 +102,17 @@ docker compose up -d db
 Bootstrap files used by all participants:
 - `db/migrations/001_init_procurement_mvp.sql`
 - `db/seeds/002_seed_procurement_mvp.sql`
+- `docker/postgres/init/00-init-mvp-db.sh`
+
+Cross-OS readiness note:
+- Workshop bootstrap supports Windows, macOS, and Linux participants by enforcing LF line endings for `.sh` and `.sql` via `.gitattributes`.
+- If the DB init script cannot execute on a participant machine, run:
+
+```bash
+chmod +x docker/postgres/init/00-init-mvp-db.sh
+docker compose down -v
+docker compose up -d db
+```
 
 6. Quick verification:
 
@@ -129,6 +140,7 @@ What this does:
 - Recreates PostgreSQL volume from scratch
 - Applies baseline schema migration
 - Inserts workshop sample data for Home/Dashboard + PR baseline
+- Runs via container init script (`/docker-entrypoint-initdb.d/00-init-mvp-db.sh`) to keep bootstrap behavior consistent across OS hosts
 
 Verification command:
 
@@ -145,7 +157,7 @@ Create backend `.env`:
 
 ```env
 PORT=3000
-DATABASE_URL=postgres://workshop:workshop@localhost:5432/procurement_mvp
+DATABASE_URL=postgres://workshop:workshop@localhost:5433/procurement_mvp
 ```
 
 Create frontend `.env`:
@@ -168,6 +180,51 @@ Baseline expectation:
 - Home/Dashboard works
 - PR list/create/detail pages work
 - PR APIs already connected to provided database
+
+---
+
+## API Readiness Check with Swagger (Early Checkpoint)
+Duration: 15
+
+Goal:
+- Validate backend API is running before PO implementation starts
+- Let participants practice asking Copilot to generate API docs view
+- Make available endpoints visible in one place
+
+Participant task:
+1. Ask Copilot to add Swagger/OpenAPI to the Fastify backend.
+2. Run backend and open Swagger UI in browser.
+3. Confirm baseline PR endpoints are listed and callable.
+
+Prompt example for Copilot:
+
+```text
+Add Swagger/OpenAPI support to this Fastify JavaScript backend.
+Use @fastify/swagger and @fastify/swagger-ui.
+Register plugins in the main server/bootstrap file,
+expose docs at /docs, and include all existing routes in the generated OpenAPI spec.
+Keep implementation simple for workshop participants.
+```
+
+Verification steps:
+
+```bash
+# backend terminal
+npm install @fastify/swagger @fastify/swagger-ui
+npm run dev
+```
+
+Open in browser:
+- `http://localhost:3000/docs`
+
+Ready criteria:
+- Swagger page loads successfully
+- Existing baseline PR endpoints are visible
+- At least one endpoint can be tried successfully from Swagger UI
+
+> aside positive
+>
+> This gives participants a fast confidence check that API contracts are live before building PO features.
 
 ---
 

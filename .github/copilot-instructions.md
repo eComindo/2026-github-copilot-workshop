@@ -43,6 +43,11 @@ Reference plan: `docs/plan.md`.
 - Add Playwright coverage focused on PO pages/flow integrated with existing baseline PR data.
 - Do not over-invest in test framework complexity.
 
+## User Interface Guidelines
+- Follow the existing UI patterns established in the baseline for consistency.
+- Always respect the CSS variables set in the baseline for colors, spacing, and typography.
+- Never use emojis in the UI or commit messages. Create a custom SVG icon if needed for visual emphasis.
+
 ## Optional Extension
 - Bookmark feature (PR|PO|GR) is an optional post-backlog exercise and should be driven via GitHub Issue creation workflow.
 

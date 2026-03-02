@@ -2,5 +2,10 @@
 
 node_modules/
 
-test_results/
+backend/node_modules/
+backend/.env
+frontend/node_modules/
+frontend/.env
+
+test-results/
 playwright-report/

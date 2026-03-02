@@ -1,0 +1,340 @@
+/* ===== Design tokens from Figma ===== */
+:root {
+  --primary: #ff4081;
+  --primary-light: #ff80ab;
+  --gradient: linear-gradient(124deg, #ff4081 0%, #fdb702 100%);
+  --bg: #f6f6f6;
+  --white: #ffffff;
+  --text: #222222;
+  --text-muted: #888888;
+  --border: #dddddd;
+  --table-header: #f3f3f3;
+  --radius-card: 15px;
+  --radius-input: 8px;
+  --radius-btn: 24px;
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: var(--primary); text-decoration: none; }
+
+/* ===== Layout ===== */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== Top Navbar ===== */
+.navbar {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.navbar-brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.navbar nav {
+  display: flex;
+  gap: 24px;
+}
+
+.navbar nav a {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-btn);
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbar nav a:hover {
+  background: rgba(255, 64, 129, 0.08);
+  color: var(--primary);
+}
+
+.navbar nav a.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* ===== Main content ===== */
+.content {
+  padding: 32px 40px;
+  flex: 1;
+}
+
+/* ===== Page Header ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.page-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.page-header .muted {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ===== Back button (circle arrow) ===== */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.back-btn:hover { opacity: 0.85; }
+
+/* ===== Gradient stat cards ===== */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--gradient);
+  border-radius: var(--radius-card);
+  padding: 16px 24px;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 110px;
+  justify-content: center;
+}
+
+.stat-card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stat-card-value {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1.6px;
+}
+
+/* ===== White card panel ===== */
+.card-panel {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.card-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-panel-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-panel-header a,
+.card-panel-header .link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ===== Panels row (2 side-by-side) ===== */
+.panels-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 24px;
+}
+
+/* ===== Tables ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  border-bottom: 1px solid var(--border);
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+th {
+  background: var(--table-header);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+td a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  text-decoration: none;
+}
+.btn:hover { opacity: 0.85; }
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-danger-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 64, 129, 0.10);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ===== Form fields (Figma style) ===== */
+.form-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  font-family: inherit;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  padding: 10px 12px;
+  background: var(--white);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--primary);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* ===== Status badge ===== */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-badge.draft { background: #f3f3f3; color: #888; }
+.status-badge.submitted { background: #fff3e0; color: #e65100; }
+.status-badge.approved { background: #e8f5e9; color: #2e7d32; }
+
+/* ===== Utility ===== */
+.muted { color: var(--text-muted); font-size: 13px; }
+.error { color: #c62828; font-size: 13px; }
+h2 { margin-top: 0; }

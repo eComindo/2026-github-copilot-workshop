@@ -28,6 +28,18 @@ docker compose up -d db
 The PostgreSQL container now initializes the workshop baseline automatically:
 - Runs schema migration: `db/migrations/001_init_procurement_mvp.sql`
 - Runs sample seed data: `db/seeds/002_seed_procurement_mvp.sql`
+- Uses Docker init script: `docker/postgres/init/00-init-mvp-db.sh`
+
+Cross-platform notes (Windows/macOS/Linux):
+- Init script and SQL files are normalized to LF via `.gitattributes`.
+- The init script is committed as executable so PostgreSQL can run it from `/docker-entrypoint-initdb.d`.
+- If bootstrap still fails on a local machine, re-apply file mode and reset DB:
+
+```bash
+chmod +x docker/postgres/init/00-init-mvp-db.sh
+docker compose down -v
+docker compose up -d db
+```
 
 Use this when starting fresh:
 
@@ -41,6 +53,26 @@ Verify database is ready:
 ```bash
 docker compose exec -T db psql -U workshop -d procurement_mvp -c "SELECT pr_number, status FROM purchase_requisitions ORDER BY pr_number;"
 ```
+
+### Troubleshooting: DB init failed
+
+Symptoms:
+- `relation "purchase_requisitions" does not exist`
+- `bad interpreter: Permission denied` from `00-init-mvp-db.sh`
+
+Quick fix:
+
+```bash
+chmod +x docker/postgres/init/00-init-mvp-db.sh
+docker compose down -v
+docker compose up -d db
+docker compose logs --no-color db | tail -n 120
+```
+
+Expected in logs:
+- `[initdb] Running baseline migration...`
+- `[initdb] Seeding sample data...`
+- `[initdb] Database initialization complete.`
 
 ### 2) Backend (to be scaffolded in workshop)
 ```bash
