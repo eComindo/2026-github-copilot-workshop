@@ -1,37 +1,44 @@
 <template>
   <section>
-    <header class="header-row">
-      <div>
-        <h2>Purchase Requisitions</h2>
-        <p class="muted">Baseline PR module list page.</p>
+    <div class="page-header">
+      <div class="page-header-left">
+        <RouterLink to="/" class="back-btn" title="Back to Dashboard">&#8592;</RouterLink>
+        <div>
+          <h2>Purchase Requisitions</h2>
+          <p class="muted">All purchase requisition records</p>
+        </div>
       </div>
-      <RouterLink class="button" to="/requisitions/new">Create PR</RouterLink>
-    </header>
+      <RouterLink class="btn btn-outline" to="/requisitions/new">+ New PR</RouterLink>
+    </div>
 
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>PR Number</th>
-          <th>Requester</th>
-          <th>Department</th>
-          <th>Title</th>
-          <th>Status</th>
-          <th>Needed By</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in items" :key="item.id">
-          <td><RouterLink :to="`/requisitions/${item.id}`">{{ item.prNumber }}</RouterLink></td>
-          <td>{{ item.requesterName }}</td>
-          <td>{{ item.departmentName }}</td>
-          <td>{{ item.title }}</td>
-          <td>{{ item.status }}</td>
-          <td>{{ item.neededByDate || '-' }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="card-panel">
+      <table>
+        <thead>
+          <tr>
+            <th>PR Number</th>
+            <th>Requester</th>
+            <th>Department</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Needed By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items" :key="item.id">
+            <td><RouterLink :to="`/requisitions/${item.id}`">{{ item.prNumber }}</RouterLink></td>
+            <td>{{ item.requesterName }}</td>
+            <td>{{ item.departmentName }}</td>
+            <td>{{ item.title }}</td>
+            <td>
+              <span class="status-badge" :class="item.status.toLowerCase()">{{ item.status }}</span>
+            </td>
+            <td>{{ item.neededByDate || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </template>
 

@@ -1,51 +1,87 @@
 <template>
   <section>
-    <header class="header-row">
-      <div>
-        <h2>PR Detail</h2>
-        <p class="muted">{{ requisition?.prNumber || '-' }} | {{ requisition?.status || '-' }}</p>
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-header-left">
+        <RouterLink to="/requisitions" class="back-btn" title="Back to list">&#8592;</RouterLink>
+        <div>
+          <h2>Detail Purchase Requisition</h2>
+          <p class="muted">{{ requisition?.prNumber || '-' }} &mdash; Purchase Requisition information detail</p>
+        </div>
       </div>
-      <RouterLink class="button secondary" to="/requisitions">Back to List</RouterLink>
-    </header>
+      <div class="btn-group" v-if="requisition">
+        <button v-if="requisition.status === 'DRAFT'" class="btn btn-primary" @click="submitRequisition">Submit PR</button>
+        <button v-if="requisition.status === 'SUBMITTED'" class="btn btn-primary" @click="approveRequisition">Approve PR</button>
+      </div>
+    </div>
 
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <div v-if="requisition" class="detail-grid">
-      <p><strong>Requester:</strong> {{ requisition.requesterName }}</p>
-      <p><strong>Department:</strong> {{ requisition.departmentName }}</p>
-      <p><strong>Title:</strong> {{ requisition.title }}</p>
-      <p><strong>Needed By:</strong> {{ requisition.neededByDate || '-' }}</p>
-      <p class="full"><strong>Notes:</strong> {{ requisition.notes || '-' }}</p>
+    <!-- PR Header card -->
+    <div class="card-panel" v-if="requisition">
+      <p class="form-section-title">PR Header</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Requester Name</label>
+          <input :value="requisition.requesterName" disabled />
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <input :value="requisition.departmentName" disabled />
+        </div>
+        <div class="form-group">
+          <label>PR Title</label>
+          <input :value="requisition.title" disabled />
+        </div>
+        <div class="form-group">
+          <label>Needed By date</label>
+          <input :value="requisition.neededByDate || '-'" disabled />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Status</label>
+          <span class="status-badge" :class="requisition.status.toLowerCase()">{{ requisition.status }}</span>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label>Notes</label>
+        <textarea :value="requisition.notes || '-'" disabled rows="3" />
+      </div>
     </div>
 
-    <div class="actions" v-if="requisition">
-      <button v-if="requisition.status === 'DRAFT'" class="button" @click="submitRequisition">Submit</button>
-      <button v-if="requisition.status === 'SUBMITTED'" class="button" @click="approveRequisition">Approve</button>
+    <!-- PR Lines card -->
+    <div class="card-panel" v-if="requisition">
+      <p class="form-section-title">PR Lines</p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:50px">Line</th>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>QTY</th>
+            <th>UOM</th>
+            <th>Est. Unit Price</th>
+            <th>Site</th>
+            <th>Required Date</th>
+            <th>Budget Center</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="line in requisition.lines" :key="line.id">
+            <td>{{ line.lineNo }}</td>
+            <td>{{ line.itemCode }}</td>
+            <td>{{ line.itemName }}</td>
+            <td>{{ line.qtyRequested }}</td>
+            <td>{{ line.uom }}</td>
+            <td>{{ line.estUnitPrice }}</td>
+            <td>{{ line.siteCode }}</td>
+            <td>{{ line.requiredDate || '-' }}</td>
+            <td>{{ line.budgetCenter || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <h3>Lines</h3>
-    <table v-if="requisition">
-      <thead>
-        <tr>
-          <th>Line</th>
-          <th>Item</th>
-          <th>Qty Requested</th>
-          <th>Qty Allocated</th>
-          <th>Qty Received</th>
-          <th>Open for PO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="line in requisition.lines" :key="line.id">
-          <td>{{ line.lineNo }}</td>
-          <td>{{ line.itemCode }} - {{ line.itemName }}</td>
-          <td>{{ line.qtyRequested }}</td>
-          <td>{{ line.qtyAllocated }}</td>
-          <td>{{ line.qtyReceived }}</td>
-          <td>{{ line.qtyOpenForPo }}</td>
-        </tr>
-      </tbody>
-    </table>
   </section>
 </template>
 
@@ -85,3 +121,13 @@ async function approveRequisition() {
 
 onMounted(load);
 </script>
+
+<style scoped>
+.form-group input:disabled,
+.form-group textarea:disabled {
+  background: var(--white);
+  color: var(--text);
+  cursor: default;
+  opacity: 1;
+}
+</style>

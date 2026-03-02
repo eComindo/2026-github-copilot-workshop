@@ -1,12 +1,12 @@
 <template>
   <div class="layout">
-    <aside class="sidebar">
-      <h1>Procurement MVP</h1>
+    <header class="navbar">
+      <span class="navbar-brand">Procurement MVP</span>
       <nav>
-        <RouterLink to="/">Home / Dashboard</RouterLink>
-        <RouterLink to="/requisitions">Purchase Requisitions</RouterLink>
+        <RouterLink to="/" :class="{ active: isDashboard }">Dashboard</RouterLink>
+        <RouterLink to="/requisitions" :class="{ active: isRequisitions }">Purchase Requisitions</RouterLink>
       </nav>
-    </aside>
+    </header>
 
     <main class="content">
       <RouterView />
@@ -15,5 +15,10 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { computed } from 'vue';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
+
+const route = useRoute();
+const isDashboard = computed(() => route.path === '/');
+const isRequisitions = computed(() => route.path.startsWith('/requisitions'));
 </script>
