@@ -7,5 +7,5 @@ backend/.env
 frontend/node_modules/
 frontend/.env
 
-test_results/
+test-results/
 playwright-report/
