@@ -13,7 +13,7 @@
 
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" novalidate>
       <!-- PO Header -->
       <PoHeaderForm v-model="header" />
 
