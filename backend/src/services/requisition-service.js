@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { getBookmarkStatus } from './bookmark-service.js';
 
 function mapHeader(row) {
   return {
@@ -65,6 +66,7 @@ export async function getRequisitionById(db, id) {
 
   return {
     ...mapHeader(headerResult.rows[0]),
+    isBookmarked: await getBookmarkStatus(db, 'PR', id),
     lines: linesResult.rows.map(mapLine),
   };
 }

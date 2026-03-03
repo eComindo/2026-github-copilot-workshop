@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { getBookmarkStatus } from './bookmark-service.js';
 
 // ── Mappers ──────────────────────────────────────────────
 
@@ -123,6 +124,7 @@ export async function getPurchaseOrderById(db, id) {
 
   return {
     ...mapHeader(headerResult.rows[0]),
+    isBookmarked: await getBookmarkStatus(db, 'PO', id),
     lines,
   };
 }

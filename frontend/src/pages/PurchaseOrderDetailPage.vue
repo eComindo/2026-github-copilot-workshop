@@ -10,6 +10,9 @@
         </div>
       </div>
       <div class="btn-group" v-if="po">
+        <button class="btn btn-outline" @click="toggleBookmark">
+          {{ po.isBookmarked ? 'Remove Bookmark' : 'Bookmark' }}
+        </button>
         <button v-if="po.status === 'DRAFT'" class="btn btn-primary" @click="submitPo">Submit PO</button>
       </div>
     </div>
@@ -102,6 +105,22 @@ async function submitPo() {
   errorMessage.value = '';
   try {
     po.value = await api.submitPurchaseOrder(route.params.id);
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
+}
+
+async function toggleBookmark() {
+  errorMessage.value = '';
+  try {
+    if (po.value.isBookmarked) {
+      await api.removeBookmark('PO', route.params.id);
+      po.value.isBookmarked = false;
+      return;
+    }
+
+    await api.addBookmark('PO', route.params.id);
+    po.value.isBookmarked = true;
   } catch (error) {
     errorMessage.value = error.message;
   }

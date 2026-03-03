@@ -3,6 +3,7 @@ set -eu
 
 DB_ROOT="${WORKSHOP_DB_ROOT:-/workspace/db}"
 MIGRATION_FILE="$DB_ROOT/migrations/001_init_procurement_mvp.sql"
+BOOKMARK_MIGRATION_FILE="$DB_ROOT/migrations/003_add_bookmarks.sql"
 SEED_FILE="$DB_ROOT/seeds/002_seed_procurement_mvp.sql"
 
 if [ ! -r "$MIGRATION_FILE" ]; then
@@ -17,6 +18,11 @@ fi
 
 echo "[initdb] Running baseline migration..."
 psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f "$MIGRATION_FILE"
+
+if [ -r "$BOOKMARK_MIGRATION_FILE" ]; then
+	echo "[initdb] Running bookmark migration..."
+	psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f "$BOOKMARK_MIGRATION_FILE"
+fi
 
 echo "[initdb] Seeding sample data..."
 psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f "$SEED_FILE"
