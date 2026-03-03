@@ -64,4 +64,15 @@ export const api = {
     apiFetch(`/api/purchase-orders/${id}/submit`, {
       method: 'POST',
     }),
+  listGoodsReceipts: () => apiFetch('/api/goods-receipts'),
+  getGoodsReceipt: (id) => apiFetch(`/api/goods-receipts/${id}`),
+  addBookmark: (entityType, entityId) =>
+    apiFetch('/api/bookmarks', {
+      method: 'POST',
+      body: JSON.stringify({ entityType, entityId }),
+    }),
+  removeBookmark: (entityType, entityId) =>
+    apiFetch(`/api/bookmarks/${entityType}/${entityId}`, {
+      method: 'DELETE',
+    }),
 };

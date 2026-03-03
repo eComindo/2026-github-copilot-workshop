@@ -10,6 +10,9 @@
         </div>
       </div>
       <div class="btn-group" v-if="requisition">
+        <button class="btn btn-outline" @click="toggleBookmark">
+          {{ requisition.isBookmarked ? 'Remove Bookmark' : 'Bookmark' }}
+        </button>
         <button v-if="requisition.status === 'DRAFT'" class="btn btn-primary" @click="submitRequisition">Submit PR</button>
         <button v-if="requisition.status === 'SUBMITTED'" class="btn btn-primary" @click="approveRequisition">Approve PR</button>
       </div>
@@ -114,6 +117,22 @@ async function submitRequisition() {
 async function approveRequisition() {
   try {
     requisition.value = await api.approveRequisition(route.params.id);
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
+}
+
+async function toggleBookmark() {
+  errorMessage.value = '';
+  try {
+    if (requisition.value.isBookmarked) {
+      await api.removeBookmark('PR', route.params.id);
+      requisition.value.isBookmarked = false;
+      return;
+    }
+
+    await api.addBookmark('PR', route.params.id);
+    requisition.value.isBookmarked = true;
   } catch (error) {
     errorMessage.value = error.message;
   }
