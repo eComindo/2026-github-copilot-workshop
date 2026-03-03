@@ -30,8 +30,15 @@ export async function getBookmarkStatus(db, entityType, entityId) {
 }
 
 async function ensureEntityExists(db, entityType, entityId) {
-  const tableName = ENTITY_TABLES[entityType];
-  const result = await db.query(`SELECT id FROM ${tableName} WHERE id = $1`, [entityId]);
+  if (entityType === 'PR') {
+    const result = await db.query(`SELECT id FROM purchase_requisitions WHERE id = $1`, [entityId]);
+    return result.rowCount > 0;
+  }
+  if (entityType === 'PO') {
+    const result = await db.query(`SELECT id FROM purchase_orders WHERE id = $1`, [entityId]);
+    return result.rowCount > 0;
+  }
+  const result = await db.query(`SELECT id FROM goods_receipts WHERE id = $1`, [entityId]);
   return result.rowCount > 0;
 }
 

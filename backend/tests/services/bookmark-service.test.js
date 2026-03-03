@@ -29,6 +29,18 @@ describe('bookmark-service', () => {
       .rejects.toMatchObject({ message: 'entityType must be one of PR, PO, or GR', statusCode: 422 });
   });
 
+  test('returns null when adding bookmark for non-existent entity', async () => {
+    const db = mockDb((sql) => {
+      if (sql.includes('FROM purchase_orders')) {
+        return { rows: [], rowCount: 0 };
+      }
+      return { rows: [], rowCount: 0 };
+    });
+
+    const result = await addBookmark(db, { entityType: 'PO', entityId: 'missing-po' });
+    expect(result).toBeNull();
+  });
+
   test('removes bookmark when entity exists', async () => {
     const db = mockDb((sql) => {
       if (sql.includes('FROM goods_receipts')) {
