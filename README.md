@@ -81,6 +81,9 @@ npm install
 npm run dev
 ```
 
+Swagger/OpenAPI docs are available at:
+- `http://localhost:3000/docs`
+
 ### 3) Frontend (to be scaffolded in workshop)
 ```bash
 cd frontend

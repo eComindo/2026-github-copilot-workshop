@@ -181,6 +181,19 @@ describe('createPurchaseOrder – payload validation', () => {
       .rejects.toMatchObject({ message: 'lines[0].qtyOrdered must be greater than 0', statusCode: 422 });
   });
 
+  test('rejects when qtyOrdered is non-numeric', async () => {
+    const db = mockDb(null);
+    const payload = validPayload({
+      lines: [{
+        prLineId: 'pr-1', itemCode: 'A', itemName: 'A', uom: 'PCS',
+        siteCode: 'WH', qtyOrdered: 'abc', unitPrice: 100,
+      }],
+    });
+
+    await expect(createPurchaseOrder(db, payload))
+      .rejects.toMatchObject({ message: 'lines[0].qtyOrdered must be greater than 0', statusCode: 422 });
+  });
+
   test('rejects when unitPrice is negative', async () => {
     const db = mockDb(null);
     const payload = validPayload({
@@ -265,6 +278,55 @@ describe('createPurchaseOrder – over-allocation guard', () => {
     await expect(createPurchaseOrder(db, validPayload()))
       .rejects.toMatchObject({
         message: 'lines[0]: PR line not found',
+        statusCode: 422,
+      });
+  });
+
+  test('returns the correct line index when second line over-allocates', async () => {
+    const client = mockClient((sql, params) => {
+      if (sql === 'BEGIN' || sql === 'ROLLBACK') return { rows: [], rowCount: 0 };
+      if (sql.includes('FOR UPDATE')) {
+        if (params[0] === 'pr-line-001') {
+          return {
+            rows: [{ id: 'pr-line-001', qty_requested: 10, qty_allocated: 0, pr_status: 'APPROVED' }],
+            rowCount: 1,
+          };
+        }
+
+        return {
+          rows: [{ id: 'pr-line-002', qty_requested: 6, qty_allocated: 5, pr_status: 'APPROVED' }],
+          rowCount: 1,
+        };
+      }
+      return { rows: [], rowCount: 0 };
+    });
+    const db = mockDb(client);
+    const payload = validPayload({
+      lines: [
+        {
+          prLineId: 'pr-line-001',
+          itemCode: 'BRG-001',
+          itemName: 'Safety Helmet',
+          qtyOrdered: 2,
+          unitPrice: 150000,
+          uom: 'PCS',
+          siteCode: 'WH-JKT',
+        },
+        {
+          prLineId: 'pr-line-002',
+          itemCode: 'BRG-002',
+          itemName: 'Safety Vest',
+          qtyOrdered: 3,
+          unitPrice: 120000,
+          uom: 'PCS',
+          siteCode: 'WH-JKT',
+        },
+      ],
+    });
+
+    await expect(createPurchaseOrder(db, payload))
+      .rejects.toMatchObject({
+        message: 'lines[1]: allocation qty 3 exceeds remaining 1',
         statusCode: 422,
       });
   });
@@ -407,6 +469,10 @@ describe('submitPurchaseOrder – status transition', () => {
     const result = await submitPurchaseOrder(db, 'po-1');
     expect(result.status).toBe('SUBMITTED');
     expect(result.poNumber).toBe('PO-2026-0001');
+
+    const updateCall = db.query.mock.calls.find(([sql]) => sql.includes('UPDATE purchase_orders'));
+    expect(updateCall).toBeDefined();
+    expect(updateCall[1]).toEqual(['po-1']);
   });
 
   test('rejects submit when PO is already SUBMITTED', async () => {
@@ -433,5 +499,21 @@ describe('submitPurchaseOrder – status transition', () => {
         message: 'Only DRAFT purchase order can be submitted',
         statusCode: 422,
       });
+  });
+
+  test('rejects submit when PO is APPROVED and does not update status', async () => {
+    const db = mockDb(null, () => ({
+      rows: [{ id: 'po-1', status: 'APPROVED' }],
+      rowCount: 1,
+    }));
+
+    await expect(submitPurchaseOrder(db, 'po-1'))
+      .rejects.toMatchObject({
+        message: 'Only DRAFT purchase order can be submitted',
+        statusCode: 422,
+      });
+
+    const updateCall = db.query.mock.calls.find(([sql]) => sql.includes('UPDATE purchase_orders'));
+    expect(updateCall).toBeUndefined();
   });
 });
