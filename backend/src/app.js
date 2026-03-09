@@ -31,7 +31,24 @@ export function buildApp() {
   app.register(requisitionRoutes);
   app.register(purchaseOrderRoutes);
 
-  app.get('/health', async () => ({ status: 'ok' }));
+  app.get(
+    '/health',
+    {
+      schema: {
+        summary: 'Health check',
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              status: { type: 'string' },
+            },
+            required: ['status'],
+          },
+        },
+      },
+    },
+    async () => ({ status: 'ok' }),
+  );
 
   app.setErrorHandler((error, request, reply) => {
     request.log.error(error);
