@@ -6,7 +6,7 @@ Hands-on 5-hour workshop to build a web-based procurement MVP and practice Copil
 - Baseline provided in repo: database schema + Home/Dashboard + PR module (list/create/detail + PR APIs)
 - Participant implementation backlog: PO module only (list/create/detail + PO APIs + PO validations)
 - GR module: out of implementation scope during workshop (further exploration)
-- Optional extension: bookmark feature (`PR | PO | GR`) as post-backlog exercise
+- Optional extension: bookmark feature (`PR`, `PO`, `GR`) as post-backlog exercise
 
 Canonical workshop document: [docs/plan.md](docs/plan.md)
 
@@ -87,25 +87,6 @@ cd frontend
 npm install
 npm run dev
 ```
-
-## Expected Endpoints
-Baseline (already implemented in repo):
-- `POST /api/requisitions`
-- `POST /api/requisitions/:id/submit`
-- `POST /api/requisitions/:id/approve`
-- `GET /api/requisitions/:id`
-- `GET /api/requisitions/:id/open-lines`
-
-Participant backlog focus (to implement in workshop):
-- `POST /api/purchase-orders`
-- `POST /api/purchase-orders/:id/submit`
-- `GET /api/purchase-orders/:id`
-- `GET /api/purchase-orders/:id/open-lines`
-
-Further exploration (not implemented during workshop):
-- `POST /api/goods-receipts`
-- `POST /api/goods-receipts/:id/post`
-- `GET /api/goods-receipts/:id`
 
 ## Validation Rules
 1. PO allocation qty must not exceed PR line remaining qty.

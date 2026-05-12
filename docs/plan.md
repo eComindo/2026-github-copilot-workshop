@@ -1,4 +1,4 @@
-# Copilot Workshop Plan: Procurement MVP
+# Copilot Workshop Plan: Procurement MVP (minimum viable product)
 
 ## 1) Goal
 Build a realistic but small procurement web app to practice using Copilot across SDLC phases.

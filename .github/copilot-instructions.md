@@ -1,7 +1,15 @@
 # Copilot Instructions for This Workshop
 
 ## Objective
-Run a 5-hour Copilot workshop using a prebuilt baseline and a focused backlog sprint.
+Build a procurement management system with core modules for Purchase Requisition (PR), Purchase Order (PO), and Goods Receipt (GR).
+A procurement system manages how a company buys things, with control and traceability from request to receiving.
+
+The modules for a MVP (minimum viable product) procurement system include:
+- **Purchase Requisition (PR)**: Employees request items/services, which are reviewed and approved by managers.
+- **Purchase Order (PO)**: Approved requisitions are converted into purchase orders sent to suppliers, tracking order details and status.
+- **Goods Receipt (GR)**: When items are delivered, a goods receipt is created to confirm what was received, update inventory, and trigger payment.
+
+In this workshop, we focus on using a prebuilt baseline and a add a backlog sprint.
 
 Reference plan: `docs/plan.md`.
 
