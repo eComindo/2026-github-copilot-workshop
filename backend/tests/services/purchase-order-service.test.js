@@ -1,6 +1,8 @@
 import { jest, describe, test, expect } from '@jest/globals';
 import {
   createPurchaseOrder,
+  listPurchaseOrders,
+  getOpenPoLines,
   submitPurchaseOrder,
 } from '../../src/services/purchase-order-service.js';
 
@@ -433,5 +435,101 @@ describe('submitPurchaseOrder – status transition', () => {
         message: 'Only DRAFT purchase order can be submitted',
         statusCode: 422,
       });
+  });
+});
+
+describe('purchase-order-service list functions', () => {
+  test('listPurchaseOrders returns mapped header fields', async () => {
+    const db = {
+      query: jest.fn(() => ({
+        rows: [
+          {
+            id: 'po-1',
+            po_number: 'PO-2026-0001',
+            status: 'DRAFT',
+            vendor_name: 'PT Maju',
+            created_at: '2026-05-01T10:00:00.000Z',
+            updated_at: '2026-05-01T10:00:00.000Z',
+          },
+        ],
+      })),
+    };
+
+    const result = await listPurchaseOrders(db);
+
+    expect(result).toEqual([
+      {
+        id: 'po-1',
+        poNumber: 'PO-2026-0001',
+        status: 'DRAFT',
+        vendorName: 'PT Maju',
+        createdAt: '2026-05-01T10:00:00.000Z',
+        updatedAt: '2026-05-01T10:00:00.000Z',
+      },
+    ]);
+  });
+
+  test('getOpenPoLines returns null when PO not found', async () => {
+    const db = { query: jest.fn(() => ({ rows: [], rowCount: 0 })) };
+
+    const result = await getOpenPoLines(db, 'missing-id');
+
+    expect(result).toBeNull();
+    expect(db.query).toHaveBeenCalledTimes(1);
+  });
+
+  test('getOpenPoLines returns only lines with qtyOpenForGr greater than 0', async () => {
+    let call = 0;
+    const db = {
+      query: jest.fn(() => {
+        call += 1;
+        if (call === 1) {
+          return {
+            rows: [{ id: 'po-1', po_number: 'PO-2026-0001', status: 'SUBMITTED' }],
+            rowCount: 1,
+          };
+        }
+        return {
+          rows: [
+            {
+              id: 'po-line-1',
+              line_no: 1,
+              item_code: 'A',
+              item_name: 'Item A',
+              qty_ordered: 10,
+              qty_received: 4,
+              uom: 'PCS',
+              unit_price: 1000,
+              site_code: 'JKT',
+              required_date: null,
+            },
+            {
+              id: 'po-line-2',
+              line_no: 2,
+              item_code: 'B',
+              item_name: 'Item B',
+              qty_ordered: 3,
+              qty_received: 3,
+              uom: 'PCS',
+              unit_price: 2000,
+              site_code: 'JKT',
+              required_date: null,
+            },
+          ],
+          rowCount: 2,
+        };
+      }),
+    };
+
+    const result = await getOpenPoLines(db, 'po-1');
+
+    expect(result.purchaseOrder).toEqual({
+      id: 'po-1',
+      poNumber: 'PO-2026-0001',
+      status: 'SUBMITTED',
+    });
+    expect(result.openLines).toHaveLength(1);
+    expect(result.openLines[0].id).toBe('po-line-1');
+    expect(result.openLines[0].qtyOpenForGr).toBe(6);
   });
 });

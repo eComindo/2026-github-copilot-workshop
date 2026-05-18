@@ -9,3 +9,5 @@ frontend/.env
 
 test-results/
 playwright-report/
+backend/coverage/
+frontend/coverage/
