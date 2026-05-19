@@ -1,170 +1,177 @@
-# PO Module Implementation Runbook
+# Procurement MVP Runbook (PO Backlog Focus)
 
-## Pre-flight
+## Purpose
+This runbook provides a strict execution sequence with checkpoints for workshop delivery.
 
-- DB schema and seed data already exist — no migration changes needed.
-- `plan.md` section 5 matches the actual DB schema. Use it as reference.
-- All PKs are UUID. PO number format: `PO-2026-XXXX`.
-- Schema source of truth: `db/migrations/001_init_procurement_mvp.sql`
+Scope is intentionally limited to Purchase Order (PO) backlog implementation:
+- PO list/create/detail UI
+- Required PO APIs and validation behavior
+- PO-focused unit and E2E testing
 
-### Seed Data Reference
+Out of scope during this runbook:
+- Goods Receipt (GR) implementation
+- Enterprise features (SSO, workflow engine, advanced reporting/compliance)
+- Broad architecture refactors
 
-| Entity | Key | Status | Notes |
-|---|---|---|---|
-| PR-2026-0001 | `...1001` | APPROVED | Line 1: 8 open (Bearing), Line 2: 30 open (Gloves) |
-| PR-2026-0002 | `...1002` | SUBMITTED | Not eligible for PO |
-| PR-2026-0003 | `...1003` | DRAFT | Not eligible for PO |
-| PO-2026-0001 | `...3001` | SUBMITTED | 12 Bearings + 20 Gloves allocated |
-| GR-2026-0001 | `...6001` | DRAFT | 5 Bearings received (not posted) |
+## Preconditions
+1. Baseline repository is checked out and dependencies are installed.
+2. PostgreSQL is running with seeded workshop data.
+3. Baseline PR module remains unchanged and working.
 
-### Key Schema Reminders
-
-- `purchase_orders` header has only `vendor_name` (no date/currency/terms/notes)
-- `po_lines` FK is `po_id`, uses `site_code` + `required_date`
-- `pr_line_allocations` qty column is `allocated_qty`
-- `pr_lines` has denormalized `qty_allocated` — must UPDATE atomically on PO creation
-- `po_lines` has denormalized `qty_received` — must UPDATE atomically on GR posting
-
----
-
-## Phase 1 — Backend: PO Service
-
-> File: `backend/src/services/purchase-order-service.js`
-
-- [ ] `mapHeader(row)` — snake_case to camelCase (`id`, `poNumber`, `status`, `vendorName`, `createdAt`, `updatedAt`)
-- [ ] `mapLine(row)` — include computed `qtyOpenForGr: qty_ordered - qty_received`
-- [ ] `createPoNumber(count)` — `PO-2026-XXXX`
-- [ ] `listPurchaseOrders(db)` — SELECT all, ORDER BY `created_at DESC`
-- [ ] `getPurchaseOrderById(db, id)` — header + lines, return null if not found
-- [ ] `getPurchaseOrderOpenLines(db, id)` — lines where `qtyOpenForGr > 0`
-- [ ] `validateCreatePayload(payload)` — require `vendorName`, `lines[]` each with `prLineId`, `itemCode`, `itemName`, `qtyOrdered > 0`, `uom`, `unitPrice >= 0`, `siteCode`
-- [ ] `createPurchaseOrder(db, payload)` — transactional:
-  - Validate payload
-  - For each line: check parent PR is APPROVED
-  - For each line: check `qty_allocated + qtyOrdered <= qty_requested` (over-allocation guard)
-  - INSERT `purchase_orders` + `po_lines` + `pr_line_allocations`
-  - UPDATE `pr_lines SET qty_allocated = qty_allocated + qtyOrdered`
-  - Return full PO via `getPurchaseOrderById`
-- [ ] `submitPurchaseOrder(db, id)` — DRAFT to SUBMITTED only, throw 422 otherwise
-
-## Phase 2 — Backend: PO Routes + Registration
-
-> File: `backend/src/routes/purchase-order-routes.js`
-
-- [ ] `GET /api/purchase-orders` → `{ items }`
-- [ ] `POST /api/purchase-orders` → 201 + full PO
-- [ ] `POST /api/purchase-orders/:id/submit` → PO or 404
-- [ ] `GET /api/purchase-orders/:id` → PO or 404
-- [ ] `GET /api/purchase-orders/:id/open-lines` → payload or 404
-- [ ] Error handling: same `error.statusCode` pattern as PR routes
-
-> File: `backend/src/app.js`
-
-- [ ] Import and register `purchaseOrderRoutes`
-
-### Checkpoint 1 — Backend API functional
+Bootstrap DB when needed:
 
 ```bash
-# Verify with curl against running server + fresh DB
-curl localhost:3000/api/purchase-orders
-curl -X POST localhost:3000/api/purchase-orders -H 'Content-Type: application/json' -d '{...}'
-# Confirm over-allocation returns 422
-# Confirm submit transitions DRAFT -> SUBMITTED
+docker compose down -v
+docker compose up -d db
 ```
 
----
+## Strict Task Sequence With Checkpoints
 
-## Phase 3 — Frontend: API Client + Router + Nav
+### Phase 0: Scope Lock
+Tasks:
+1. Confirm implementation boundary is PO only.
+2. Confirm required PO endpoints from `docs/plan.md` are the contract source.
 
-> File: `frontend/src/api.js`
+Checkpoint:
+- Scope statement is explicit: "PO only, no GR implementation changes."
 
-- [ ] `listPurchaseOrders()`
-- [ ] `createPurchaseOrder(payload)`
-- [ ] `getPurchaseOrder(id)`
-- [ ] `submitPurchaseOrder(id)`
-- [ ] `getPurchaseOrderOpenLines(id)`
+Exit criteria:
+- Team agreement on scope before code edits.
 
-> File: `frontend/src/router/index.js`
+### Phase 1: Baseline Verification
+Tasks:
+1. Start backend and frontend.
+2. Verify dashboard and PR flow still run on baseline.
+3. Verify existing PO backend endpoints respond.
 
-- [ ] `/purchase-orders` → `purchase-orders-list`
-- [ ] `/purchase-orders/new` → `purchase-orders-create`
-- [ ] `/purchase-orders/:id` → `purchase-orders-detail` (props: true)
+Checkpoint:
+- Baseline app is healthy and PR is not regressed before PO UI work.
 
-> File: `frontend/src/App.vue`
+Exit criteria:
+- No blocker in startup, seed data, or baseline navigation.
 
-- [ ] Add "Purchase Orders" nav link
-- [ ] Active state: `route.path.startsWith('/purchase-orders')`
+### Phase 2: API Contract Alignment
+Tasks:
+1. Align frontend PO API helper methods with backend routes.
+2. Confirm payload/response fields for list/create/detail/submit/open-lines.
+3. Keep backend behavior unchanged unless a defect is proven.
 
-## Phase 4 — Frontend: PO Pages
+Checkpoint:
+- PO field mapping table is complete and agreed by backend/frontend.
 
-> File: `frontend/src/pages/PurchaseOrderListPage.vue`
+Exit criteria:
+- Frontend has clear contract for implementation.
 
-- [ ] Mirror `RequisitionListPage` pattern
-- [ ] Table columns: PO Number, Vendor, Status, Created At
-- [ ] Status badges (`.draft`, `.submitted`)
-- [ ] Row click → detail, page header with back button to `/`
+### Phase 3: Navigation and Router Wiring
+Tasks:
+1. Add PO routes (list/create/detail).
+2. Add PO navigation entry in app shell.
+3. Ensure direct URL access works for PO pages.
 
-> File: `frontend/src/pages/PurchaseOrderCreatePage.vue`
+Checkpoint:
+- Navigation to PO URLs works without runtime errors.
 
-- [ ] Header section: `vendorName` input
-- [ ] PR picker: dropdown of approved PRs → load open lines via `api.getRequisitionOpenLines(prId)`
-- [ ] Per line: `qtyOrdered` (max = `qtyOpenForPo`), `unitPrice`, `siteCode`, `requiredDate`
-- [ ] Submit: build payload, POST, navigate to detail
+Exit criteria:
+- Route skeleton is stable and ready for page implementation.
 
-> File: `frontend/src/pages/PurchaseOrderDetailPage.vue`
+### Phase 4: PO List Page
+Tasks:
+1. Implement PO list page using existing PR list page pattern.
+2. Render loading, empty, and error states.
+3. Link PO identifier to PO detail route.
 
-- [ ] Two card panels: header info + lines table
-- [ ] Lines columns: Line, Item Code, Item Name, Qty Ordered, Qty Received, UOM, Unit Price, Site
-- [ ] "Submit PO" button when status is DRAFT
+Checkpoint:
+- List page shows API data and click-through to detail works.
 
-### Checkpoint 2 — Full PO UI flow working
+Exit criteria:
+- List page is functionally complete and consistent with baseline UI style.
 
-```
-Dashboard → PO List → Create PO (from PR-2026-0001 open lines)
-→ PO Detail → Submit PO → status shows SUBMITTED
-```
+### Phase 5: PO Create Page
+Tasks:
+1. Implement create form with line allocation workflow.
+2. Source approved PR open lines for allocation.
+3. Validate required fields and numeric constraints.
+4. Submit to `POST /api/purchase-orders`.
 
----
+Checkpoint:
+- Valid create reaches PO detail in DRAFT.
+- Invalid over-allocation is rejected with clear user feedback.
 
-## Phase 5 — Jest Unit Tests
+Exit criteria:
+- Create flow is reliable for both happy and failure paths.
 
-> File: `backend/src/services/__tests__/purchase-order-service.test.js`
+### Phase 6: PO Detail Page and Submit Action
+Tasks:
+1. Implement PO detail display (header, lines, allocation context).
+2. Show submit action only for DRAFT PO.
+3. Submit via `POST /api/purchase-orders/:id/submit`.
+4. Refresh UI state after submit.
 
-- [ ] Configure Jest for ESM: `NODE_OPTIONS=--experimental-vm-modules`
-- [ ] Test: reject over-allocation (qty exceeds remaining)
-- [ ] Test: reject invalid status transition (submit non-DRAFT)
-- [ ] Test: reject PO from non-APPROVED PR
-- [ ] Test: valid PO creation succeeds
+Checkpoint:
+- DRAFT -> SUBMITTED transition is visible in UI and enforced.
 
-### Checkpoint 3 — Jest tests pass
+Exit criteria:
+- Submit behavior matches service rule and invalid repeat submit is handled.
 
-```bash
-cd backend && npm test
-```
+### Phase 7: PO Unit Test Hardening
+Tasks:
+1. Keep tests focused in PO service test file.
+2. Ensure over-allocation rejection remains covered.
+3. Ensure status transition validation remains covered.
+4. Add focused gap tests only if needed (for example multi-line create behavior).
 
-## Phase 6 — Playwright E2E Tests
+Checkpoint:
+- PO service tests pass with explicit business-rule assertions.
 
-> File: `tests/e2e/po-module.spec.js`
+Exit criteria:
+- Unit coverage supports PO rule confidence without test complexity creep.
 
-- [ ] PO List Page: table renders seed PO, status badge, navigation
-- [ ] PO Create Page: select approved PR, see open lines, create PO, redirect to detail
-- [ ] PO Workflow: create PO from remaining open lines → submit → verify status
-- [ ] Over-allocation rejection: attempt excess qty, verify error
+### Phase 8: PO End-to-End Coverage
+Tasks:
+1. Add PO Playwright spec for list/create/detail/submit.
+2. Add one integrated journey from approved PR lines to submitted PO.
+3. Keep assertions deterministic against workshop seed assumptions.
 
-### Checkpoint 4 — E2E tests pass
+Checkpoint:
+- PO E2E spec passes consistently.
 
-```bash
-npx playwright test tests/e2e/po-module.spec.js
-```
+Exit criteria:
+- UI flow confidence established for workshop demo and participant validation.
 
----
+### Phase 9: Regression and Scope Audit (Release Gate)
+Tasks:
+1. Re-run PO unit tests.
+2. Re-run PO E2E tests.
+3. Run PR smoke flow to confirm no cross-module regression.
+4. Confirm no GR implementation changes were introduced.
 
-## Final Verification
+Checkpoint:
+- Test results and scope audit both pass.
 
-| Check | Command / Action |
-|---|---|
-| Backend API | `curl` all 5 PO endpoints; over-allocation returns 422 |
-| UI flow | Dashboard → PO List → Create → Detail → Submit |
-| Jest | `cd backend && npm test` |
-| Playwright PO | `npx playwright test tests/e2e/po-module.spec.js` |
-| Baseline intact | `npx playwright test tests/e2e/pr-module.spec.js` (no regressions) |
+Exit criteria:
+- PO backlog accepted as done for MVP workshop scope.
+
+## Recommended File Touch Map
+- `frontend/src/api.js`
+- `frontend/src/router/index.js`
+- `frontend/src/App.vue`
+- `frontend/src/pages/PurchaseOrderListPage.vue`
+- `frontend/src/pages/PurchaseOrderCreatePage.vue`
+- `frontend/src/pages/PurchaseOrderDetailPage.vue`
+- `backend/tests/services/purchase-order-service.test.js`
+- `tests/e2e/po-module.spec.js`
+
+## Acceptance Checklist (Definition of Done)
+1. PO routes required by plan are available and behaviorally correct.
+2. PO UI pages (list/create/detail) are navigable and functional.
+3. Over-allocation rule is enforced and user-visible on failure.
+4. PO submit transition is explicit and invalid transitions are rejected.
+5. PO unit tests cover core validation and transition rules.
+6. PO E2E flow validates create and submit journey.
+7. PR baseline behavior remains intact.
+8. No GR implementation work is introduced.
+
+## Notes for Workshop Delivery
+1. Prefer workshop clarity over abstraction-heavy implementation.
+2. Keep route handlers thin and place PO rules in service logic.
+3. When defects appear, patch the specific PO rule and add a matching focused test before continuing.
