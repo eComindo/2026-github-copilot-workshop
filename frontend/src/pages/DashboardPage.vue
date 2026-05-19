@@ -8,6 +8,7 @@
       </div>
       <div class="btn-group">
         <RouterLink to="/requisitions/new" class="btn btn-outline">+ New PR</RouterLink>
+        <RouterLink to="/purchase-orders/new" class="btn btn-outline">+ New PO</RouterLink>
       </div>
     </div>
 
