@@ -9,6 +9,15 @@ function mockDb(queryImpl) {
 }
 
 describe('requisition-service list functions', () => {
+  test('listRequisitions returns empty array when no records found', async () => {
+    const db = mockDb(() => ({ rows: [] }));
+
+    const result = await listRequisitions(db);
+
+    expect(result).toEqual([]);
+    expect(db.query).toHaveBeenCalledTimes(1);
+  });
+
   test('listRequisitions returns mapped header fields', async () => {
     const db = mockDb(() => ({
       rows: [
@@ -43,6 +52,7 @@ describe('requisition-service list functions', () => {
         updatedAt: '2026-05-01T10:00:00.000Z',
       },
     ]);
+    expect(db.query.mock.calls[0][0]).toContain('ORDER BY created_at DESC');
   });
 
   test('getRequisitionOpenLines returns null when requisition not found', async () => {
