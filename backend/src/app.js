@@ -24,7 +24,7 @@ export function buildApp() {
   });
 
   app.register(swaggerUi, {
-    routePrefix: '/docs',
+    routePrefix: '/api-docs',
   });
 
   app.register(dbPlugin);
