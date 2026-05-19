@@ -11,7 +11,7 @@ The modules for a MVP (minimum viable product) procurement system include:
 
 In this workshop, we focus on using a prebuilt baseline and a add a backlog sprint.
 
-Reference plan: `docs/plan.md`.
+Reference plan: `docs/plan.md`. Always check `docs/plan.md` before large changes.
 
 ## Scope Constraints (Strict)
 - Baseline provided in repo: database schema + Home/Dashboard + PR module (list/create/detail + required PR APIs).
@@ -55,6 +55,28 @@ Reference plan: `docs/plan.md`.
 - Follow the existing UI patterns established in the baseline for consistency.
 - Always respect the CSS variables set in the baseline for colors, spacing, and typography.
 - Never use emojis in the UI or commit messages. Create a custom SVG icon if needed for visual emphasis.
+
+## Delivery Checklist (Definition of Done)
+Use this checklist for each PO backlog item before marking it complete.
+
+### Implementation Quality
+- Scope remains within PO module and required PO endpoints in `docs/plan.md`.
+- Route handlers are thin; business rules are implemented in service functions.
+- Request payloads are validated with clear 4xx responses for user errors.
+- PO rules are enforced, especially allocation qty <= PR line remaining qty.
+- Status transitions are explicit, and invalid transitions are rejected.
+
+### Testing Discipline
+- Add or update focused Jest tests for each changed PO rule.
+- Cover happy path and failure path (including over-allocation and invalid submit transition).
+- Keep tests deterministic with seeded baseline data.
+- Run affected unit tests and PO-related Playwright flow before completion.
+
+### Documentation Discipline
+- Update `docs/plan.md` when PO API contracts, validations, or behavior change.
+- Update `README.md` or `docs/runbook.md` when setup or run commands change.
+- Document assumptions and known limitations in PR/issue notes.
+- Keep endpoint names and examples consistent across code, tests, and docs.
 
 ## Optional Extension
 - Bookmark feature (PR|PO|GR) is an optional post-backlog exercise and should be driven via GitHub Issue creation workflow.
