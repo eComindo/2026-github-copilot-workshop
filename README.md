@@ -16,6 +16,11 @@ Canonical workshop document: [docs/plan.md](docs/plan.md)
 - Frontend: Vue 3 + Vite (JavaScript)
 - Testing: Jest (unit) + Playwright (e2e)
 
+## Repository Hygiene
+- Generated test artifacts are intentionally ignored and should not be committed.
+- Ignored outputs include `playwright-report/`, `test-results/`, `backend/coverage/`, and `frontend/coverage/`.
+- If you need to share test evidence in the workshop, share screenshots or logs outside the repository commit history.
+
 ## Quick Start
 
 ### 1) Start PostgreSQL
