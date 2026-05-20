@@ -174,7 +174,10 @@ describe('createPurchaseOrder – payload validation', () => {
   test('rejects when qtyOrdered is zero', async () => {
     const db = mockDb(null);
     const payload = validPayload({
-      lines: [],
+      lines: [{
+        prLineId: 'pr-1', itemCode: 'A', itemName: 'A', uom: 'PCS',
+        siteCode: 'WH', qtyOrdered: 0, unitPrice: 100,
+      }],
     });
     await expect(createPurchaseOrder(db, payload))
       .rejects.toMatchObject({ message: 'lines[0].qtyOrdered must be greater than 0', statusCode: 422 });
