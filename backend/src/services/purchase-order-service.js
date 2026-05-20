@@ -170,6 +170,8 @@ export async function createPurchaseOrder(db, payload) {
   try {
     await client.query('BEGIN');
 
+    const pendingAllocationByPrLineId = new Map();
+
     // Lock and validate every referenced PR line
     for (let i = 0; i < payload.lines.length; i++) {
       const line = payload.lines[i];
@@ -199,13 +201,20 @@ export async function createPurchaseOrder(db, payload) {
       }
 
       const remaining = Number(prLine.qty_requested) - Number(prLine.qty_allocated);
-      if (Number(line.qtyOrdered) > remaining) {
-        const err = new Error(
-          `lines[${i}]: allocation qty ${line.qtyOrdered} exceeds remaining ${remaining}`
-        );
+      const requestedQty = Number(line.qtyOrdered);
+      const pendingQty = pendingAllocationByPrLineId.get(line.prLineId) || 0;
+      const totalRequestedQty = pendingQty + requestedQty;
+
+      if (totalRequestedQty > remaining) {
+        const errorMessage = pendingQty === 0
+          ? `lines[${i}]: allocation qty ${line.qtyOrdered} exceeds remaining ${remaining}`
+          : `lines[${i}]: total allocation qty ${totalRequestedQty} exceeds remaining ${remaining} for prLineId ${line.prLineId}`;
+        const err = new Error(errorMessage);
         err.statusCode = 422;
         throw err;
       }
+
+      pendingAllocationByPrLineId.set(line.prLineId, totalRequestedQty);
     }
 
     // Generate PO number

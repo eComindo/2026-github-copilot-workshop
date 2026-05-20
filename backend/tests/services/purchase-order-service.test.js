@@ -174,10 +174,7 @@ describe('createPurchaseOrder – payload validation', () => {
   test('rejects when qtyOrdered is zero', async () => {
     const db = mockDb(null);
     const payload = validPayload({
-      lines: [{
-        prLineId: 'pr-1', itemCode: 'A', itemName: 'A', uom: 'PCS',
-        siteCode: 'WH', qtyOrdered: 0, unitPrice: 100,
-      }],
+      lines: [],
     });
     await expect(createPurchaseOrder(db, payload))
       .rejects.toMatchObject({ message: 'lines[0].qtyOrdered must be greater than 0', statusCode: 422 });
@@ -269,6 +266,37 @@ describe('createPurchaseOrder – over-allocation guard', () => {
         message: 'lines[0]: PR line not found',
         statusCode: 422,
       });
+  });
+
+  test('rejects when cumulative allocation in payload exceeds remaining qty', async () => {
+    const client = mockClient((sql) => {
+      if (sql === 'BEGIN' || sql === 'ROLLBACK') return { rows: [], rowCount: 0 };
+      if (sql.includes('FOR UPDATE')) {
+        return {
+          rows: [{ id: 'pr-line-001', qty_requested: 10, qty_allocated: 7, pr_status: 'APPROVED' }],
+          rowCount: 1,
+        };
+      }
+      return { rows: [], rowCount: 0 };
+    });
+    const db = mockDb(client);
+
+    const line = validPayload().lines[0];
+    const payload = validPayload({
+      lines: [
+        { ...line, qtyOrdered: 2 },
+        { ...line, qtyOrdered: 2 },
+      ],
+    });
+
+    await expect(createPurchaseOrder(db, payload))
+      .rejects.toMatchObject({
+        message: 'lines[1]: total allocation qty 4 exceeds remaining 3 for prLineId pr-line-001',
+        statusCode: 422,
+      });
+
+    expect(client.query).toHaveBeenCalledWith('ROLLBACK');
+    expect(client.release).toHaveBeenCalled();
   });
 });
 
