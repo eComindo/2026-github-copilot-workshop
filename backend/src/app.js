@@ -1,5 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import swagger from '@fastify/swagger';
+import swaggerUI from '@fastify/swagger-ui';
 import dbPlugin from './plugins/db.js';
 import requisitionRoutes from './routes/requisition-routes.js';
 import purchaseOrderRoutes from './routes/purchase-order-routes.js';
@@ -11,11 +13,55 @@ export function buildApp() {
     origin: true,
   });
 
+  app.register(swagger, {
+    swagger: {
+      info: {
+        title: 'Procurement MVP API',
+        description: 'API for managing Requisitions, Purchase Orders, and Goods Receipts',
+        version: '1.0.0',
+      },
+      host: 'localhost:3000',
+      schemes: ['http'],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      tags: [
+        {
+          name: 'Health',
+          description: 'Service health check',
+        },
+        {
+          name: 'Requisitions',
+          description: 'Requisition (PR) endpoints',
+        },
+        {
+          name: 'Purchase Orders',
+          description: 'Purchase Order (PO) endpoints',
+        },
+      ],
+    },
+  });
+
+  app.register(swaggerUI, {
+    routePrefix: '/api-docs',
+  });
+
   app.register(dbPlugin);
   app.register(requisitionRoutes);
   app.register(purchaseOrderRoutes);
 
-  app.get('/health', async () => ({ status: 'ok' }));
+  app.get('/health', async () => ({ status: 'ok' }), {
+    schema: {
+      tags: ['Health'],
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            status: { type: 'string' },
+          },
+        },
+      },
+    },
+  });
 
   app.setErrorHandler((error, request, reply) => {
     request.log.error(error);

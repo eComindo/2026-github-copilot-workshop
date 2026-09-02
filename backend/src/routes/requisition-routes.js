@@ -7,10 +7,58 @@ import {
   submitRequisition,
 } from '../services/requisition-service.js';
 
+const requisitionSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'string' },
+    description: { type: 'string' },
+    required_date: { type: 'string' },
+    status: { type: 'string' },
+    lines: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          item_code: { type: 'string' },
+          description: { type: 'string' },
+          qty_required: { type: 'number' },
+          qty_allocated: { type: 'number' },
+          unit_price: { type: 'number' },
+        },
+      },
+    },
+  },
+};
+
+const errorSchema = {
+  type: 'object',
+  properties: {
+    message: { type: 'string' },
+  },
+};
+
 export default async function requisitionRoutes(fastify) {
   fastify.get('/api/requisitions', async (request, reply) => {
     const items = await listRequisitions(fastify.db);
     return { items };
+  }, {
+    schema: {
+      tags: ['Requisitions'],
+      summary: 'List all requisitions',
+      description: 'Retrieve a list of all purchase requisitions',
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            items: {
+              type: 'array',
+              items: requisitionSchema,
+            },
+          },
+        },
+      },
+    },
   });
 
   fastify.post('/api/requisitions', async (request, reply) => {
@@ -26,6 +74,37 @@ export default async function requisitionRoutes(fastify) {
 
       throw error;
     }
+  }, {
+    schema: {
+      tags: ['Requisitions'],
+      summary: 'Create a new requisition',
+      description: 'Create a new purchase requisition with line items',
+      body: {
+        type: 'object',
+        required: ['description', 'required_date', 'lines'],
+        properties: {
+          description: { type: 'string' },
+          required_date: { type: 'string' },
+          lines: {
+            type: 'array',
+            items: {
+              type: 'object',
+              required: ['item_code', 'description', 'qty_required', 'unit_price'],
+              properties: {
+                item_code: { type: 'string' },
+                description: { type: 'string' },
+                qty_required: { type: 'number' },
+                unit_price: { type: 'number' },
+              },
+            },
+          },
+        },
+      },
+      response: {
+        201: requisitionSchema,
+        400: errorSchema,
+      },
+    },
   });
 
   fastify.post('/api/requisitions/:id/submit', async (request, reply) => {
@@ -45,6 +124,23 @@ export default async function requisitionRoutes(fastify) {
 
       throw error;
     }
+  }, {
+    schema: {
+      tags: ['Requisitions'],
+      summary: 'Submit a requisition',
+      description: 'Submit a draft requisition (transition from DRAFT to SUBMITTED)',
+      params: {
+        type: 'object',
+        required: ['id'],
+        properties: {
+          id: { type: 'string' },
+        },
+      },
+      response: {
+        200: requisitionSchema,
+        404: errorSchema,
+      },
+    },
   });
 
   fastify.post('/api/requisitions/:id/approve', async (request, reply) => {
@@ -64,6 +160,23 @@ export default async function requisitionRoutes(fastify) {
 
       throw error;
     }
+  }, {
+    schema: {
+      tags: ['Requisitions'],
+      summary: 'Approve a requisition',
+      description: 'Approve a submitted requisition (transition from SUBMITTED to APPROVED)',
+      params: {
+        type: 'object',
+        required: ['id'],
+        properties: {
+          id: { type: 'string' },
+        },
+      },
+      response: {
+        200: requisitionSchema,
+        404: errorSchema,
+      },
+    },
   });
 
   fastify.get('/api/requisitions/:id', async (request, reply) => {
@@ -74,6 +187,23 @@ export default async function requisitionRoutes(fastify) {
     }
 
     return requisition;
+  }, {
+    schema: {
+      tags: ['Requisitions'],
+      summary: 'Get requisition by ID',
+      description: 'Retrieve a specific requisition with all its details and line items',
+      params: {
+        type: 'object',
+        required: ['id'],
+        properties: {
+          id: { type: 'string' },
+        },
+      },
+      response: {
+        200: requisitionSchema,
+        404: errorSchema,
+      },
+    },
   });
 
   fastify.get('/api/requisitions/:id/open-lines', async (request, reply) => {
@@ -84,5 +214,32 @@ export default async function requisitionRoutes(fastify) {
     }
 
     return payload;
+  }, {
+    schema: {
+      tags: ['Requisitions'],
+      summary: 'Get open lines for a requisition',
+      description: 'Retrieve line items from a requisition that have unallocated quantities (for PO creation)',
+      params: {
+        type: 'object',
+        required: ['id'],
+        properties: {
+          id: { type: 'string' },
+        },
+      },
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            lines: {
+              type: 'array',
+              items: {
+                type: 'object',
+              },
+            },
+          },
+        },
+        404: errorSchema,
+      },
+    },
   });
 }
