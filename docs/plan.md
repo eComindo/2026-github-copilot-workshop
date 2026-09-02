@@ -361,18 +361,18 @@ erDiagram
 - Verify Home/Dashboard + PR module are already working
 
 ### Hour 2 — PO Backlog: API + Data Rules
-- Implement PO create/submit/detail/open-lines endpoints
-- Implement allocation validation (allocated qty <= PR remaining qty)
-- Keep handlers thin and move rules to PO service
+- ✅ Implement PO create/submit/detail/open-lines endpoints
+- ✅ Implement allocation validation (allocated qty <= PR remaining qty)
+- ✅ Keep handlers thin and move rules to PO service
 
 ### Hour 3 — PO Backlog: UI Pages
-- Build PO list/create/detail pages on top of baseline navigation
-- Connect pages to PO APIs
-- Validate create-from-approved-PR-line flow
+- ✅ Build PO list/create/detail pages on top of baseline navigation
+- ✅ Connect pages to PO APIs
+- ✅ Validate create-from-approved-PR-line flow
 
 ### Hour 4 — PO-focused Testing + GitHub Review
-- Add Jest tests focused on PO rules and status transitions
-- Add Playwright flow for PO pages integrated with baseline PR data
+- ✅ Add Jest tests focused on PO rules and status transitions
+- ✅ Add Playwright flow for PO pages integrated with baseline PR data
 - Open PR and use Copilot review + code quality checks
 
 ### Hour 5 — Optional Extension + Exploration
