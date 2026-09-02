@@ -49,7 +49,7 @@ export function buildApp() {
   app.register(requisitionRoutes);
   app.register(purchaseOrderRoutes);
 
-  app.get('/health', async () => ({ status: 'ok' }), {
+  app.get('/health', {
     schema: {
       tags: ['Health'],
       response: {
@@ -61,7 +61,7 @@ export function buildApp() {
         },
       },
     },
-  });
+  }, async () => ({ status: 'ok' }));
 
   app.setErrorHandler((error, request, reply) => {
     request.log.error(error);

@@ -40,10 +40,7 @@ const errorSchema = {
 };
 
 export default async function purchaseOrderRoutes(fastify) {
-  fastify.get('/api/purchase-orders', async (request, reply) => {
-    const items = await listPurchaseOrders(fastify.db);
-    return { items };
-  }, {
+  fastify.get('/api/purchase-orders', {
     schema: {
       tags: ['Purchase Orders'],
       summary: 'List all purchase orders',
@@ -60,22 +57,12 @@ export default async function purchaseOrderRoutes(fastify) {
         },
       },
     },
+  }, async (request, reply) => {
+    const items = await listPurchaseOrders(fastify.db);
+    return { items };
   });
 
-  fastify.post('/api/purchase-orders', async (request, reply) => {
-    try {
-      const purchaseOrder = await createPurchaseOrder(fastify.db, request.body);
-      reply.code(201);
-      return purchaseOrder;
-    } catch (error) {
-      if (error.statusCode) {
-        reply.code(error.statusCode);
-        return { message: error.message };
-      }
-
-      throw error;
-    }
-  }, {
+  fastify.post('/api/purchase-orders', {
     schema: {
       tags: ['Purchase Orders'],
       summary: 'Create a new purchase order',
@@ -106,16 +93,10 @@ export default async function purchaseOrderRoutes(fastify) {
         400: errorSchema,
       },
     },
-  });
-
-  fastify.post('/api/purchase-orders/:id/submit', async (request, reply) => {
+  }, async (request, reply) => {
     try {
-      const purchaseOrder = await submitPurchaseOrder(fastify.db, request.params.id);
-      if (!purchaseOrder) {
-        reply.code(404);
-        return { message: 'Purchase order not found' };
-      }
-
+      const purchaseOrder = await createPurchaseOrder(fastify.db, request.body);
+      reply.code(201);
       return purchaseOrder;
     } catch (error) {
       if (error.statusCode) {
@@ -125,7 +106,9 @@ export default async function purchaseOrderRoutes(fastify) {
 
       throw error;
     }
-  }, {
+  });
+
+  fastify.post('/api/purchase-orders/:id/submit', {
     schema: {
       tags: ['Purchase Orders'],
       summary: 'Submit a purchase order',
@@ -142,17 +125,26 @@ export default async function purchaseOrderRoutes(fastify) {
         404: errorSchema,
       },
     },
+  }, async (request, reply) => {
+    try {
+      const purchaseOrder = await submitPurchaseOrder(fastify.db, request.params.id);
+      if (!purchaseOrder) {
+        reply.code(404);
+        return { message: 'Purchase order not found' };
+      }
+
+      return purchaseOrder;
+    } catch (error) {
+      if (error.statusCode) {
+        reply.code(error.statusCode);
+        return { message: error.message };
+      }
+
+      throw error;
+    }
   });
 
-  fastify.get('/api/purchase-orders/:id', async (request, reply) => {
-    const purchaseOrder = await getPurchaseOrderById(fastify.db, request.params.id);
-    if (!purchaseOrder) {
-      reply.code(404);
-      return { message: 'Purchase order not found' };
-    }
-
-    return purchaseOrder;
-  }, {
+  fastify.get('/api/purchase-orders/:id', {
     schema: {
       tags: ['Purchase Orders'],
       summary: 'Get purchase order by ID',
@@ -169,17 +161,17 @@ export default async function purchaseOrderRoutes(fastify) {
         404: errorSchema,
       },
     },
-  });
-
-  fastify.get('/api/purchase-orders/:id/open-lines', async (request, reply) => {
-    const payload = await getOpenPoLines(fastify.db, request.params.id);
-    if (!payload) {
+  }, async (request, reply) => {
+    const purchaseOrder = await getPurchaseOrderById(fastify.db, request.params.id);
+    if (!purchaseOrder) {
       reply.code(404);
       return { message: 'Purchase order not found' };
     }
 
-    return payload;
-  }, {
+    return purchaseOrder;
+  });
+
+  fastify.get('/api/purchase-orders/:id/open-lines', {
     schema: {
       tags: ['Purchase Orders'],
       summary: 'Get open lines for a purchase order',
@@ -206,5 +198,13 @@ export default async function purchaseOrderRoutes(fastify) {
         404: errorSchema,
       },
     },
+  }, async (request, reply) => {
+    const payload = await getOpenPoLines(fastify.db, request.params.id);
+    if (!payload) {
+      reply.code(404);
+      return { message: 'Purchase order not found' };
+    }
+
+    return payload;
   });
 }
