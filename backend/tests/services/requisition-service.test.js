@@ -110,4 +110,12 @@ describe('requisition-service list functions', () => {
     expect(result.openLines[0].id).toBe('l-1');
     expect(result.openLines[0].qtyOpenForPo).toBe(3);
   });
+
+  test('listRequisitions returns an empty array when there are no requisitions', async () => {
+    const db = mockDb(() => ({ rows: [] }));
+
+    const result = await listRequisitions(db);
+
+    expect(result).toEqual([]);
+  });
 });

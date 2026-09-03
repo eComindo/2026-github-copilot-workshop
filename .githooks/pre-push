@@ -1,0 +1,14 @@
+#!/bin/sh
+# Blocks push when the workspace test suite (backend + frontend) fails.
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root" || exit 1
+
+npm test
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "pre-push: tests failed, push aborted." >&2
+  exit 1
+fi
+
+exit 0
