@@ -137,12 +137,13 @@ Target system APIs (full procurement flow):
 Workshop status: prebuilt in baseline.
 
 ### Purchase Order
+- `GET /api/purchase-orders`
 - `POST /api/purchase-orders`
 - `POST /api/purchase-orders/:id/submit`
 - `GET /api/purchase-orders/:id`
 - `GET /api/purchase-orders/:id/open-lines`
 
-Workshop status: participant implementation backlog (primary focus).
+Workshop status: implemented. The Create PO page loads approved PR open lines, creates draft POs, and navigates to PO detail. Allocation rule violations return HTTP 422 with a clear message.
 
 ### Goods Receipt
 - `POST /api/goods-receipts`

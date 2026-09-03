@@ -83,8 +83,22 @@
 
       <!-- Action buttons -->
       <div class="btn-group">
-        <RouterLink to="/requisitions" class="btn btn-outline">Cancel</RouterLink>
-        <button class="btn btn-primary" type="submit">Save As Draft</button>
+        <button
+          class="btn btn-draft"
+          type="submit"
+          :disabled="isSubmitting"
+          @click="submitAction = 'DRAFT'"
+        >
+          {{ isSubmitting && submitAction === 'DRAFT' ? 'Saving...' : 'Save As Draft' }}
+        </button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          :disabled="isSubmitting"
+          @click="submitAction = 'SUBMITTED'"
+        >
+          {{ isSubmitting && submitAction === 'SUBMITTED' ? 'Submitting...' : 'Submit PR' }}
+        </button>
       </div>
     </form>
   </section>
@@ -97,6 +111,8 @@ import { api } from '../api';
 
 const router = useRouter();
 const errorMessage = ref('');
+const isSubmitting = ref(false);
+const submitAction = ref('DRAFT');
 
 function emptyLine() {
   return {
@@ -131,15 +147,23 @@ function removeLine(index) {
 
 async function handleSubmit() {
   errorMessage.value = '';
+  isSubmitting.value = true;
   try {
     const payload = {
       ...form,
       lines: form.lines.map((line) => ({ ...line })),
     };
     const created = await api.createRequisition(payload);
+
+    if (submitAction.value === 'SUBMITTED') {
+      await api.submitRequisition(created.id);
+    }
+
     await router.push(`/requisitions/${created.id}`);
   } catch (error) {
     errorMessage.value = error.message;
+  } finally {
+    isSubmitting.value = false;
   }
 }
 </script>
@@ -156,5 +180,15 @@ async function handleSubmit() {
 .card-panel table input:focus {
   border-color: var(--primary);
   outline: none;
+}
+
+.btn-draft {
+  background: #ffb900;
+  color: var(--white);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 </style>

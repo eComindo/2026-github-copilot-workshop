@@ -1,180 +1,361 @@
 <template>
   <section>
-    <!-- Page header -->
     <div class="page-header">
       <div class="page-header-left">
-        <RouterLink to="/purchase-orders" class="back-btn" title="Back to list">&#8592;</RouterLink>
+        <RouterLink to="/purchase-orders" class="back-btn" title="Back to PO List">&#8592;</RouterLink>
         <div>
           <h2>Create Purchase Order</h2>
-          <p class="muted">Allocate order quantities from approved PR open lines</p>
+          <p class="muted">Allocate approved requisition lines to a new purchase order</p>
         </div>
       </div>
     </div>
 
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <form @submit.prevent="handleSubmit">
-      <!-- PO Header card -->
-      <div class="card-panel">
-        <p class="form-section-title">PO Header</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Vendor Name</label>
-            <input v-model="form.vendorName" placeholder="Type..." required />
-          </div>
-          <div class="form-group">
-            <label>Source PR (Approved)</label>
-            <select v-model="selectedPrId" @change="loadOpenLines">
-              <option value="" disabled>Select a PR...</option>
-              <option v-for="pr in approvedRequisitions" :key="pr.id" :value="pr.id">
-                {{ pr.prNumber }} &mdash; {{ pr.title }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <form @submit.prevent="handleSubmit" class="form-container">
+      <!-- Vendor Information -->
+      <VendorHeadingForm
+        v-model:vendorName="form.vendorName"
+        :errors="fieldErrors"
+      />
 
-      <!-- PO Lines card -->
-      <div class="card-panel" v-if="openLines.length">
-        <p class="form-section-title">Select Lines to Allocate</p>
-        <table>
-          <thead>
-            <tr>
-              <th style="width:40px"></th>
-              <th>Item Code</th>
-              <th>Item Name</th>
-              <th>Open QTY</th>
-              <th style="width:110px">Order QTY</th>
-              <th style="width:80px">UOM</th>
-              <th>Unit Price</th>
-              <th>Site</th>
-              <th>Required Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="line in openLines" :key="line.id">
-              <td><input type="checkbox" v-model="line.selected" /></td>
-              <td>{{ line.itemCode }}</td>
-              <td>{{ line.itemName }}</td>
-              <td>{{ line.qtyOpenForPo }}</td>
-              <td>
-                <input
-                  v-model.number="line.qtyOrdered"
-                  type="number"
-                  min="0.01"
-                  :max="line.qtyOpenForPo"
-                  step="0.01"
-                  :disabled="!line.selected"
-                />
-              </td>
-              <td>{{ line.uom }}</td>
-              <td>
-                <input v-model.number="line.unitPrice" type="number" min="0" step="0.01" :disabled="!line.selected" />
-              </td>
-              <td>{{ line.siteCode }}</td>
-              <td>{{ line.requiredDate || '-' }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p v-else-if="selectedPrId" class="muted">No open lines available for this PR.</p>
+      <!-- PR Line Selection -->
+      <PRLinePicker
+        :prLines="availablePrLines"
+        :selectedLineIds="selectedLineIds"
+        :loading="loadingPrLines"
+        :error="errorLoadingPrLines"
+        @update:selectedLineIds="selectedLineIds = $event"
+        @retry="loadPrLines"
+      />
 
-      <!-- Action buttons -->
-      <div class="btn-group">
-        <RouterLink to="/purchase-orders" class="btn btn-outline">Cancel</RouterLink>
-        <button class="btn btn-primary" type="submit" :disabled="!hasSelectedLines">Save As Draft</button>
+      <!-- Line Allocation Details -->
+      <LineAllocationForm
+        :selectedLines="selectedLines"
+        :errors="lineAllocationErrors"
+        @update:selectedLines="selectedLines = $event"
+        @remove-line="onRemoveLine"
+      />
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <RouterLink to="/purchase-orders" class="btn btn-outline">
+          Cancel
+        </RouterLink>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          :disabled="!isFormValid || isSubmitting"
+        >
+          <span v-if="isSubmitting">Creating...</span>
+          <span v-else>Create Purchase Order</span>
+        </button>
       </div>
     </form>
   </section>
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { api } from '../api';
+import VendorHeadingForm from '../components/VendorHeadingForm.vue';
+import PRLinePicker from '../components/PRLinePicker.vue';
+import LineAllocationForm from '../components/LineAllocationForm.vue';
 
 const router = useRouter();
-const errorMessage = ref('');
 
-const form = reactive({
+// Form state
+const form = ref({
   vendorName: '',
 });
 
-const approvedRequisitions = ref([]);
-const selectedPrId = ref('');
-const openLines = ref([]);
+const selectedLineIds = ref([]);
+const availablePrLines = ref([]);
+const selectedLines = ref([]);
+const isSubmitting = ref(false);
+const errorMessage = ref('');
+const fieldErrors = ref({});
+const loadingPrLines = ref(false);
+const errorLoadingPrLines = ref('');
+const lineAllocationErrors = ref([]);
 
-const hasSelectedLines = computed(() => openLines.value.some((line) => line.selected));
-
-onMounted(async () => {
-  try {
-    const payload = await api.listRequisitions();
-    approvedRequisitions.value = (payload.items || []).filter((item) => item.status === 'APPROVED');
-  } catch (error) {
-    errorMessage.value = error.message;
+// Computed properties
+const isFormValid = computed(() => {
+  if (!form.value.vendorName.trim()) {
+    return false;
   }
+
+  if (selectedLines.value.length === 0) {
+    return false;
+  }
+
+  // Check that all lines have valid qty and price
+  return selectedLines.value.every(
+    (line) =>
+      line.qtyOrdered > 0 &&
+      line.qtyOrdered <= line.qtyRemaining &&
+      line.unitPrice >= 0
+  );
 });
 
-async function loadOpenLines() {
-  errorMessage.value = '';
-  openLines.value = [];
-  if (!selectedPrId.value) return;
+// Methods
+const loadPrLines = async () => {
+  loadingPrLines.value = true;
+  errorLoadingPrLines.value = '';
 
   try {
-    const payload = await api.getRequisitionOpenLines(selectedPrId.value);
-    openLines.value = payload.openLines.map((line) => ({
-      ...line,
-      selected: false,
-      qtyOrdered: line.qtyOpenForPo,
-      unitPrice: line.estUnitPrice,
-    }));
+    const requisitions = await api.listRequisitions();
+    const approvedRequisitions = (requisitions.items || []).filter(
+      (requisition) => requisition.status === 'APPROVED'
+    );
+    const openLinePayloads = await Promise.all(
+      approvedRequisitions.map((requisition) =>
+        api.getRequisitionOpenLines(requisition.id)
+      )
+    );
+
+    availablePrLines.value = openLinePayloads.flatMap(({ requisition, openLines }) =>
+      openLines.map((line) => ({
+        ...line,
+        prNumber: requisition.prNumber,
+        qtyRemaining: line.qtyOpenForPo,
+      }))
+    );
   } catch (error) {
-    errorMessage.value = error.message;
+    errorLoadingPrLines.value =
+      error.message || 'Failed to load PR lines. Please try again.';
+  } finally {
+    loadingPrLines.value = false;
   }
-}
+};
 
-async function handleSubmit() {
+const updateSelectedLines = () => {
+  // Build selectedLines array from selectedLineIds
+  const updated = selectedLineIds.value.map((lineId) => {
+    const existingLine = selectedLines.value.find((l) => l.id === lineId);
+    const prLine = availablePrLines.value.find((l) => l.id === lineId);
+
+    if (existingLine) {
+      return existingLine;
+    }
+
+    return {
+      id: lineId,
+      ...prLine,
+      qtyOrdered: 0,
+      unitPrice: prLine.unitPrice || 0,
+      requiredDate: prLine.requiredDate || '',
+    };
+  });
+
+  selectedLines.value = updated;
+};
+
+const onRemoveLine = (index) => {
+  const lineId = selectedLines.value[index].id;
+  selectedLineIds.value = selectedLineIds.value.filter((id) => id !== lineId);
+};
+
+const validateForm = () => {
+  fieldErrors.value = {};
+  lineAllocationErrors.value = [];
+  let isValid = true;
+
+  // Validate vendor name
+  if (!form.value.vendorName.trim()) {
+    fieldErrors.value.vendorName = 'Vendor name is required';
+    isValid = false;
+  }
+
+  // Validate each line
+  selectedLines.value.forEach((line, index) => {
+    const errors = {};
+
+    if (!line.qtyOrdered || line.qtyOrdered <= 0) {
+      errors.qtyOrdered = 'Quantity must be greater than 0';
+      isValid = false;
+    }
+
+    if (line.qtyOrdered > line.qtyRemaining) {
+      errors.qtyOrdered = `Quantity cannot exceed remaining ${line.qtyRemaining}`;
+      isValid = false;
+    }
+
+    if (line.unitPrice < 0) {
+      errors.unitPrice = 'Unit price cannot be negative';
+      isValid = false;
+    }
+
+    if (Object.keys(errors).length > 0) {
+      lineAllocationErrors.value[index] = errors;
+    }
+  });
+
+  return isValid;
+};
+
+const handleSubmit = async () => {
   errorMessage.value = '';
+
+  if (!validateForm()) {
+    errorMessage.value = 'Please fix the errors above';
+    return;
+  }
+
+  isSubmitting.value = true;
+
   try {
-    const lines = openLines.value
-      .filter((line) => line.selected)
-      .map((line) => ({
+    const payload = {
+      vendorName: form.value.vendorName.trim(),
+      lines: selectedLines.value.map((line) => ({
         prLineId: line.id,
         itemCode: line.itemCode,
         itemName: line.itemName,
         qtyOrdered: line.qtyOrdered,
-        uom: line.uom,
         unitPrice: line.unitPrice,
-        siteCode: line.siteCode,
+        uom: line.uom,
+        siteCode: line.siteCode || '',
         requiredDate: line.requiredDate || null,
-      }));
+      })),
+    };
 
-    const created = await api.createPurchaseOrder({ vendorName: form.vendorName, lines });
-    await router.push(`/purchase-orders/${created.id}`);
+    const result = await api.createPurchaseOrder(payload);
+    await router.push(`/purchase-orders/${result.id}`);
   } catch (error) {
-    errorMessage.value = error.message;
+    errorMessage.value =
+      error.message || 'Failed to create purchase order. Please try again.';
+  } finally {
+    isSubmitting.value = false;
   }
-}
+};
+
+// Watchers
+watch(selectedLineIds, updateSelectedLines, { deep: true });
+
+// Lifecycle
+onMounted(loadPrLines);
 </script>
 
 <style scoped>
-.card-panel table input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-input);
-  font-family: inherit;
-  font-size: 13px;
+section {
+  padding: 0;
 }
-.card-panel table input:focus {
-  border-color: var(--primary);
-  outline: none;
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
 }
-.form-group select {
-  padding: 8px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-input);
-  font-family: inherit;
-  font-size: 13px;
+
+.page-header-left {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.page-header-left div {
+  flex: 1;
+}
+
+.page-header-left h2 {
+  margin: 0 0 4px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.page-header-left .muted {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s;
+  font-size: 20px;
+}
+
+.back-btn:hover {
+  background: var(--color-background-tertiary);
+  border-color: var(--color-primary);
+}
+
+.error {
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--color-error);
+  border-radius: 6px;
+  color: var(--color-error);
+  font-size: 14px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.btn-outline {
+  border: 1px solid var(--color-border);
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+}
+
+.btn-outline:hover {
+  background: var(--color-background-secondary);
+  border-color: var(--color-primary);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2563eb;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>

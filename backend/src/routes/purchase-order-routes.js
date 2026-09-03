@@ -10,22 +10,41 @@ const purchaseOrderSchema = {
   type: 'object',
   properties: {
     id: { type: 'string' },
-    pr_id: { type: 'string' },
+    poNumber: { type: 'string' },
     status: { type: 'string' },
-    vendor: { type: 'string' },
-    vendor_email: { type: 'string' },
-    total_amount: { type: 'number' },
-    created_at: { type: 'string' },
+    vendorName: { type: 'string' },
+    prNumber: { type: ['string', 'null'] },
+    requesterName: { type: ['string', 'null'] },
+    createdAt: { type: 'string' },
+    updatedAt: { type: 'string' },
     lines: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
           id: { type: 'string' },
-          po_id: { type: 'string' },
-          pr_line_id: { type: 'string' },
-          qty_ordered: { type: 'number' },
-          unit_price: { type: 'number' },
+          lineNo: { type: 'integer' },
+          itemCode: { type: 'string' },
+          itemName: { type: 'string' },
+          qtyOrdered: { type: 'number' },
+          qtyReceived: { type: 'number' },
+          qtyOpenForGr: { type: 'number' },
+          uom: { type: 'string' },
+          unitPrice: { type: 'number' },
+          siteCode: { type: 'string' },
+          requiredDate: { type: ['string', 'null'] },
+          allocations: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prLineId: { type: 'string' },
+                prNumber: { type: 'string' },
+                requesterName: { type: 'string' },
+                allocatedQty: { type: 'number' },
+              },
+            },
+          },
         },
       },
     },
@@ -69,20 +88,32 @@ export default async function purchaseOrderRoutes(fastify) {
       description: 'Create a new PO with allocated quantities from approved requisition lines',
       body: {
         type: 'object',
-        required: ['pr_id', 'vendor', 'vendor_email', 'lines'],
+        required: ['vendorName', 'lines'],
         properties: {
-          pr_id: { type: 'string' },
-          vendor: { type: 'string' },
-          vendor_email: { type: 'string' },
+          vendorName: { type: 'string', minLength: 1 },
           lines: {
             type: 'array',
+            minItems: 1,
             items: {
               type: 'object',
-              required: ['pr_line_id', 'qty_ordered', 'unit_price'],
+              required: [
+                'prLineId',
+                'itemCode',
+                'itemName',
+                'qtyOrdered',
+                'unitPrice',
+                'uom',
+                'siteCode',
+              ],
               properties: {
-                pr_line_id: { type: 'string' },
-                qty_ordered: { type: 'number' },
-                unit_price: { type: 'number' },
+                prLineId: { type: 'string' },
+                itemCode: { type: 'string' },
+                itemName: { type: 'string' },
+                qtyOrdered: { type: 'number', exclusiveMinimum: 0 },
+                unitPrice: { type: 'number', minimum: 0 },
+                uom: { type: 'string' },
+                siteCode: { type: 'string' },
+                requiredDate: { type: ['string', 'null'] },
               },
             },
           },
@@ -91,6 +122,7 @@ export default async function purchaseOrderRoutes(fastify) {
       response: {
         201: purchaseOrderSchema,
         400: errorSchema,
+        422: errorSchema,
       },
     },
   }, async (request, reply) => {
@@ -123,6 +155,7 @@ export default async function purchaseOrderRoutes(fastify) {
       response: {
         200: purchaseOrderSchema,
         404: errorSchema,
+        422: errorSchema,
       },
     },
   }, async (request, reply) => {
@@ -187,7 +220,15 @@ export default async function purchaseOrderRoutes(fastify) {
         200: {
           type: 'object',
           properties: {
-            lines: {
+            purchaseOrder: {
+              type: 'object',
+              properties: {
+                id: { type: 'string' },
+                poNumber: { type: 'string' },
+                status: { type: 'string' },
+              },
+            },
+            openLines: {
               type: 'array',
               items: {
                 type: 'object',

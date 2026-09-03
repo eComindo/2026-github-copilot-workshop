@@ -9,6 +9,10 @@ function mockDb(queryImpl) {
 }
 
 describe('requisition-service list functions', () => {
+  test('deliberately fails so the pre-push hook blocks the push', () => {
+    expect(true).toBe(false);
+  });
+
   test('listRequisitions returns mapped header fields', async () => {
     const db = mockDb(() => ({
       rows: [
