@@ -1,0 +1,226 @@
+{
+  "communities": {
+    "0": [
+      "routes_purchase_order_routes",
+      "routes_purchase_order_routes_createpurchaseorderschema",
+      "routes_purchase_order_routes_getpurchaseorderschema",
+      "routes_purchase_order_routes_listpurchaseordersschema",
+      "routes_purchase_order_routes_openlinesschema",
+      "routes_purchase_order_routes_submitpurchaseorderschema",
+      "services_purchase_order_service",
+      "services_purchase_order_service_createponumber",
+      "services_purchase_order_service_createpurchaseorder",
+      "services_purchase_order_service_getopenpolines",
+      "services_purchase_order_service_getpurchaseorderbyid",
+      "services_purchase_order_service_listpurchaseorders",
+      "services_purchase_order_service_mapheader",
+      "services_purchase_order_service_mapline",
+      "services_purchase_order_service_submitpurchaseorder",
+      "services_purchase_order_service_test",
+      "services_purchase_order_service_test_detailqueryresponses",
+      "services_purchase_order_service_test_happypathclientresponses",
+      "services_purchase_order_service_test_mockclient",
+      "services_purchase_order_service_test_mockdb",
+      "services_purchase_order_service_test_validpayload",
+      "services_purchase_order_service_validatecreatepayload"
+    ],
+    "1": [
+      "routes_requisition_routes",
+      "routes_requisition_routes_approverequisitionschema",
+      "routes_requisition_routes_createrequisitionschema",
+      "routes_requisition_routes_getrequisitionschema",
+      "routes_requisition_routes_listrequisitionsschema",
+      "routes_requisition_routes_openlinesschema",
+      "routes_requisition_routes_submitrequisitionschema",
+      "services_requisition_service",
+      "services_requisition_service_approverequisition",
+      "services_requisition_service_createprnumber",
+      "services_requisition_service_createrequisition",
+      "services_requisition_service_getrequisitionbyid",
+      "services_requisition_service_getrequisitionopenlines",
+      "services_requisition_service_listrequisitions",
+      "services_requisition_service_mapheader",
+      "services_requisition_service_mapline",
+      "services_requisition_service_submitrequisition",
+      "services_requisition_service_test",
+      "services_requisition_service_test_mockdb",
+      "services_requisition_service_validatecreatepayload"
+    ],
+    "2": [
+      "backend_src_app_js_src_app",
+      "plugins_db",
+      "plugins_db_dbplugin",
+      "plugins_swagger",
+      "plugins_swagger_errorresponse",
+      "plugins_swagger_poline",
+      "plugins_swagger_purchaseorder",
+      "plugins_swagger_requisition",
+      "plugins_swagger_requisitionline",
+      "plugins_swagger_swaggerplugin",
+      "routes_purchase_order_routes_purchaseorderroutes",
+      "routes_requisition_routes_requisitionroutes",
+      "src_app_buildapp",
+      "src_config",
+      "src_config_config",
+      "src_server",
+      "src_server_start"
+    ],
+    "3": [
+      "components_polineallocationtable",
+      "components_polineallocationtable_addallocation",
+      "components_polineallocationtable_availablelines",
+      "components_polineallocationtable_emit",
+      "components_polineallocationtable_fetcherror",
+      "components_polineallocationtable_hasremaininglines",
+      "components_polineallocationtable_loading",
+      "components_polineallocationtable_loadopenlines",
+      "components_polineallocationtable_localallocations",
+      "components_polineallocationtable_onlineselect",
+      "components_polineallocationtable_propenlines",
+      "components_polineallocationtable_props",
+      "components_polineallocationtable_remainingfor",
+      "components_polineallocationtable_removeallocation",
+      "components_polineallocationtable_validateallocation",
+      "components_polineallocationtable_validateallocations",
+      "components_polineallocationtable_validationerror"
+    ],
+    "4": [
+      "components_poheaderform",
+      "pages_pocreatepage",
+      "pages_pocreatepage_allocationtableref",
+      "pages_pocreatepage_errormessage",
+      "pages_pocreatepage_formdata",
+      "pages_pocreatepage_handlesubmit",
+      "pages_pocreatepage_router",
+      "pages_pocreatepage_submitting",
+      "pages_requisitionlistpage",
+      "pages_requisitionlistpage_errormessage",
+      "pages_requisitionlistpage_items",
+      "src_api",
+      "src_api_api",
+      "src_api_apifetch"
+    ],
+    "5": [
+      "pages_dashboardpage",
+      "pages_podetailpage",
+      "pages_polistpage",
+      "pages_requisitiondetailpage",
+      "router_index",
+      "router_index_router",
+      "router_index_routes",
+      "src_main"
+    ],
+    "6": [
+      "pages_requisitioncreatepage",
+      "pages_requisitioncreatepage_addline",
+      "pages_requisitioncreatepage_emptyline",
+      "pages_requisitioncreatepage_errormessage",
+      "pages_requisitioncreatepage_form",
+      "pages_requisitioncreatepage_handlesubmit",
+      "pages_requisitioncreatepage_removeline",
+      "pages_requisitioncreatepage_router"
+    ],
+    "7": [
+      "frontend_src_app_vue_src_app",
+      "src_app_ispurchaseorders",
+      "src_app_isrequisitions"
+    ],
+    "8": [
+      "init_00_init_mvp_db",
+      "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry"
+    ],
+    "9": [
+      "playwright_config",
+      "playwright_config_defineconfig"
+    ],
+    "10": [
+      "backend_jest_config"
+    ],
+    "11": [
+      "frontend_vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.15584415584415584,
+    "1": 0.1736842105263158,
+    "2": 0.15441176470588236,
+    "3": 0.14705882352941177,
+    "4": 0.15384615384615385,
+    "5": 0.2857142857142857,
+    "6": 0.2857142857142857,
+    "7": 0.6666666666666666,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0
+  },
+  "gods": [
+    {
+      "id": "services_purchase_order_service_getpurchaseorderbyid",
+      "label": "getPurchaseOrderById()",
+      "degree": 6
+    },
+    {
+      "id": "services_purchase_order_service_createpurchaseorder",
+      "label": "createPurchaseOrder()",
+      "degree": 6
+    },
+    {
+      "id": "services_requisition_service_getrequisitionbyid",
+      "label": "getRequisitionById()",
+      "degree": 6
+    },
+    {
+      "id": "services_requisition_service_createrequisition",
+      "label": "createRequisition()",
+      "degree": 5
+    },
+    {
+      "id": "src_api_api",
+      "label": "api",
+      "degree": 5
+    },
+    {
+      "id": "services_purchase_order_service_submitpurchaseorder",
+      "label": "submitPurchaseOrder()",
+      "degree": 4
+    },
+    {
+      "id": "components_polineallocationtable_validateallocation",
+      "label": "validateAllocation()",
+      "degree": 4
+    },
+    {
+      "id": "src_app_buildapp",
+      "label": "buildApp()",
+      "degree": 3
+    },
+    {
+      "id": "src_config_config",
+      "label": "config",
+      "degree": 3
+    },
+    {
+      "id": "services_purchase_order_service_listpurchaseorders",
+      "label": "listPurchaseOrders()",
+      "degree": 3
+    }
+  ],
+  "surprises": [
+    {
+      "source": "start()",
+      "target": "buildApp()",
+      "source_files": [
+        "backend/src/server.js",
+        "backend/src/app.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}
