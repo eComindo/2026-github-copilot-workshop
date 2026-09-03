@@ -51,6 +51,25 @@ Reference plan: `docs/plan.md`.
 - Add Playwright coverage focused on PO pages/flow integrated with existing baseline PR data.
 - Do not over-invest in test framework complexity.
 
+## Implementation Quality Checklist
+- [ ] Scope respected: changes stay within PO module goals for this workshop.
+- [ ] API compatibility preserved with `docs/plan.md` contract.
+- [ ] Business rules enforced in services (especially allocation qty <= PR line remaining qty).
+- [ ] Route handlers remain thin with clear validation and readable error responses.
+- [ ] Naming is explicit and file/module size stays teachable.
+
+## Testing Checklist
+- [ ] Unit tests cover happy path and failure cases for PO validations.
+- [ ] Unit tests include status transition rules (draft -> submitted and invalid transitions).
+- [ ] E2E flow covers PO list/create/detail against seeded PR data.
+- [ ] Changed tests and relevant suites pass locally before completion.
+
+## Documentation Discipline Checklist
+- [ ] Any new endpoint behavior is reflected in `docs/plan.md` or noted in PR description.
+- [ ] Assumptions and constraints are documented briefly (what was simplified for workshop clarity).
+- [ ] Error cases exposed to users are documented in code comments or route-level notes.
+- [ ] Change summary includes what was implemented, what was intentionally out of scope, and why.
+
 ## User Interface Guidelines
 - Follow the existing UI patterns established in the baseline for consistency.
 - Always respect the CSS variables set in the baseline for colors, spacing, and typography.
@@ -61,3 +80,171 @@ Reference plan: `docs/plan.md`.
 
 ## Workshop-First Principle
 When there is a trade-off between production robustness and workshop clarity, choose workshop clarity.
+
+<!-- rtk-instruction v2-->
+# RTK — Token-Optimized CLI
+
+rtk is a CLI proxy that filters and compresses command outputs, saving 60-90% tokens.
+
+#### Rule
+
+Always prefix shell commands with rtk:
+
+# Instead of:      Use:
+git status         rtk git status
+git log -10        rtk git log -10
+docker ps          rtk docker ps
+Other examples where you can use rtk:
+
+rtk tree
+rtk ls -la
+rtk read
+rtk grep
+rtk rg
+rtk npm run test
+rtk curl <url>
+
+<!-- /rtk-instruction -->
+
+## Codebase Context & Knowledge Graph Protocol
+
+You have access to a pre-computed AST knowledge graph of this repository at `graphify-out/graph.json`. To minimize context window clutter, prevent hallucinations, and accurately map cross-file dependencies, you MUST follow these routing rules:
+
+1. **Consult the Graph First:** Before writing plans, making sweeping structural modifications, or tracing function call blast-radii, read `graphify-out/graph.json`. Filter nodes to only those whose `id` paths start with `backend/` or `frontend/src/` — nodes from `playwright-report/`, `test-results/`, and `coverage/` are minified build artifacts and must be ignored.
+2. **Identify God Nodes:** Rank nodes by edge degree. The highest-degree nodes are the structural hubs (e.g., service files, route registries). Avoid duplicating responsibilities already owned by a god node.
+3. **Trace Structural Paths:** If the user asks about relationships between modules or layers (e.g., how the API layer reaches the DB), do not grep blindly. Traverse the `links` array in `graph.json` to find the actual dependency path.
+4. **Graph State:** The graph is derived strictly via AST extraction — no documentation or semantic layer. Treat all node hierarchies and import edges as 100% extracted truth (`EXTRACTED` confidence tier). Do not infer structure that isn't in the graph.
+
+<!-- 
+You can leave out this comment section in your actual AGENTS.md file.
+
+Prerequisites:
+- tree (https://formulae.brew.sh/formula/tree)
+- rtk (https://github.com/rtk-ai/rtk)
+- Graphify (https://github.com/safishamsi/graphify)
+- ast-grep (https://github.com/ast-grep/ast-grep)
+-->
+
+## Response Style
+- Be extremely concise. No pleasantries, no filler.
+- When asked to write code, return code only unless explanation is explicitly requested.
+- No sycophantic preambles ("Sure!", "Great question!", "Absolutely!").
+- No "Here's a function that..." preambles.
+- Don't restate the question before answering.
+- No "Note:", "Tip:", or "Remember:" appendices unless asked.
+- No usage examples unless asked.
+- No unsolicited suggestions or improvements beyond what was asked.
+- Use short variable names where meaning is clear from context.
+
+<!-- example for JavaScript -->
+## Code Style
+- JavaScript (ES2022+), no TypeScript unless specified
+- Arrow functions, const over let
+- Minimal inline comments — only for genuinely complex logic
+
+
+## Context Retrieval Policy
+
+Always retrieve the smallest amount of information necessary.
+Escalate only when necessary. Stop escalating as soon as sufficient information has been obtained.
+
+Preferred order:
+1. Need code structure? `graphify-out/graph.json`.
+2. Need directory structure? `rtk tree`
+3. Need symbols? `ast-grep`.
+4. Need implementation? Source files.
+5. Use repository-wide search as last resort
+
+Avoid reading entire directories or the whole repository unless explicitly requested.
+
+
+<!-- rtk-instructions v2 -->
+## RTK (Rust Token Killer) - Token-Optimized CLI
+
+`rtk` is a CLI proxy that filters and compresses command outputs, saving 60-90% tokens.
+
+**Always** prefix commands with `rtk`. If RTK has a dedicated filter, it uses it. If not, it passes through unchanged. This means RTK is always safe to use.
+
+
+Instead of:
+```
+ls -la .
+git status
+git log -10
+docker ps
+```
+
+Use:
+```
+rtk ls -la .
+rtk git status
+rtk git log -10
+rtk docker ps
+```
+
+### RTK commands example
+
+```bash
+rtk ls <path>
+rtk read <file>
+rtk find <pattern>
+
+rtk err <cmd>           # Filter errors only from any command
+rtk log <file>          # Deduplicated logs with counts
+rtk json <file>         # JSON structure without values
+
+rtk curl <url>          # Compact HTTP responses
+
+rtk docker ps           # Compact container list
+rtk docker images       # Compact image list
+rtk docker logs <c>     # Deduplicated logs
+```
+
+<!-- /rtk-instructions -->
+
+
+## Graphify - Codebase context & knowledge graph protocol
+
+A pre-computed AST knowledge graph (`graph.json`) is available at: `graphify-out/graph.json`
+Use `graph.json` before searching or reading multiple source files.
+
+Workflow:
+1. Read `graph.json`.
+2. Identify the relevant symbols, files, and dependency paths.
+3. Read only the source files required for the task.
+4. Avoid scanning unrelated files.
+
+Use the graph for:
+- dependency tracing
+- call-path discovery
+- identifying high-centrality modules
+- impact analysis before refactoring
+- locating symbol definitions
+
+Never read an entire directory simply to locate a symbol. Use `graph.json` to locate the symbol first, then read only the relevant files.
+
+The graph is generated from AST extraction and represents extracted structural relationships only. Treat graph edges as authoritative for structural relationships.
+Do not infer dependencies that are absent from the graph.
+
+
+## ast-grep
+
+Prefer `ast-grep` over `grep` whenever searching source code.
+
+Use `ast-grep` for:
+- locating function definitions
+- locating class definitions
+- locating method implementations
+- finding imports
+- matching AST patterns
+- performing structural search
+
+Use `grep` only for:
+- Markdown
+- JSON
+- YAML
+- log files
+- generated text
+- plain-text configuration
+
+Avoid using `grep` to search programming language source code when `ast-grep` can answer the query.
