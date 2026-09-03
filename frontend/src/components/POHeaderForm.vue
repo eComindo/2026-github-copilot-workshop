@@ -5,7 +5,7 @@
     <div class="field-grid">
       <label class="field" for="vendor-name">
         <span class="label">Vendor Name *</span>
-        <input id="vendor-name" v-model="vendorValue" type="text" placeholder="Enter vendor name" />
+        <input id="vendor-name" data-testid="po-vendor-name" v-model="vendorValue" type="text" placeholder="Enter vendor name" />
         <span v-if="vendorError" class="field-error">{{ vendorError }}</span>
       </label>
 
