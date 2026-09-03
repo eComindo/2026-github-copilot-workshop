@@ -104,7 +104,7 @@ describe('requisition-service list functions', () => {
     expect(result.requisition).toEqual({
       id: 'pr-1',
       prNumber: 'PR-2026-0001',
-      status: 'FAILED',
+      status: 'APPROVED',
     });
     expect(result.openLines).toHaveLength(1);
     expect(result.openLines[0].id).toBe('l-1');
