@@ -7,10 +7,10 @@
           <th class="check-col"><input type="checkbox" :checked="allSelected" @change="toggleAll" /></th>
           <th>PR</th><th>Line</th><th>Item Code</th><th>Item Name</th><th>UOM</th><th>Requested Qty</th><th>Allocated Qty</th><th>Remaining Qty</th><th>Order Qty</th><th>Delivery Date</th><th>Unit Price</th><th>Line Amount</th>
         </tr></thead>
-        <tbody><tr v-for="(row, index) in tableRows" :key="row.id" class="line-row">
-          <td class="check-col"><input v-model="row.selected" type="checkbox" @change="emitRows" /></td>
+        <tbody><tr v-for="(row, index) in tableRows" :key="row.id" class="line-row" data-testid="po-line-row">
+          <td class="check-col"><input v-model="row.selected" type="checkbox" data-testid="po-line-select" @change="emitRows" /></td>
           <td>{{ row.prNo || '—' }}</td><td>{{ row.line || row.line_no || '—' }}</td><td>{{ row.itemCode || row.item_code }}</td><td>{{ row.itemName || row.item_name }}</td><td>{{ row.uom }}</td><td>{{ row.requestedQty ?? row.qty_requested ?? '—' }}</td><td>{{ row.allocatedQty ?? row.qty_allocated ?? '—' }}</td><td>{{ row.remainingQty ?? row.openQty ?? '—' }}</td>
-          <td><input v-model.number="row.orderQty" type="number" min="0" :max="row.remainingQty || row.openQty" :class="['mini-input', { 'qty-input': legacyMode }]" aria-label="Order quantity" @input="emitRows" @change="validateLineQuantity(index)" /></td>
+          <td><input v-model.number="row.orderQty" type="number" min="0" :max="row.remainingQty || row.openQty" :class="['mini-input', { 'qty-input': legacyMode }]" data-testid="po-order-qty" aria-label="Order quantity" @input="emitRows" @change="validateLineQuantity(index)" /></td>
           <td><input v-model="row.deliveryDate" type="date" class="mini-input date-input" aria-label="Delivery date" @input="emitRows" /></td>
           <td><input v-model.number="row.unitPrice" type="number" min="0" :class="['mini-input', { 'price-input': legacyMode }]" aria-label="Unit price" @input="emitRows" /></td><td>{{ formatCurrency(row.orderQty * row.unitPrice) }}</td>
           <td v-if="legacyMode"><button type="button" class="remove-btn btn-remove" @click="$emit('remove-line', index)">Remove</button></td>

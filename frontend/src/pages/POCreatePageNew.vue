@@ -1,5 +1,5 @@
 <template>
-  <div class="po-create-page">
+  <div class="po-create-page" data-testid="po-create-page">
     <div class="page-header">
       <div class="page-header-left">
         <button type="button" class="back-btn" aria-label="Go back" @click="goBack">←</button>
@@ -17,8 +17,8 @@
       <div class="selection-meta"><span class="selection-label">Selected Lines</span><span class="selection-count">{{ selectedLineCount }}</span></div>
       <div class="total-meta"><span class="total-label">Estimated Total</span><span class="total-value">{{ formatCurrency(totalAmount) }}</span></div>
       <div class="actions">
-        <button type="button" class="btn btn-neutral" :disabled="saving" @click="createPo(false)">{{ saving ? 'Saving...' : 'Save As Draft' }}</button>
-        <button type="button" class="btn btn-primary" :disabled="saving || !isFormValid" @click="createPo(true)">{{ saving ? 'Submitting...' : 'Submit PO' }}</button>
+        <button type="button" class="btn btn-neutral" data-testid="save-po-draft" :disabled="saving" @click="createPo(false)">{{ saving ? 'Saving...' : 'Save As Draft' }}</button>
+        <button type="button" class="btn btn-primary" data-testid="submit-po" :disabled="saving || !isFormValid" @click="createPo(true)">{{ saving ? 'Submitting...' : 'Submit PO' }}</button>
       </div>
     </div>
   </div>
