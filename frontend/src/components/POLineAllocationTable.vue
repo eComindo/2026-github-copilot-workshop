@@ -8,11 +8,11 @@
           <th>PR</th><th>Line</th><th>Item Code</th><th>Item Name</th><th>UOM</th><th>Requested Qty</th><th>Allocated Qty</th><th>Remaining Qty</th><th>Order Qty</th><th>Delivery Date</th><th>Unit Price</th><th>Line Amount</th>
         </tr></thead>
         <tbody><tr v-for="(row, index) in tableRows" :key="row.id" class="line-row">
-          <td class="check-col"><input v-model="row.selected" type="checkbox" /></td>
+          <td class="check-col"><input v-model="row.selected" type="checkbox" @change="emitRows" /></td>
           <td>{{ row.prNo || '—' }}</td><td>{{ row.line || row.line_no || '—' }}</td><td>{{ row.itemCode || row.item_code }}</td><td>{{ row.itemName || row.item_name }}</td><td>{{ row.uom }}</td><td>{{ row.requestedQty ?? row.qty_requested ?? '—' }}</td><td>{{ row.allocatedQty ?? row.qty_allocated ?? '—' }}</td><td>{{ row.remainingQty ?? row.openQty ?? '—' }}</td>
-          <td><input v-model.number="row.orderQty" type="number" min="0" :max="row.remainingQty || row.openQty" :class="['mini-input', { 'qty-input': legacyMode }]" aria-label="Order quantity" @change="validateLineQuantity(index)" /></td>
-          <td><input v-model="row.deliveryDate" type="date" class="mini-input date-input" aria-label="Delivery date" /></td>
-          <td><input v-model.number="row.unitPrice" type="number" min="0" :class="['mini-input', { 'price-input': legacyMode }]" aria-label="Unit price" /></td><td>{{ formatCurrency(row.orderQty * row.unitPrice) }}</td>
+          <td><input v-model.number="row.orderQty" type="number" min="0" :max="row.remainingQty || row.openQty" :class="['mini-input', { 'qty-input': legacyMode }]" aria-label="Order quantity" @input="emitRows" @change="validateLineQuantity(index)" /></td>
+          <td><input v-model="row.deliveryDate" type="date" class="mini-input date-input" aria-label="Delivery date" @input="emitRows" /></td>
+          <td><input v-model.number="row.unitPrice" type="number" min="0" :class="['mini-input', { 'price-input': legacyMode }]" aria-label="Unit price" @input="emitRows" /></td><td>{{ formatCurrency(row.orderQty * row.unitPrice) }}</td>
           <td v-if="legacyMode"><button type="button" class="remove-btn btn-remove" @click="$emit('remove-line', index)">Remove</button></td>
         </tr></tbody>
       </table>
@@ -31,6 +31,7 @@ const lineErrors = ref([]);
 const legacyMode = computed(() => props.rows === undefined);
 const tableRows = computed(() => (props.rows ?? props.lines ?? []).map((source) => ({ ...source, selected: source.selected ?? true, prNo: source.prNo ?? source.pr_number, line: source.line ?? source.line_no, itemCode: source.itemCode ?? source.item_code, itemName: source.itemName ?? source.item_name, requestedQty: source.requestedQty ?? source.qty_requested, allocatedQty: source.allocatedQty ?? source.qty_allocated, remainingQty: source.remainingQty ?? source.openQty ?? ((source.qty_requested || 0) - (source.qty_allocated || 0)), orderQty: source.orderQty ?? source.qtyOrdered ?? 0, unitPrice: source.unitPrice ?? 0 })));
 const allSelected = computed(() => tableRows.value.length > 0 && tableRows.value.every((row) => row.selected));
+const emitRows = () => { emit('update:rows', tableRows.value); emit('update:lines', tableRows.value); };
 const toggleAll = (event) => { tableRows.value.forEach((row) => { row.selected = event.target.checked; }); emit('update:rows', tableRows.value); emit('update:lines', tableRows.value); };
 const formatCurrency = (value) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Number(value) || 0);
 const validateAll = () => tableRows.value.every((row) => Number(row.orderQty) > 0 && Number(row.orderQty) <= Number(row.remainingQty));
