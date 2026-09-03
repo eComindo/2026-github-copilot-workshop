@@ -439,6 +439,14 @@ describe('submitPurchaseOrder – status transition', () => {
 });
 
 describe('purchase-order-service list functions', () => {
+  test('listPurchaseOrders returns an empty array when there are no purchase orders', async () => {
+    const db = { query: jest.fn(() => ({ rows: [] })) };
+
+    const result = await listPurchaseOrders(db);
+
+    expect(result).toEqual([]);
+  });
+
   test('listPurchaseOrders returns mapped header fields', async () => {
     const db = {
       query: jest.fn(() => ({
@@ -531,5 +539,41 @@ describe('purchase-order-service list functions', () => {
     expect(result.openLines).toHaveLength(1);
     expect(result.openLines[0].id).toBe('po-line-1');
     expect(result.openLines[0].qtyOpenForGr).toBe(6);
+  });
+
+  test('getOpenPoLines returns an empty array when all lines are fully received', async () => {
+    let call = 0;
+    const db = {
+      query: jest.fn(() => {
+        call += 1;
+        if (call === 1) {
+          return {
+            rows: [{ id: 'po-1', po_number: 'PO-2026-0001', status: 'SUBMITTED' }],
+            rowCount: 1,
+          };
+        }
+        return {
+          rows: [
+            {
+              id: 'po-line-1',
+              line_no: 1,
+              item_code: 'A',
+              item_name: 'Item A',
+              qty_ordered: 10,
+              qty_received: 10,
+              uom: 'PCS',
+              unit_price: 1000,
+              site_code: 'JKT',
+              required_date: null,
+            },
+          ],
+          rowCount: 1,
+        };
+      }),
+    };
+
+    const result = await getOpenPoLines(db, 'po-1');
+
+    expect(result.openLines).toEqual([]);
   });
 });
