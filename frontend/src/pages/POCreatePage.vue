@@ -19,6 +19,7 @@
 
       <!-- PO Lines / Allocations -->
       <POLineAllocationTable
+        ref="allocationTableRef"
         v-model="formData.allocations"
         :pr-id="formData.prId"
         @error="(msg) => (errorMessage = msg)"
@@ -27,7 +28,9 @@
       <!-- Action buttons -->
       <div class="btn-group">
         <RouterLink to="/purchase-orders" class="btn btn-outline">Cancel</RouterLink>
-        <button class="btn btn-primary" type="submit">Save As Draft</button>
+        <button class="btn btn-primary" type="submit" :disabled="submitting">
+          {{ submitting ? 'Saving...' : 'Save As Draft' }}
+        </button>
       </div>
     </form>
   </section>
@@ -36,11 +39,14 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+import { api } from '../api';
 import POHeaderForm from '../components/POHeaderForm.vue';
 import POLineAllocationTable from '../components/POLineAllocationTable.vue';
 
 const router = useRouter();
 const errorMessage = ref('');
+const submitting = ref(false);
+const allocationTableRef = ref(null);
 
 const formData = reactive({
   prId: null,
@@ -53,10 +59,47 @@ const formData = reactive({
   allocations: [],
 });
 
-const handleSubmit = () => {
-  // TODO: Call API to create PO
-  console.log('PO Form Data:', formData);
-  errorMessage.value = 'API integration pending';
+const handleSubmit = async () => {
+  errorMessage.value = '';
+
+  if (!formData.prId) {
+    errorMessage.value = 'Select a PR first';
+    return;
+  }
+
+  if (!formData.supplierName.trim()) {
+    errorMessage.value = 'Supplier name is required';
+    return;
+  }
+
+  if (!allocationTableRef.value?.validateAllocations()) {
+    errorMessage.value = 'Fix allocation errors before submitting';
+    return;
+  }
+
+  const payload = {
+    vendorName: formData.supplierName.trim(),
+    lines: formData.allocations.map((allocation) => ({
+      prLineId: allocation.prLineId,
+      itemCode: allocation.itemCode,
+      itemName: allocation.itemName,
+      qtyOrdered: allocation.allocateQty,
+      unitPrice: allocation.unitPrice,
+      uom: allocation.uom,
+      siteCode: allocation.siteCode,
+      requiredDate: allocation.requiredDate || null,
+    })),
+  };
+
+  submitting.value = true;
+  try {
+    await api.createPurchaseOrder(payload);
+    router.push({ name: 'purchase-orders-list' });
+  } catch (err) {
+    errorMessage.value = err.message;
+  } finally {
+    submitting.value = false;
+  }
 };
 </script>
 

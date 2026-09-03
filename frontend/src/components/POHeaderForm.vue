@@ -11,6 +11,7 @@
             {{ pr.prNumber }} - {{ pr.title }}
           </option>
         </select>
+        <span v-if="prListError" class="field-error">{{ prListError }}</span>
       </div>
       <div class="form-group">
         <label>Supplier</label>
@@ -50,7 +51,8 @@
 </template>
 
 <script setup>
-import { watch, reactive, ref } from 'vue';
+import { watch, reactive, ref, onMounted } from 'vue';
+import { api } from '../api';
 
 const props = defineProps({
   modelValue: {
@@ -63,11 +65,18 @@ const emit = defineEmits(['update:modelValue', 'error']);
 
 const localData = reactive({ ...props.modelValue });
 
-const prList = ref([
-  // TODO: Fetch from API
-  { id: 1, prNumber: 'PR-001', title: 'Office Supplies' },
-  { id: 2, prNumber: 'PR-002', title: 'Equipment' },
-]);
+const prList = ref([]);
+const prListError = ref('');
+
+onMounted(async () => {
+  try {
+    const data = await api.listRequisitions();
+    prList.value = (data.items || []).filter((pr) => pr.status === 'APPROVED');
+  } catch (err) {
+    prListError.value = err.message;
+    emit('error', err.message);
+  }
+});
 
 watch(
   localData,
@@ -142,5 +151,11 @@ textarea:focus {
 
 textarea {
   resize: vertical;
+}
+
+.field-error {
+  color: #d32f2f;
+  font-size: 0.8rem;
+  margin-top: 4px;
 }
 </style>

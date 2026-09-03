@@ -9,9 +9,9 @@
       "source_file": "backend/jest.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "backend_jest_config",
-      "community": 9,
-      "norm_label": "jest.config.js"
+      "community": 10,
+      "norm_label": "jest.config.js",
+      "id": "backend_jest_config"
     },
     {
       "label": "app.js",
@@ -19,9 +19,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "backend_src_app_js_src_app",
-      "community": 4,
-      "norm_label": "app.js"
+      "community": 2,
+      "norm_label": "app.js",
+      "id": "backend_src_app_js_src_app"
     },
     {
       "label": "buildApp()",
@@ -29,9 +29,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "src_app_buildapp",
-      "community": 5,
-      "norm_label": "buildapp()"
+      "community": 2,
+      "norm_label": "buildapp()",
+      "id": "src_app_buildapp"
     },
     {
       "label": "config.js",
@@ -39,9 +39,9 @@
       "source_file": "backend/src/config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_config",
-      "community": 5,
-      "norm_label": "config.js"
+      "community": 2,
+      "norm_label": "config.js",
+      "id": "src_config"
     },
     {
       "label": "config",
@@ -49,9 +49,9 @@
       "source_file": "backend/src/config.js",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "src_config_config",
-      "community": 5,
-      "norm_label": "config"
+      "community": 2,
+      "norm_label": "config",
+      "id": "src_config_config"
     },
     {
       "label": "db.js",
@@ -59,9 +59,9 @@
       "source_file": "backend/src/plugins/db.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "plugins_db",
-      "community": 5,
-      "norm_label": "db.js"
+      "community": 2,
+      "norm_label": "db.js",
+      "id": "plugins_db"
     },
     {
       "label": "dbPlugin()",
@@ -69,9 +69,9 @@
       "source_file": "backend/src/plugins/db.js",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "plugins_db_dbplugin",
-      "community": 5,
-      "norm_label": "dbplugin()"
+      "community": 2,
+      "norm_label": "dbplugin()",
+      "id": "plugins_db_dbplugin"
     },
     {
       "label": "swagger.js",
@@ -79,9 +79,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "plugins_swagger",
-      "community": 4,
-      "norm_label": "swagger.js"
+      "community": 2,
+      "norm_label": "swagger.js",
+      "id": "plugins_swagger"
     },
     {
       "label": "RequisitionLine",
@@ -89,9 +89,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "plugins_swagger_requisitionline",
-      "community": 4,
-      "norm_label": "requisitionline"
+      "community": 2,
+      "norm_label": "requisitionline",
+      "id": "plugins_swagger_requisitionline"
     },
     {
       "label": "Requisition",
@@ -99,9 +99,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "plugins_swagger_requisition",
-      "community": 4,
-      "norm_label": "requisition"
+      "community": 2,
+      "norm_label": "requisition",
+      "id": "plugins_swagger_requisition"
     },
     {
       "label": "POLine",
@@ -109,9 +109,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L49",
       "_origin": "ast",
-      "id": "plugins_swagger_poline",
-      "community": 4,
-      "norm_label": "poline"
+      "community": 2,
+      "norm_label": "poline",
+      "id": "plugins_swagger_poline"
     },
     {
       "label": "PurchaseOrder",
@@ -119,9 +119,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L69",
       "_origin": "ast",
-      "id": "plugins_swagger_purchaseorder",
-      "community": 4,
-      "norm_label": "purchaseorder"
+      "community": 2,
+      "norm_label": "purchaseorder",
+      "id": "plugins_swagger_purchaseorder"
     },
     {
       "label": "ErrorResponse",
@@ -129,9 +129,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L86",
       "_origin": "ast",
-      "id": "plugins_swagger_errorresponse",
-      "community": 4,
-      "norm_label": "errorresponse"
+      "community": 2,
+      "norm_label": "errorresponse",
+      "id": "plugins_swagger_errorresponse"
     },
     {
       "label": "swaggerPlugin",
@@ -139,9 +139,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L95",
       "_origin": "ast",
-      "id": "plugins_swagger_swaggerplugin",
-      "community": 4,
-      "norm_label": "swaggerplugin"
+      "community": 2,
+      "norm_label": "swaggerplugin",
+      "id": "plugins_swagger_swaggerplugin"
     },
     {
       "label": "purchase-order-routes.js",
@@ -149,9 +149,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes",
       "community": 0,
-      "norm_label": "purchase-order-routes.js"
+      "norm_label": "purchase-order-routes.js",
+      "id": "routes_purchase_order_routes"
     },
     {
       "label": "createPurchaseOrderSchema",
@@ -159,9 +159,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes_createpurchaseorderschema",
       "community": 0,
-      "norm_label": "createpurchaseorderschema"
+      "norm_label": "createpurchaseorderschema",
+      "id": "routes_purchase_order_routes_createpurchaseorderschema"
     },
     {
       "label": "listPurchaseOrdersSchema",
@@ -169,9 +169,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L34",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes_listpurchaseordersschema",
       "community": 0,
-      "norm_label": "listpurchaseordersschema"
+      "norm_label": "listpurchaseordersschema",
+      "id": "routes_purchase_order_routes_listpurchaseordersschema"
     },
     {
       "label": "getPurchaseOrderSchema",
@@ -179,9 +179,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L39",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes_getpurchaseorderschema",
       "community": 0,
-      "norm_label": "getpurchaseorderschema"
+      "norm_label": "getpurchaseorderschema",
+      "id": "routes_purchase_order_routes_getpurchaseorderschema"
     },
     {
       "label": "submitPurchaseOrderSchema",
@@ -189,9 +189,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L50",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes_submitpurchaseorderschema",
       "community": 0,
-      "norm_label": "submitpurchaseorderschema"
+      "norm_label": "submitpurchaseorderschema",
+      "id": "routes_purchase_order_routes_submitpurchaseorderschema"
     },
     {
       "label": "openLinesSchema",
@@ -199,9 +199,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L61",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes_openlinesschema",
       "community": 0,
-      "norm_label": "openlinesschema"
+      "norm_label": "openlinesschema",
+      "id": "routes_purchase_order_routes_openlinesschema"
     },
     {
       "label": "purchaseOrderRoutes()",
@@ -209,9 +209,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L72",
       "_origin": "ast",
-      "id": "routes_purchase_order_routes_purchaseorderroutes",
-      "community": 4,
-      "norm_label": "purchaseorderroutes()"
+      "community": 2,
+      "norm_label": "purchaseorderroutes()",
+      "id": "routes_purchase_order_routes_purchaseorderroutes"
     },
     {
       "label": "requisition-routes.js",
@@ -219,9 +219,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "routes_requisition_routes",
       "community": 1,
-      "norm_label": "requisition-routes.js"
+      "norm_label": "requisition-routes.js",
+      "id": "routes_requisition_routes"
     },
     {
       "label": "listRequisitionsSchema",
@@ -229,9 +229,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "routes_requisition_routes_listrequisitionsschema",
       "community": 1,
-      "norm_label": "listrequisitionsschema"
+      "norm_label": "listrequisitionsschema",
+      "id": "routes_requisition_routes_listrequisitionsschema"
     },
     {
       "label": "createRequisitionSchema",
@@ -239,9 +239,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "routes_requisition_routes_createrequisitionschema",
       "community": 1,
-      "norm_label": "createrequisitionschema"
+      "norm_label": "createrequisitionschema",
+      "id": "routes_requisition_routes_createrequisitionschema"
     },
     {
       "label": "getRequisitionSchema",
@@ -249,9 +249,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L48",
       "_origin": "ast",
-      "id": "routes_requisition_routes_getrequisitionschema",
       "community": 1,
-      "norm_label": "getrequisitionschema"
+      "norm_label": "getrequisitionschema",
+      "id": "routes_requisition_routes_getrequisitionschema"
     },
     {
       "label": "submitRequisitionSchema",
@@ -259,9 +259,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L59",
       "_origin": "ast",
-      "id": "routes_requisition_routes_submitrequisitionschema",
       "community": 1,
-      "norm_label": "submitrequisitionschema"
+      "norm_label": "submitrequisitionschema",
+      "id": "routes_requisition_routes_submitrequisitionschema"
     },
     {
       "label": "approveRequisitionSchema",
@@ -269,9 +269,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L70",
       "_origin": "ast",
-      "id": "routes_requisition_routes_approverequisitionschema",
       "community": 1,
-      "norm_label": "approverequisitionschema"
+      "norm_label": "approverequisitionschema",
+      "id": "routes_requisition_routes_approverequisitionschema"
     },
     {
       "label": "openLinesSchema",
@@ -279,9 +279,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L81",
       "_origin": "ast",
-      "id": "routes_requisition_routes_openlinesschema",
       "community": 1,
-      "norm_label": "openlinesschema"
+      "norm_label": "openlinesschema",
+      "id": "routes_requisition_routes_openlinesschema"
     },
     {
       "label": "requisitionRoutes()",
@@ -289,9 +289,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L92",
       "_origin": "ast",
-      "id": "routes_requisition_routes_requisitionroutes",
-      "community": 4,
-      "norm_label": "requisitionroutes()"
+      "community": 2,
+      "norm_label": "requisitionroutes()",
+      "id": "routes_requisition_routes_requisitionroutes"
     },
     {
       "label": "server.js",
@@ -299,9 +299,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_server",
-      "community": 5,
-      "norm_label": "server.js"
+      "community": 2,
+      "norm_label": "server.js",
+      "id": "src_server"
     },
     {
       "label": "start()",
@@ -309,9 +309,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "src_server_start",
-      "community": 5,
-      "norm_label": "start()"
+      "community": 2,
+      "norm_label": "start()",
+      "id": "src_server_start"
     },
     {
       "label": "purchase-order-service.js",
@@ -319,9 +319,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "services_purchase_order_service",
       "community": 0,
-      "norm_label": "purchase-order-service.js"
+      "norm_label": "purchase-order-service.js",
+      "id": "services_purchase_order_service"
     },
     {
       "label": "mapHeader()",
@@ -329,9 +329,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "services_purchase_order_service_mapheader",
       "community": 0,
-      "norm_label": "mapheader()"
+      "norm_label": "mapheader()",
+      "id": "services_purchase_order_service_mapheader"
     },
     {
       "label": "mapLine()",
@@ -339,9 +339,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "services_purchase_order_service_mapline",
       "community": 0,
-      "norm_label": "mapline()"
+      "norm_label": "mapline()",
+      "id": "services_purchase_order_service_mapline"
     },
     {
       "label": "createPoNumber()",
@@ -349,9 +349,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L32",
       "_origin": "ast",
-      "id": "services_purchase_order_service_createponumber",
       "community": 0,
-      "norm_label": "createponumber()"
+      "norm_label": "createponumber()",
+      "id": "services_purchase_order_service_createponumber"
     },
     {
       "label": "validateCreatePayload()",
@@ -359,9 +359,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L39",
       "_origin": "ast",
-      "id": "services_purchase_order_service_validatecreatepayload",
       "community": 0,
-      "norm_label": "validatecreatepayload()"
+      "norm_label": "validatecreatepayload()",
+      "id": "services_purchase_order_service_validatecreatepayload"
     },
     {
       "label": "listPurchaseOrders()",
@@ -369,9 +369,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L77",
       "_origin": "ast",
-      "id": "services_purchase_order_service_listpurchaseorders",
       "community": 0,
-      "norm_label": "listpurchaseorders()"
+      "norm_label": "listpurchaseorders()",
+      "id": "services_purchase_order_service_listpurchaseorders"
     },
     {
       "label": "getPurchaseOrderById()",
@@ -379,9 +379,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L87",
       "_origin": "ast",
-      "id": "services_purchase_order_service_getpurchaseorderbyid",
       "community": 0,
-      "norm_label": "getpurchaseorderbyid()"
+      "norm_label": "getpurchaseorderbyid()",
+      "id": "services_purchase_order_service_getpurchaseorderbyid"
     },
     {
       "label": "getOpenPoLines()",
@@ -389,9 +389,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L130",
       "_origin": "ast",
-      "id": "services_purchase_order_service_getopenpolines",
       "community": 0,
-      "norm_label": "getopenpolines()"
+      "norm_label": "getopenpolines()",
+      "id": "services_purchase_order_service_getopenpolines"
     },
     {
       "label": "createPurchaseOrder()",
@@ -399,9 +399,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L161",
       "_origin": "ast",
-      "id": "services_purchase_order_service_createpurchaseorder",
       "community": 0,
-      "norm_label": "createpurchaseorder()"
+      "norm_label": "createpurchaseorder()",
+      "id": "services_purchase_order_service_createpurchaseorder"
     },
     {
       "label": "submitPurchaseOrder()",
@@ -409,9 +409,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L276",
       "_origin": "ast",
-      "id": "services_purchase_order_service_submitpurchaseorder",
       "community": 0,
-      "norm_label": "submitpurchaseorder()"
+      "norm_label": "submitpurchaseorder()",
+      "id": "services_purchase_order_service_submitpurchaseorder"
     },
     {
       "label": "requisition-service.js",
@@ -419,9 +419,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "services_requisition_service",
       "community": 1,
-      "norm_label": "requisition-service.js"
+      "norm_label": "requisition-service.js",
+      "id": "services_requisition_service"
     },
     {
       "label": "mapHeader()",
@@ -429,9 +429,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "services_requisition_service_mapheader",
       "community": 1,
-      "norm_label": "mapheader()"
+      "norm_label": "mapheader()",
+      "id": "services_requisition_service_mapheader"
     },
     {
       "label": "mapLine()",
@@ -439,9 +439,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "services_requisition_service_mapline",
       "community": 1,
-      "norm_label": "mapline()"
+      "norm_label": "mapline()",
+      "id": "services_requisition_service_mapline"
     },
     {
       "label": "createPrNumber()",
@@ -449,9 +449,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "services_requisition_service_createprnumber",
       "community": 1,
-      "norm_label": "createprnumber()"
+      "norm_label": "createprnumber()",
+      "id": "services_requisition_service_createprnumber"
     },
     {
       "label": "listRequisitions()",
@@ -459,9 +459,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L41",
       "_origin": "ast",
-      "id": "services_requisition_service_listrequisitions",
       "community": 1,
-      "norm_label": "listrequisitions()"
+      "norm_label": "listrequisitions()",
+      "id": "services_requisition_service_listrequisitions"
     },
     {
       "label": "getRequisitionById()",
@@ -469,9 +469,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "services_requisition_service_getrequisitionbyid",
       "community": 1,
-      "norm_label": "getrequisitionbyid()"
+      "norm_label": "getrequisitionbyid()",
+      "id": "services_requisition_service_getrequisitionbyid"
     },
     {
       "label": "getRequisitionOpenLines()",
@@ -479,9 +479,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L72",
       "_origin": "ast",
-      "id": "services_requisition_service_getrequisitionopenlines",
       "community": 1,
-      "norm_label": "getrequisitionopenlines()"
+      "norm_label": "getrequisitionopenlines()",
+      "id": "services_requisition_service_getrequisitionopenlines"
     },
     {
       "label": "validateCreatePayload()",
@@ -489,9 +489,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L101",
       "_origin": "ast",
-      "id": "services_requisition_service_validatecreatepayload",
       "community": 1,
-      "norm_label": "validatecreatepayload()"
+      "norm_label": "validatecreatepayload()",
+      "id": "services_requisition_service_validatecreatepayload"
     },
     {
       "label": "createRequisition()",
@@ -499,9 +499,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L134",
       "_origin": "ast",
-      "id": "services_requisition_service_createrequisition",
       "community": 1,
-      "norm_label": "createrequisition()"
+      "norm_label": "createrequisition()",
+      "id": "services_requisition_service_createrequisition"
     },
     {
       "label": "submitRequisition()",
@@ -509,9 +509,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L198",
       "_origin": "ast",
-      "id": "services_requisition_service_submitrequisition",
       "community": 1,
-      "norm_label": "submitrequisition()"
+      "norm_label": "submitrequisition()",
+      "id": "services_requisition_service_submitrequisition"
     },
     {
       "label": "approveRequisition()",
@@ -519,9 +519,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L225",
       "_origin": "ast",
-      "id": "services_requisition_service_approverequisition",
       "community": 1,
-      "norm_label": "approverequisition()"
+      "norm_label": "approverequisition()",
+      "id": "services_requisition_service_approverequisition"
     },
     {
       "label": "purchase-order-service.test.js",
@@ -529,9 +529,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "services_purchase_order_service_test",
       "community": 0,
-      "norm_label": "purchase-order-service.test.js"
+      "norm_label": "purchase-order-service.test.js",
+      "id": "services_purchase_order_service_test"
     },
     {
       "label": "validPayload()",
@@ -539,9 +539,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "services_purchase_order_service_test_validpayload",
       "community": 0,
-      "norm_label": "validpayload()"
+      "norm_label": "validpayload()",
+      "id": "services_purchase_order_service_test_validpayload"
     },
     {
       "label": "mockClient()",
@@ -549,9 +549,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L37",
       "_origin": "ast",
-      "id": "services_purchase_order_service_test_mockclient",
       "community": 0,
-      "norm_label": "mockclient()"
+      "norm_label": "mockclient()",
+      "id": "services_purchase_order_service_test_mockclient"
     },
     {
       "label": "mockDb()",
@@ -559,9 +559,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "services_purchase_order_service_test_mockdb",
       "community": 0,
-      "norm_label": "mockdb()"
+      "norm_label": "mockdb()",
+      "id": "services_purchase_order_service_test_mockdb"
     },
     {
       "label": "happyPathClientResponses()",
@@ -569,9 +569,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L60",
       "_origin": "ast",
-      "id": "services_purchase_order_service_test_happypathclientresponses",
       "community": 0,
-      "norm_label": "happypathclientresponses()"
+      "norm_label": "happypathclientresponses()",
+      "id": "services_purchase_order_service_test_happypathclientresponses"
     },
     {
       "label": "detailQueryResponses()",
@@ -579,9 +579,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L87",
       "_origin": "ast",
-      "id": "services_purchase_order_service_test_detailqueryresponses",
       "community": 0,
-      "norm_label": "detailqueryresponses()"
+      "norm_label": "detailqueryresponses()",
+      "id": "services_purchase_order_service_test_detailqueryresponses"
     },
     {
       "label": "requisition-service.test.js",
@@ -589,9 +589,9 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "services_requisition_service_test",
       "community": 1,
-      "norm_label": "requisition-service.test.js"
+      "norm_label": "requisition-service.test.js",
+      "id": "services_requisition_service_test"
     },
     {
       "label": "mockDb()",
@@ -599,9 +599,9 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "services_requisition_service_test_mockdb",
       "community": 1,
-      "norm_label": "mockdb()"
+      "norm_label": "mockdb()",
+      "id": "services_requisition_service_test_mockdb"
     },
     {
       "label": "00-init-mvp-db.sh",
@@ -613,9 +613,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "id": "init_00_init_mvp_db",
-      "community": 7,
-      "norm_label": "00-init-mvp-db.sh"
+      "community": 8,
+      "norm_label": "00-init-mvp-db.sh",
+      "id": "init_00_init_mvp_db"
     },
     {
       "label": "00-init-mvp-db.sh script",
@@ -627,9 +627,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "id": "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry",
-      "community": 7,
-      "norm_label": "00-init-mvp-db.sh script"
+      "community": 8,
+      "norm_label": "00-init-mvp-db.sh script",
+      "id": "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry"
     },
     {
       "label": "App.vue",
@@ -637,9 +637,9 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "frontend_src_app_vue_src_app",
-      "community": 6,
-      "norm_label": "app.vue"
+      "community": 7,
+      "norm_label": "app.vue",
+      "id": "frontend_src_app_vue_src_app"
     },
     {
       "label": "isRequisitions",
@@ -647,9 +647,9 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "src_app_isrequisitions",
-      "community": 6,
-      "norm_label": "isrequisitions"
+      "community": 7,
+      "norm_label": "isrequisitions",
+      "id": "src_app_isrequisitions"
     },
     {
       "label": "isPurchaseOrders",
@@ -657,9 +657,9 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "src_app_ispurchaseorders",
-      "community": 6,
-      "norm_label": "ispurchaseorders"
+      "community": 7,
+      "norm_label": "ispurchaseorders",
+      "id": "src_app_ispurchaseorders"
     },
     {
       "label": "api.js",
@@ -667,9 +667,9 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_api",
-      "community": 3,
-      "norm_label": "api.js"
+      "community": 4,
+      "norm_label": "api.js",
+      "id": "src_api"
     },
     {
       "label": "apiFetch()",
@@ -677,9 +677,9 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "src_api_apifetch",
-      "community": 3,
-      "norm_label": "apifetch()"
+      "community": 4,
+      "norm_label": "apifetch()",
+      "id": "src_api_apifetch"
     },
     {
       "label": "api",
@@ -687,9 +687,9 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "src_api_api",
-      "community": 3,
-      "norm_label": "api"
+      "community": 4,
+      "norm_label": "api",
+      "id": "src_api_api"
     },
     {
       "label": "POHeaderForm.vue",
@@ -697,9 +697,9 @@
       "source_file": "frontend/src/components/POHeaderForm.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "components_poheaderform",
-      "community": 2,
-      "norm_label": "poheaderform.vue"
+      "community": 4,
+      "norm_label": "poheaderform.vue",
+      "id": "components_poheaderform"
     },
     {
       "label": "POLineAllocationTable.vue",
@@ -707,9 +707,9 @@
       "source_file": "frontend/src/components/POLineAllocationTable.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "components_polineallocationtable",
-      "community": 2,
-      "norm_label": "polineallocationtable.vue"
+      "community": 3,
+      "norm_label": "polineallocationtable.vue",
+      "id": "components_polineallocationtable"
     },
     {
       "label": "main.js",
@@ -717,9 +717,9 @@
       "source_file": "frontend/src/main.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_main",
-      "community": 2,
-      "norm_label": "main.js"
+      "community": 5,
+      "norm_label": "main.js",
+      "id": "src_main"
     },
     {
       "label": "DashboardPage.vue",
@@ -727,9 +727,9 @@
       "source_file": "frontend/src/pages/DashboardPage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pages_dashboardpage",
-      "community": 2,
-      "norm_label": "dashboardpage.vue"
+      "community": 5,
+      "norm_label": "dashboardpage.vue",
+      "id": "pages_dashboardpage"
     },
     {
       "label": "POCreatePage.vue",
@@ -737,9 +737,9 @@
       "source_file": "frontend/src/pages/POCreatePage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pages_pocreatepage",
-      "community": 2,
-      "norm_label": "pocreatepage.vue"
+      "community": 4,
+      "norm_label": "pocreatepage.vue",
+      "id": "pages_pocreatepage"
     },
     {
       "label": "router",
@@ -747,9 +747,9 @@
       "source_file": "frontend/src/pages/POCreatePage.vue",
       "source_location": "L42",
       "_origin": "ast",
-      "id": "pages_pocreatepage_router",
-      "community": 2,
-      "norm_label": "router"
+      "community": 4,
+      "norm_label": "router",
+      "id": "pages_pocreatepage_router"
     },
     {
       "label": "errorMessage",
@@ -757,9 +757,9 @@
       "source_file": "frontend/src/pages/POCreatePage.vue",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "pages_pocreatepage_errormessage",
-      "community": 2,
-      "norm_label": "errormessage"
+      "community": 4,
+      "norm_label": "errormessage",
+      "id": "pages_pocreatepage_errormessage"
     },
     {
       "label": "formData",
@@ -767,9 +767,9 @@
       "source_file": "frontend/src/pages/POCreatePage.vue",
       "source_location": "L45",
       "_origin": "ast",
-      "id": "pages_pocreatepage_formdata",
-      "community": 2,
-      "norm_label": "formdata"
+      "community": 4,
+      "norm_label": "formdata",
+      "id": "pages_pocreatepage_formdata"
     },
     {
       "label": "handleSubmit()",
@@ -777,9 +777,9 @@
       "source_file": "frontend/src/pages/POCreatePage.vue",
       "source_location": "L56",
       "_origin": "ast",
-      "id": "pages_pocreatepage_handlesubmit",
-      "community": 2,
-      "norm_label": "handlesubmit()"
+      "community": 4,
+      "norm_label": "handlesubmit()",
+      "id": "pages_pocreatepage_handlesubmit"
     },
     {
       "label": "POListPage.vue",
@@ -787,9 +787,9 @@
       "source_file": "frontend/src/pages/POListPage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pages_polistpage",
-      "community": 2,
-      "norm_label": "polistpage.vue"
+      "community": 5,
+      "norm_label": "polistpage.vue",
+      "id": "pages_polistpage"
     },
     {
       "label": "RequisitionCreatePage.vue",
@@ -797,9 +797,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage",
-      "community": 3,
-      "norm_label": "requisitioncreatepage.vue"
+      "community": 6,
+      "norm_label": "requisitioncreatepage.vue",
+      "id": "pages_requisitioncreatepage"
     },
     {
       "label": "router",
@@ -807,9 +807,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L98",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_router",
-      "community": 3,
-      "norm_label": "router"
+      "community": 6,
+      "norm_label": "router",
+      "id": "pages_requisitioncreatepage_router"
     },
     {
       "label": "errorMessage",
@@ -817,9 +817,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L99",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_errormessage",
-      "community": 3,
-      "norm_label": "errormessage"
+      "community": 6,
+      "norm_label": "errormessage",
+      "id": "pages_requisitioncreatepage_errormessage"
     },
     {
       "label": "emptyLine()",
@@ -827,9 +827,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L101",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_emptyline",
-      "community": 3,
-      "norm_label": "emptyline()"
+      "community": 6,
+      "norm_label": "emptyline()",
+      "id": "pages_requisitioncreatepage_emptyline"
     },
     {
       "label": "form",
@@ -837,9 +837,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L114",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_form",
-      "community": 3,
-      "norm_label": "form"
+      "community": 6,
+      "norm_label": "form",
+      "id": "pages_requisitioncreatepage_form"
     },
     {
       "label": "addLine()",
@@ -847,9 +847,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L123",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_addline",
-      "community": 3,
-      "norm_label": "addline()"
+      "community": 6,
+      "norm_label": "addline()",
+      "id": "pages_requisitioncreatepage_addline"
     },
     {
       "label": "removeLine()",
@@ -857,9 +857,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L127",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_removeline",
-      "community": 3,
-      "norm_label": "removeline()"
+      "community": 6,
+      "norm_label": "removeline()",
+      "id": "pages_requisitioncreatepage_removeline"
     },
     {
       "label": "handleSubmit()",
@@ -867,9 +867,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L132",
       "_origin": "ast",
-      "id": "pages_requisitioncreatepage_handlesubmit",
-      "community": 3,
-      "norm_label": "handlesubmit()"
+      "community": 6,
+      "norm_label": "handlesubmit()",
+      "id": "pages_requisitioncreatepage_handlesubmit"
     },
     {
       "label": "RequisitionDetailPage.vue",
@@ -877,9 +877,9 @@
       "source_file": "frontend/src/pages/RequisitionDetailPage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pages_requisitiondetailpage",
-      "community": 2,
-      "norm_label": "requisitiondetailpage.vue"
+      "community": 5,
+      "norm_label": "requisitiondetailpage.vue",
+      "id": "pages_requisitiondetailpage"
     },
     {
       "label": "RequisitionListPage.vue",
@@ -887,9 +887,9 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "pages_requisitionlistpage",
-      "community": 3,
-      "norm_label": "requisitionlistpage.vue"
+      "community": 4,
+      "norm_label": "requisitionlistpage.vue",
+      "id": "pages_requisitionlistpage"
     },
     {
       "label": "items",
@@ -897,9 +897,9 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L50",
       "_origin": "ast",
-      "id": "pages_requisitionlistpage_items",
-      "community": 3,
-      "norm_label": "items"
+      "community": 4,
+      "norm_label": "items",
+      "id": "pages_requisitionlistpage_items"
     },
     {
       "label": "errorMessage",
@@ -907,9 +907,9 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "pages_requisitionlistpage_errormessage",
-      "community": 3,
-      "norm_label": "errormessage"
+      "community": 4,
+      "norm_label": "errormessage",
+      "id": "pages_requisitionlistpage_errormessage"
     },
     {
       "label": "index.js",
@@ -917,9 +917,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "router_index",
-      "community": 2,
-      "norm_label": "index.js"
+      "community": 5,
+      "norm_label": "index.js",
+      "id": "router_index"
     },
     {
       "label": "routes",
@@ -927,9 +927,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "router_index_routes",
-      "community": 2,
-      "norm_label": "routes"
+      "community": 5,
+      "norm_label": "routes",
+      "id": "router_index_routes"
     },
     {
       "label": "router",
@@ -937,9 +937,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "router_index_router",
-      "community": 2,
-      "norm_label": "router"
+      "community": 5,
+      "norm_label": "router",
+      "id": "router_index_router"
     },
     {
       "label": "vite.config.js",
@@ -947,9 +947,9 @@
       "source_file": "frontend/vite.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "frontend_vite_config",
-      "community": 10,
-      "norm_label": "vite.config.js"
+      "community": 11,
+      "norm_label": "vite.config.js",
+      "id": "frontend_vite_config"
     },
     {
       "label": "playwright.config.js",
@@ -957,9 +957,9 @@
       "source_file": "playwright.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "playwright_config",
-      "community": 8,
-      "norm_label": "playwright.config.js"
+      "community": 9,
+      "norm_label": "playwright.config.js",
+      "id": "playwright_config"
     },
     {
       "label": "{ defineConfig }",
@@ -967,9 +967,199 @@
       "source_file": "playwright.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "playwright_config_defineconfig",
-      "community": 8,
-      "norm_label": "{ defineconfig }"
+      "community": 9,
+      "norm_label": "{ defineconfig }",
+      "id": "playwright_config_defineconfig"
+    },
+    {
+      "label": "props",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_props",
+      "community": 3,
+      "norm_label": "props"
+    },
+    {
+      "label": "emit",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L129",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_emit",
+      "community": 3,
+      "norm_label": "emit"
+    },
+    {
+      "label": "localAllocations",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_localallocations",
+      "community": 3,
+      "norm_label": "localallocations"
+    },
+    {
+      "label": "validationError",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L132",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_validationerror",
+      "community": 3,
+      "norm_label": "validationerror"
+    },
+    {
+      "label": "prOpenLines",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L133",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_propenlines",
+      "community": 3,
+      "norm_label": "propenlines"
+    },
+    {
+      "label": "loading",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L134",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_loading",
+      "community": 3,
+      "norm_label": "loading"
+    },
+    {
+      "label": "fetchError",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_fetcherror",
+      "community": 3,
+      "norm_label": "fetcherror"
+    },
+    {
+      "label": "loadOpenLines()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L145",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_loadopenlines",
+      "community": 3,
+      "norm_label": "loadopenlines()"
+    },
+    {
+      "label": "hasRemainingLines",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L169",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_hasremaininglines",
+      "community": 3,
+      "norm_label": "hasremaininglines"
+    },
+    {
+      "label": "availableLines()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L174",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_availablelines",
+      "community": 3,
+      "norm_label": "availablelines()"
+    },
+    {
+      "label": "addAllocation()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L184",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_addallocation",
+      "community": 3,
+      "norm_label": "addallocation()"
+    },
+    {
+      "label": "removeAllocation()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L197",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_removeallocation",
+      "community": 3,
+      "norm_label": "removeallocation()"
+    },
+    {
+      "label": "onLineSelect()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L202",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_onlineselect",
+      "community": 3,
+      "norm_label": "onlineselect()"
+    },
+    {
+      "label": "remainingFor()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L220",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_remainingfor",
+      "community": 3,
+      "norm_label": "remainingfor()"
+    },
+    {
+      "label": "validateAllocation()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L236",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_validateallocation",
+      "community": 3,
+      "norm_label": "validateallocation()"
+    },
+    {
+      "label": "validateAllocations()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L259",
+      "_origin": "ast",
+      "id": "components_polineallocationtable_validateallocations",
+      "community": 3,
+      "norm_label": "validateallocations()"
+    },
+    {
+      "label": "submitting",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/POCreatePage.vue",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "pages_pocreatepage_submitting",
+      "community": 4,
+      "norm_label": "submitting"
+    },
+    {
+      "label": "allocationTableRef",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/POCreatePage.vue",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "pages_pocreatepage_allocationtableref",
+      "community": 4,
+      "norm_label": "allocationtableref"
+    },
+    {
+      "label": "PODetailPage.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PODetailPage.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "pages_podetailpage",
+      "community": 5,
+      "norm_label": "podetailpage.vue"
     }
   ],
   "links": [
@@ -980,9 +1170,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "plugins_db",
-      "confidence_score": 1.0
+      "target": "plugins_db"
     },
     {
       "relation": "imports_from",
@@ -991,9 +1181,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "plugins_swagger",
-      "confidence_score": 1.0
+      "target": "plugins_swagger"
     },
     {
       "relation": "imports",
@@ -1002,9 +1192,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "plugins_swagger_swaggerplugin",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_swaggerplugin"
     },
     {
       "relation": "imports_from",
@@ -1013,9 +1203,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "routes_purchase_order_routes",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes"
     },
     {
       "relation": "imports",
@@ -1024,9 +1214,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "routes_purchase_order_routes_purchaseorderroutes",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_purchaseorderroutes"
     },
     {
       "relation": "imports_from",
@@ -1035,9 +1225,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "routes_requisition_routes",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes"
     },
     {
       "relation": "imports",
@@ -1046,9 +1236,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "routes_requisition_routes_requisitionroutes",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_requisitionroutes"
     },
     {
       "relation": "contains",
@@ -1056,9 +1246,9 @@
       "source_file": "backend/src/app.js",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_src_app_js_src_app",
-      "target": "src_app_buildapp",
-      "confidence_score": 1.0
+      "target": "src_app_buildapp"
     },
     {
       "relation": "imports",
@@ -1067,9 +1257,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_server",
-      "target": "src_app_buildapp",
-      "confidence_score": 1.0
+      "target": "src_app_buildapp"
     },
     {
       "relation": "calls",
@@ -1078,9 +1268,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_server_start",
-      "target": "src_app_buildapp",
-      "confidence_score": 1.0
+      "target": "src_app_buildapp"
     },
     {
       "relation": "imports_from",
@@ -1089,9 +1279,9 @@
       "source_file": "backend/src/plugins/db.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_db",
-      "target": "src_config",
-      "confidence_score": 1.0
+      "target": "src_config"
     },
     {
       "relation": "contains",
@@ -1099,9 +1289,9 @@
       "source_file": "backend/src/config.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_config",
-      "target": "src_config_config",
-      "confidence_score": 1.0
+      "target": "src_config_config"
     },
     {
       "relation": "imports_from",
@@ -1110,9 +1300,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_server",
-      "target": "src_config",
-      "confidence_score": 1.0
+      "target": "src_config"
     },
     {
       "relation": "imports",
@@ -1121,9 +1311,9 @@
       "source_file": "backend/src/plugins/db.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_db",
-      "target": "src_config_config",
-      "confidence_score": 1.0
+      "target": "src_config_config"
     },
     {
       "relation": "imports",
@@ -1132,9 +1322,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_server",
-      "target": "src_config_config",
-      "confidence_score": 1.0
+      "target": "src_config_config"
     },
     {
       "relation": "contains",
@@ -1142,9 +1332,9 @@
       "source_file": "backend/src/plugins/db.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_db",
-      "target": "plugins_db_dbplugin",
-      "confidence_score": 1.0
+      "target": "plugins_db_dbplugin"
     },
     {
       "relation": "contains",
@@ -1152,9 +1342,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_swagger",
-      "target": "plugins_swagger_errorresponse",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_errorresponse"
     },
     {
       "relation": "contains",
@@ -1162,9 +1352,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_swagger",
-      "target": "plugins_swagger_poline",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_poline"
     },
     {
       "relation": "contains",
@@ -1172,9 +1362,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_swagger",
-      "target": "plugins_swagger_purchaseorder",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_purchaseorder"
     },
     {
       "relation": "contains",
@@ -1182,9 +1372,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_swagger",
-      "target": "plugins_swagger_requisition",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_requisition"
     },
     {
       "relation": "contains",
@@ -1192,9 +1382,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_swagger",
-      "target": "plugins_swagger_requisitionline",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_requisitionline"
     },
     {
       "relation": "contains",
@@ -1202,9 +1392,9 @@
       "source_file": "backend/src/plugins/swagger.js",
       "source_location": "L95",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "plugins_swagger",
-      "target": "plugins_swagger_swaggerplugin",
-      "confidence_score": 1.0
+      "target": "plugins_swagger_swaggerplugin"
     },
     {
       "relation": "contains",
@@ -1212,59 +1402,59 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "routes_purchase_order_routes_createpurchaseorderschema",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_createpurchaseorderschema"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/routes/purchase-order-routes.js",
-      "source_location": "L39",
+      "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "routes_purchase_order_routes_getpurchaseorderschema",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_getpurchaseorderschema"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/routes/purchase-order-routes.js",
-      "source_location": "L34",
+      "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "routes_purchase_order_routes_listpurchaseordersschema",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_listpurchaseordersschema"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/routes/purchase-order-routes.js",
-      "source_location": "L61",
+      "source_location": "L65",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "routes_purchase_order_routes_openlinesschema",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_openlinesschema"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/routes/purchase-order-routes.js",
-      "source_location": "L72",
+      "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "routes_purchase_order_routes_purchaseorderroutes",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_purchaseorderroutes"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/routes/purchase-order-routes.js",
-      "source_location": "L50",
+      "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "routes_purchase_order_routes_submitpurchaseorderschema",
-      "confidence_score": 1.0
+      "target": "routes_purchase_order_routes_submitpurchaseorderschema"
     },
     {
       "relation": "imports_from",
@@ -1273,9 +1463,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "services_purchase_order_service",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service"
     },
     {
       "relation": "imports",
@@ -1284,9 +1474,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "services_purchase_order_service_createpurchaseorder",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_createpurchaseorder"
     },
     {
       "relation": "imports",
@@ -1295,9 +1485,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "services_purchase_order_service_getopenpolines",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getopenpolines"
     },
     {
       "relation": "imports",
@@ -1306,9 +1496,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "services_purchase_order_service_getpurchaseorderbyid",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getpurchaseorderbyid"
     },
     {
       "relation": "imports",
@@ -1317,9 +1507,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "services_purchase_order_service_listpurchaseorders",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_listpurchaseorders"
     },
     {
       "relation": "imports",
@@ -1328,9 +1518,9 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_purchase_order_routes",
-      "target": "services_purchase_order_service_submitpurchaseorder",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_submitpurchaseorder"
     },
     {
       "relation": "contains",
@@ -1338,9 +1528,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_approverequisitionschema",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_approverequisitionschema"
     },
     {
       "relation": "contains",
@@ -1348,9 +1538,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_createrequisitionschema",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_createrequisitionschema"
     },
     {
       "relation": "contains",
@@ -1358,9 +1548,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_getrequisitionschema",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_getrequisitionschema"
     },
     {
       "relation": "contains",
@@ -1368,9 +1558,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_listrequisitionsschema",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_listrequisitionsschema"
     },
     {
       "relation": "contains",
@@ -1378,9 +1568,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_openlinesschema",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_openlinesschema"
     },
     {
       "relation": "contains",
@@ -1388,9 +1578,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_requisitionroutes",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_requisitionroutes"
     },
     {
       "relation": "contains",
@@ -1398,9 +1588,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "routes_requisition_routes_submitrequisitionschema",
-      "confidence_score": 1.0
+      "target": "routes_requisition_routes_submitrequisitionschema"
     },
     {
       "relation": "imports_from",
@@ -1409,9 +1599,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service",
-      "confidence_score": 1.0
+      "target": "services_requisition_service"
     },
     {
       "relation": "imports",
@@ -1420,9 +1610,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service_approverequisition",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_approverequisition"
     },
     {
       "relation": "imports",
@@ -1431,9 +1621,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service_createrequisition",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_createrequisition"
     },
     {
       "relation": "imports",
@@ -1442,9 +1632,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service_getrequisitionbyid",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionbyid"
     },
     {
       "relation": "imports",
@@ -1453,9 +1643,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service_getrequisitionopenlines",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionopenlines"
     },
     {
       "relation": "imports",
@@ -1464,9 +1654,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service_listrequisitions",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_listrequisitions"
     },
     {
       "relation": "imports",
@@ -1475,9 +1665,9 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_requisition_routes",
-      "target": "services_requisition_service_submitrequisition",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_submitrequisition"
     },
     {
       "relation": "contains",
@@ -1485,9 +1675,9 @@
       "source_file": "backend/src/server.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_server",
-      "target": "src_server_start",
-      "confidence_score": 1.0
+      "target": "src_server_start"
     },
     {
       "relation": "contains",
@@ -1495,9 +1685,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_createponumber",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_createponumber"
     },
     {
       "relation": "contains",
@@ -1505,9 +1695,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_createpurchaseorder",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_createpurchaseorder"
     },
     {
       "relation": "contains",
@@ -1515,9 +1705,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L130",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_getopenpolines",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getopenpolines"
     },
     {
       "relation": "contains",
@@ -1525,9 +1715,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_getpurchaseorderbyid",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getpurchaseorderbyid"
     },
     {
       "relation": "contains",
@@ -1535,9 +1725,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_listpurchaseorders",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_listpurchaseorders"
     },
     {
       "relation": "contains",
@@ -1545,9 +1735,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_mapheader",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_mapheader"
     },
     {
       "relation": "contains",
@@ -1555,9 +1745,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_mapline",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_mapline"
     },
     {
       "relation": "contains",
@@ -1565,9 +1755,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L276",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_submitpurchaseorder",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_submitpurchaseorder"
     },
     {
       "relation": "contains",
@@ -1575,9 +1765,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service",
-      "target": "services_purchase_order_service_validatecreatepayload",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_validatecreatepayload"
     },
     {
       "relation": "imports_from",
@@ -1586,9 +1776,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service"
     },
     {
       "relation": "calls",
@@ -1597,9 +1787,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L125",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_getpurchaseorderbyid",
-      "target": "services_purchase_order_service_mapheader",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_mapheader"
     },
     {
       "relation": "calls",
@@ -1608,9 +1798,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L115",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_getpurchaseorderbyid",
-      "target": "services_purchase_order_service_mapline",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_mapline"
     },
     {
       "relation": "calls",
@@ -1619,9 +1809,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L213",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_createpurchaseorder",
-      "target": "services_purchase_order_service_createponumber",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_createponumber"
     },
     {
       "relation": "calls",
@@ -1630,9 +1820,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L162",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_createpurchaseorder",
-      "target": "services_purchase_order_service_validatecreatepayload",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_validatecreatepayload"
     },
     {
       "relation": "imports",
@@ -1641,9 +1831,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_listpurchaseorders",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_listpurchaseorders"
     },
     {
       "relation": "calls",
@@ -1652,9 +1842,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L265",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_createpurchaseorder",
-      "target": "services_purchase_order_service_getpurchaseorderbyid",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getpurchaseorderbyid"
     },
     {
       "relation": "calls",
@@ -1663,9 +1853,9 @@
       "source_file": "backend/src/services/purchase-order-service.js",
       "source_location": "L299",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_submitpurchaseorder",
-      "target": "services_purchase_order_service_getpurchaseorderbyid",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getpurchaseorderbyid"
     },
     {
       "relation": "imports",
@@ -1674,9 +1864,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_getopenpolines",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_getopenpolines"
     },
     {
       "relation": "imports",
@@ -1685,9 +1875,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_createpurchaseorder",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_createpurchaseorder"
     },
     {
       "relation": "imports",
@@ -1696,9 +1886,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_submitpurchaseorder",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_submitpurchaseorder"
     },
     {
       "relation": "contains",
@@ -1706,9 +1896,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L225",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_approverequisition",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_approverequisition"
     },
     {
       "relation": "contains",
@@ -1716,9 +1906,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_createprnumber",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_createprnumber"
     },
     {
       "relation": "contains",
@@ -1726,9 +1916,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_createrequisition",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_createrequisition"
     },
     {
       "relation": "contains",
@@ -1736,9 +1926,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_getrequisitionbyid",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionbyid"
     },
     {
       "relation": "contains",
@@ -1746,9 +1936,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_getrequisitionopenlines",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionopenlines"
     },
     {
       "relation": "contains",
@@ -1756,9 +1946,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_listrequisitions",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_listrequisitions"
     },
     {
       "relation": "contains",
@@ -1766,9 +1956,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_mapheader",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_mapheader"
     },
     {
       "relation": "contains",
@@ -1776,9 +1966,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_mapline",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_mapline"
     },
     {
       "relation": "contains",
@@ -1786,9 +1976,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_submitrequisition",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_submitrequisition"
     },
     {
       "relation": "contains",
@@ -1796,9 +1986,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service",
-      "target": "services_requisition_service_validatecreatepayload",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_validatecreatepayload"
     },
     {
       "relation": "imports_from",
@@ -1807,9 +1997,9 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_test",
-      "target": "services_requisition_service",
-      "confidence_score": 1.0
+      "target": "services_requisition_service"
     },
     {
       "relation": "calls",
@@ -1818,9 +2008,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_getrequisitionbyid",
-      "target": "services_requisition_service_mapheader",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_mapheader"
     },
     {
       "relation": "calls",
@@ -1829,9 +2019,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_createrequisition",
-      "target": "services_requisition_service_createprnumber",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_createprnumber"
     },
     {
       "relation": "imports",
@@ -1840,9 +2030,9 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_test",
-      "target": "services_requisition_service_listrequisitions",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_listrequisitions"
     },
     {
       "relation": "calls",
@@ -1851,9 +2041,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L249",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_approverequisition",
-      "target": "services_requisition_service_getrequisitionbyid",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionbyid"
     },
     {
       "relation": "calls",
@@ -1862,9 +2052,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L195",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_createrequisition",
-      "target": "services_requisition_service_getrequisitionbyid",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionbyid"
     },
     {
       "relation": "calls",
@@ -1873,9 +2063,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L222",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_submitrequisition",
-      "target": "services_requisition_service_getrequisitionbyid",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionbyid"
     },
     {
       "relation": "imports",
@@ -1884,9 +2074,9 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_test",
-      "target": "services_requisition_service_getrequisitionopenlines",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_getrequisitionopenlines"
     },
     {
       "relation": "calls",
@@ -1895,9 +2085,9 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L135",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_createrequisition",
-      "target": "services_requisition_service_validatecreatepayload",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_validatecreatepayload"
     },
     {
       "relation": "contains",
@@ -1905,9 +2095,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_test_detailqueryresponses",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_test_detailqueryresponses"
     },
     {
       "relation": "contains",
@@ -1915,9 +2105,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_test_happypathclientresponses",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_test_happypathclientresponses"
     },
     {
       "relation": "contains",
@@ -1925,9 +2115,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_test_mockclient",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_test_mockclient"
     },
     {
       "relation": "contains",
@@ -1935,9 +2125,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_test_mockdb",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_test_mockdb"
     },
     {
       "relation": "contains",
@@ -1945,9 +2135,9 @@
       "source_file": "backend/tests/services/purchase-order-service.test.js",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_purchase_order_service_test",
-      "target": "services_purchase_order_service_test_validpayload",
-      "confidence_score": 1.0
+      "target": "services_purchase_order_service_test_validpayload"
     },
     {
       "relation": "contains",
@@ -1955,9 +2145,9 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_requisition_service_test",
-      "target": "services_requisition_service_test_mockdb",
-      "confidence_score": 1.0
+      "target": "services_requisition_service_test_mockdb"
     },
     {
       "relation": "contains",
@@ -1965,9 +2155,9 @@
       "source_file": "docker/postgres/init/00-init-mvp-db.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "init_00_init_mvp_db",
-      "target": "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry",
-      "confidence_score": 1.0
+      "target": "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry"
     },
     {
       "relation": "contains",
@@ -1975,9 +2165,9 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_app_vue_src_app",
-      "target": "src_app_ispurchaseorders",
-      "confidence_score": 1.0
+      "target": "src_app_ispurchaseorders"
     },
     {
       "relation": "contains",
@@ -1985,9 +2175,9 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_app_vue_src_app",
-      "target": "src_app_isrequisitions",
-      "confidence_score": 1.0
+      "target": "src_app_isrequisitions"
     },
     {
       "relation": "imports_from",
@@ -1996,9 +2186,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -2007,9 +2197,9 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitionlistpage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "contains",
@@ -2017,9 +2207,9 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_api",
-      "confidence_score": 1.0
+      "target": "src_api_api"
     },
     {
       "relation": "contains",
@@ -2027,8 +2217,30 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_apifetch",
+      "target": "src_api_apifetch"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "src_api_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/POCreatePage.vue",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "pages_pocreatepage",
+      "target": "src_api_api",
       "confidence_score": 1.0
     },
     {
@@ -2038,9 +2250,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "src_api_api",
-      "confidence_score": 1.0
+      "target": "src_api_api"
     },
     {
       "relation": "imports",
@@ -2049,8 +2261,179 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitionlistpage",
-      "target": "src_api_api",
+      "target": "src_api_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/POCreatePage.vue",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_pocreatepage",
+      "target": "components_poheaderform"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L184",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_addallocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L174",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_availablelines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L129",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_emit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_fetcherror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_hasremaininglines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L134",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_loading",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_loadopenlines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_localallocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L202",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_onlineselect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_propenlines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L220",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_remainingfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L197",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_removeallocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L236",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_validateallocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L259",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_validateallocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L132",
+      "weight": 1.0,
+      "source": "components_polineallocationtable",
+      "target": "components_polineallocationtable_validationerror",
       "confidence_score": 1.0
     },
     {
@@ -2058,22 +2441,11 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/POCreatePage.vue",
-      "source_location": "L39",
+      "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_pocreatepage",
-      "target": "components_poheaderform",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "frontend/src/pages/POCreatePage.vue",
-      "source_location": "L40",
-      "weight": 1.0,
-      "source": "pages_pocreatepage",
-      "target": "components_polineallocationtable",
-      "confidence_score": 1.0
+      "target": "components_polineallocationtable"
     },
     {
       "relation": "imports_from",
@@ -2082,9 +2454,9 @@
       "source_file": "frontend/src/main.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_main",
-      "target": "router_index",
-      "confidence_score": 1.0
+      "target": "router_index"
     },
     {
       "relation": "imports",
@@ -2093,9 +2465,9 @@
       "source_file": "frontend/src/main.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_main",
-      "target": "router_index_router",
-      "confidence_score": 1.0
+      "target": "router_index_router"
     },
     {
       "relation": "imports_from",
@@ -2104,48 +2476,68 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "pages_dashboardpage",
+      "target": "pages_dashboardpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/POCreatePage.vue",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "pages_pocreatepage",
+      "target": "pages_pocreatepage_allocationtableref",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/POCreatePage.vue",
-      "source_location": "L43",
+      "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_pocreatepage",
-      "target": "pages_pocreatepage_errormessage",
-      "confidence_score": 1.0
+      "target": "pages_pocreatepage_errormessage"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/POCreatePage.vue",
-      "source_location": "L45",
+      "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_pocreatepage",
-      "target": "pages_pocreatepage_formdata",
-      "confidence_score": 1.0
+      "target": "pages_pocreatepage_formdata"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/POCreatePage.vue",
-      "source_location": "L56",
+      "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_pocreatepage",
-      "target": "pages_pocreatepage_handlesubmit",
-      "confidence_score": 1.0
+      "target": "pages_pocreatepage_handlesubmit"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/POCreatePage.vue",
-      "source_location": "L42",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_pocreatepage",
+      "target": "pages_pocreatepage_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/POCreatePage.vue",
+      "source_location": "L48",
       "weight": 1.0,
       "source": "pages_pocreatepage",
-      "target": "pages_pocreatepage_router",
+      "target": "pages_pocreatepage_submitting",
       "confidence_score": 1.0
     },
     {
@@ -2155,9 +2547,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "pages_pocreatepage",
-      "confidence_score": 1.0
+      "target": "pages_pocreatepage"
     },
     {
       "relation": "imports_from",
@@ -2166,9 +2558,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "pages_polistpage",
-      "confidence_score": 1.0
+      "target": "pages_polistpage"
     },
     {
       "relation": "contains",
@@ -2176,9 +2568,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L123",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_addline",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_addline"
     },
     {
       "relation": "contains",
@@ -2186,9 +2578,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_emptyline",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_emptyline"
     },
     {
       "relation": "contains",
@@ -2196,9 +2588,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L99",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_errormessage",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_errormessage"
     },
     {
       "relation": "contains",
@@ -2206,9 +2598,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L114",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_form",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_form"
     },
     {
       "relation": "contains",
@@ -2216,9 +2608,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L132",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_handlesubmit",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_handlesubmit"
     },
     {
       "relation": "contains",
@@ -2226,9 +2618,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L127",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_removeline",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_removeline"
     },
     {
       "relation": "contains",
@@ -2236,9 +2628,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L98",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage",
-      "target": "pages_requisitioncreatepage_router",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_router"
     },
     {
       "relation": "imports_from",
@@ -2247,9 +2639,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "pages_requisitioncreatepage",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage"
     },
     {
       "relation": "calls",
@@ -2258,9 +2650,9 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L124",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitioncreatepage_addline",
-      "target": "pages_requisitioncreatepage_emptyline",
-      "confidence_score": 1.0
+      "target": "pages_requisitioncreatepage_emptyline"
     },
     {
       "relation": "imports_from",
@@ -2269,9 +2661,9 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "pages_requisitiondetailpage",
-      "confidence_score": 1.0
+      "target": "pages_requisitiondetailpage"
     },
     {
       "relation": "contains",
@@ -2279,9 +2671,9 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitionlistpage",
-      "target": "pages_requisitionlistpage_errormessage",
-      "confidence_score": 1.0
+      "target": "pages_requisitionlistpage_errormessage"
     },
     {
       "relation": "contains",
@@ -2289,9 +2681,9 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_requisitionlistpage",
-      "target": "pages_requisitionlistpage_items",
-      "confidence_score": 1.0
+      "target": "pages_requisitionlistpage_items"
     },
     {
       "relation": "imports_from",
@@ -2300,29 +2692,40 @@
       "source_file": "frontend/src/router/index.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "pages_requisitionlistpage",
+      "target": "pages_requisitionlistpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/router/index.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "router_index",
+      "target": "pages_podetailpage",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/router/index.js",
-      "source_location": "L18",
+      "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "router_index_router",
-      "confidence_score": 1.0
+      "target": "router_index_router"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/router/index.js",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "router_index",
-      "target": "router_index_routes",
-      "confidence_score": 1.0
+      "target": "router_index_routes"
     },
     {
       "relation": "contains",
@@ -2330,11 +2733,55 @@
       "source_file": "playwright.config.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "playwright_config",
-      "target": "playwright_config_defineconfig",
+      "target": "playwright_config_defineconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "components_polineallocationtable_loadopenlines",
+      "target": "components_polineallocationtable_emit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L216",
+      "weight": 1.0,
+      "source": "components_polineallocationtable_onlineselect",
+      "target": "components_polineallocationtable_validateallocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L250",
+      "weight": 1.0,
+      "source": "components_polineallocationtable_validateallocation",
+      "target": "components_polineallocationtable_remainingfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/POLineAllocationTable.vue",
+      "source_location": "L266",
+      "weight": 1.0,
+      "source": "components_polineallocationtable_validateallocations",
+      "target": "components_polineallocationtable_validateallocation",
       "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "19a616fa4bed1300f44f8c2f73ed127fac26b184"
+  "built_at_commit": "562f0c0b0e6031dbf1503b8b3b046e3b72a8b935"
 }

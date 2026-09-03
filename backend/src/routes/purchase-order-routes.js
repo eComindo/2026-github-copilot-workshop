@@ -11,19 +11,23 @@ const createPurchaseOrderSchema = {
   tags: ['Purchase Orders'],
   body: {
     type: 'object',
-    required: ['vendor_name', 'lines'],
+    required: ['vendorName', 'lines'],
     properties: {
-      vendor_name: { type: 'string' },
+      vendorName: { type: 'string' },
       lines: {
         type: 'array',
         minItems: 1,
         items: {
           type: 'object',
-          required: ['pr_line_id', 'allocated_qty', 'unit_price'],
           properties: {
-            pr_line_id: { type: 'string', format: 'uuid' },
-            allocated_qty: { type: 'number', minimum: 0.01 },
-            unit_price: { type: 'number', minimum: 0 },
+            prLineId: { type: 'string', format: 'uuid' },
+            itemCode: { type: 'string' },
+            itemName: { type: 'string' },
+            qtyOrdered: { type: 'number' },
+            unitPrice: { type: 'number' },
+            uom: { type: 'string' },
+            siteCode: { type: 'string' },
+            requiredDate: { type: 'string', format: 'date', nullable: true },
           },
         },
       },

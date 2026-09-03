@@ -25,9 +25,9 @@
     "semantic_hash": "905bd5439a3ab2e30c705f8593ca8a95"
   },
   "backend/src/routes/purchase-order-routes.js": {
-    "mtime": 1788392174.9571261,
-    "ast_hash": "76d14a672ae2b1b10b6e848bbc639815",
-    "semantic_hash": "76d14a672ae2b1b10b6e848bbc639815"
+    "mtime": 1788403193.3138518,
+    "ast_hash": "a4da6c78cbf07c98ece2ff69241feb70",
+    "semantic_hash": "a4da6c78cbf07c98ece2ff69241feb70"
   },
   "backend/src/routes/requisition-routes.js": {
     "mtime": 1788392171.5667405,
@@ -85,14 +85,14 @@
     "semantic_hash": "e85a6407b47d82807f5aa886b967b4e7"
   },
   "frontend/src/components/POHeaderForm.vue": {
-    "mtime": 1788392427.4389212,
-    "ast_hash": "2f3e0ce3800c92482d0e22f8a1c2556c",
-    "semantic_hash": "2f3e0ce3800c92482d0e22f8a1c2556c"
+    "mtime": 1788403193.301718,
+    "ast_hash": "2f523d37d43a11900cef75d32b3d523d",
+    "semantic_hash": "2f523d37d43a11900cef75d32b3d523d"
   },
   "frontend/src/components/POLineAllocationTable.vue": {
-    "mtime": 1788392427.438963,
-    "ast_hash": "c8acacc5363bf100c159544b07127de3",
-    "semantic_hash": "c8acacc5363bf100c159544b07127de3"
+    "mtime": 1788403193.3017857,
+    "ast_hash": "6449d812aa8ae38a667526c710368748",
+    "semantic_hash": "6449d812aa8ae38a667526c710368748"
   },
   "frontend/src/main.js": {
     "mtime": 1772615059.6808026,
@@ -105,14 +105,14 @@
     "semantic_hash": "c846ce9eda3c414126ad13a998010adc"
   },
   "frontend/src/pages/POCreatePage.vue": {
-    "mtime": 1788392427.4389496,
-    "ast_hash": "a6757319248e87b28340c90d3ed49e74",
-    "semantic_hash": "a6757319248e87b28340c90d3ed49e74"
+    "mtime": 1788403193.3017776,
+    "ast_hash": "6c7889a154a37f6e51b9b87a333051b5",
+    "semantic_hash": "6c7889a154a37f6e51b9b87a333051b5"
   },
   "frontend/src/pages/POListPage.vue": {
-    "mtime": 1788392427.4484367,
-    "ast_hash": "c7d7a495cc42dd09abe18f51242383da",
-    "semantic_hash": "c7d7a495cc42dd09abe18f51242383da"
+    "mtime": 1788404174.4972765,
+    "ast_hash": "97509b0d79c43ad8cb65fa354a9e7310",
+    "semantic_hash": "97509b0d79c43ad8cb65fa354a9e7310"
   },
   "frontend/src/pages/RequisitionCreatePage.vue": {
     "mtime": 1772615059.683183,
@@ -130,9 +130,9 @@
     "semantic_hash": "a6a73a39bcefeb790dd812000218875d"
   },
   "frontend/src/router/index.js": {
-    "mtime": 1788392427.4389427,
-    "ast_hash": "6223bde35c586c9ce176ebb44ddccd52",
-    "semantic_hash": "6223bde35c586c9ce176ebb44ddccd52"
+    "mtime": 1788404174.5156446,
+    "ast_hash": "b81c2e3e0a4965b01c63ee2dee39ee3a",
+    "semantic_hash": "b81c2e3e0a4965b01c63ee2dee39ee3a"
   },
   "frontend/vite.config.js": {
     "mtime": 1788334658.4429965,
@@ -143,5 +143,10 @@
     "mtime": 1772615059.690933,
     "ast_hash": "1dff95dba3fb3a024ea7b63de0b61920",
     "semantic_hash": "1dff95dba3fb3a024ea7b63de0b61920"
+  },
+  "frontend/src/pages/PODetailPage.vue": {
+    "mtime": 1788404174.4972644,
+    "ast_hash": "256c241e682585f569b025b12dd875e8",
+    "semantic_hash": "256c241e682585f569b025b12dd875e8"
   }
 }

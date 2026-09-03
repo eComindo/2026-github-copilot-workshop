@@ -47,39 +47,9 @@
       "services_requisition_service_validatecreatepayload"
     ],
     "2": [
-      "components_poheaderform",
-      "components_polineallocationtable",
-      "pages_dashboardpage",
-      "pages_pocreatepage",
-      "pages_pocreatepage_errormessage",
-      "pages_pocreatepage_formdata",
-      "pages_pocreatepage_handlesubmit",
-      "pages_pocreatepage_router",
-      "pages_polistpage",
-      "pages_requisitiondetailpage",
-      "router_index",
-      "router_index_router",
-      "router_index_routes",
-      "src_main"
-    ],
-    "3": [
-      "pages_requisitioncreatepage",
-      "pages_requisitioncreatepage_addline",
-      "pages_requisitioncreatepage_emptyline",
-      "pages_requisitioncreatepage_errormessage",
-      "pages_requisitioncreatepage_form",
-      "pages_requisitioncreatepage_handlesubmit",
-      "pages_requisitioncreatepage_removeline",
-      "pages_requisitioncreatepage_router",
-      "pages_requisitionlistpage",
-      "pages_requisitionlistpage_errormessage",
-      "pages_requisitionlistpage_items",
-      "src_api",
-      "src_api_api",
-      "src_api_apifetch"
-    ],
-    "4": [
       "backend_src_app_js_src_app",
+      "plugins_db",
+      "plugins_db_dbplugin",
       "plugins_swagger",
       "plugins_swagger_errorresponse",
       "plugins_swagger_poline",
@@ -88,49 +58,101 @@
       "plugins_swagger_requisitionline",
       "plugins_swagger_swaggerplugin",
       "routes_purchase_order_routes_purchaseorderroutes",
-      "routes_requisition_routes_requisitionroutes"
-    ],
-    "5": [
-      "plugins_db",
-      "plugins_db_dbplugin",
+      "routes_requisition_routes_requisitionroutes",
       "src_app_buildapp",
       "src_config",
       "src_config_config",
       "src_server",
       "src_server_start"
     ],
+    "3": [
+      "components_polineallocationtable",
+      "components_polineallocationtable_addallocation",
+      "components_polineallocationtable_availablelines",
+      "components_polineallocationtable_emit",
+      "components_polineallocationtable_fetcherror",
+      "components_polineallocationtable_hasremaininglines",
+      "components_polineallocationtable_loading",
+      "components_polineallocationtable_loadopenlines",
+      "components_polineallocationtable_localallocations",
+      "components_polineallocationtable_onlineselect",
+      "components_polineallocationtable_propenlines",
+      "components_polineallocationtable_props",
+      "components_polineallocationtable_remainingfor",
+      "components_polineallocationtable_removeallocation",
+      "components_polineallocationtable_validateallocation",
+      "components_polineallocationtable_validateallocations",
+      "components_polineallocationtable_validationerror"
+    ],
+    "4": [
+      "components_poheaderform",
+      "pages_pocreatepage",
+      "pages_pocreatepage_allocationtableref",
+      "pages_pocreatepage_errormessage",
+      "pages_pocreatepage_formdata",
+      "pages_pocreatepage_handlesubmit",
+      "pages_pocreatepage_router",
+      "pages_pocreatepage_submitting",
+      "pages_requisitionlistpage",
+      "pages_requisitionlistpage_errormessage",
+      "pages_requisitionlistpage_items",
+      "src_api",
+      "src_api_api",
+      "src_api_apifetch"
+    ],
+    "5": [
+      "pages_dashboardpage",
+      "pages_podetailpage",
+      "pages_polistpage",
+      "pages_requisitiondetailpage",
+      "router_index",
+      "router_index_router",
+      "router_index_routes",
+      "src_main"
+    ],
     "6": [
+      "pages_requisitioncreatepage",
+      "pages_requisitioncreatepage_addline",
+      "pages_requisitioncreatepage_emptyline",
+      "pages_requisitioncreatepage_errormessage",
+      "pages_requisitioncreatepage_form",
+      "pages_requisitioncreatepage_handlesubmit",
+      "pages_requisitioncreatepage_removeline",
+      "pages_requisitioncreatepage_router"
+    ],
+    "7": [
       "frontend_src_app_vue_src_app",
       "src_app_ispurchaseorders",
       "src_app_isrequisitions"
     ],
-    "7": [
+    "8": [
       "init_00_init_mvp_db",
       "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry"
     ],
-    "8": [
+    "9": [
       "playwright_config",
       "playwright_config_defineconfig"
     ],
-    "9": [
+    "10": [
       "backend_jest_config"
     ],
-    "10": [
+    "11": [
       "frontend_vite_config"
     ]
   },
   "cohesion": {
     "0": 0.15584415584415584,
     "1": 0.1736842105263158,
-    "2": 0.15384615384615385,
-    "3": 0.17582417582417584,
-    "4": 0.2222222222222222,
-    "5": 0.42857142857142855,
-    "6": 0.6666666666666666,
-    "7": 1.0,
+    "2": 0.15441176470588236,
+    "3": 0.14705882352941177,
+    "4": 0.15384615384615385,
+    "5": 0.2857142857142857,
+    "6": 0.2857142857142857,
+    "7": 0.6666666666666666,
     "8": 1.0,
     "9": 1.0,
-    "10": 1.0
+    "10": 1.0,
+    "11": 1.0
   },
   "gods": [
     {
@@ -154,8 +176,18 @@
       "degree": 5
     },
     {
+      "id": "src_api_api",
+      "label": "api",
+      "degree": 5
+    },
+    {
       "id": "services_purchase_order_service_submitpurchaseorder",
       "label": "submitPurchaseOrder()",
+      "degree": 4
+    },
+    {
+      "id": "components_polineallocationtable_validateallocation",
+      "label": "validateAllocation()",
       "degree": 4
     },
     {
@@ -171,16 +203,6 @@
     {
       "id": "services_purchase_order_service_listpurchaseorders",
       "label": "listPurchaseOrders()",
-      "degree": 3
-    },
-    {
-      "id": "services_purchase_order_service_getopenpolines",
-      "label": "getOpenPoLines()",
-      "degree": 3
-    },
-    {
-      "id": "services_requisition_service_listrequisitions",
-      "label": "listRequisitions()",
       "degree": 3
     }
   ],

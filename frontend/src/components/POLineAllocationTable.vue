@@ -6,7 +6,7 @@
         type="button"
         class="btn btn-outline"
         @click="addAllocation"
-        :disabled="!prId"
+        :disabled="!prId || !hasRemainingLines"
       >
         + New Allocation
       </button>
@@ -14,6 +14,11 @@
 
     <p v-if="!prId" class="muted" style="margin: 12px 0 0 0">
       Select a PR first to add allocations
+    </p>
+    <p v-else-if="loading" class="muted" style="margin: 12px 0 0 0">Loading open PR lines...</p>
+    <p v-else-if="fetchError" class="error" style="margin: 12px 0 0 0">{{ fetchError }}</p>
+    <p v-else-if="prOpenLines.length === 0" class="muted" style="margin: 12px 0 0 0">
+      No open lines available for allocation on this PR
     </p>
 
     <table v-if="localAllocations.length > 0">
@@ -33,7 +38,16 @@
         <tr v-for="(allocation, index) in localAllocations" :key="index">
           <td>{{ index + 1 }}</td>
           <td>
-            <span class="text-muted">{{ allocation.itemCode }}</span>
+            <select v-model="allocation.prLineId" @change="onLineSelect(index)">
+              <option value="">-- Select item --</option>
+              <option
+                v-for="line in availableLines(index)"
+                :key="line.id"
+                :value="line.id"
+              >
+                {{ line.itemCode }} (rem {{ line.qtyOpenForPo }})
+              </option>
+            </select>
           </td>
           <td>
             <span class="text-muted">{{ allocation.itemName }}</span>
@@ -98,7 +112,8 @@
 </template>
 
 <script setup>
-import { watch, reactive, ref } from 'vue';
+import { watch, reactive, ref, computed } from 'vue';
+import { api } from '../api';
 
 const props = defineProps({
   modelValue: {
@@ -115,6 +130,9 @@ const emit = defineEmits(['update:modelValue', 'error']);
 
 const localAllocations = reactive([...props.modelValue]);
 const validationError = ref('');
+const prOpenLines = ref([]);
+const loading = ref(false);
+const fetchError = ref('');
 
 watch(
   localAllocations,
@@ -124,23 +142,55 @@ watch(
   { deep: true }
 );
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    if (newVal !== localAllocations) {
-      Object.assign(localAllocations, newVal);
-    }
+const loadOpenLines = async (prId) => {
+  prOpenLines.value = [];
+  fetchError.value = '';
+  validationError.value = '';
+  localAllocations.splice(0, localAllocations.length);
+
+  if (!prId) {
+    return;
   }
-);
+
+  loading.value = true;
+  try {
+    const data = await api.getRequisitionOpenLines(prId);
+    prOpenLines.value = data.openLines || [];
+  } catch (err) {
+    fetchError.value = err.message;
+    emit('error', err.message);
+  } finally {
+    loading.value = false;
+  }
+};
+
+watch(() => props.prId, (newPrId) => loadOpenLines(newPrId), { immediate: true });
+
+const hasRemainingLines = computed(() => {
+  const used = localAllocations.map((a) => a.prLineId).filter(Boolean);
+  return prOpenLines.value.some((line) => !used.includes(line.id));
+});
+
+const availableLines = (index) => {
+  const usedElsewhere = localAllocations
+    .filter((_, i) => i !== index)
+    .map((a) => a.prLineId)
+    .filter(Boolean);
+  return prOpenLines.value.filter(
+    (line) => !usedElsewhere.includes(line.id) || line.id === localAllocations[index].prLineId
+  );
+};
 
 const addAllocation = () => {
   localAllocations.push({
+    prLineId: '',
     itemCode: '',
     itemName: '',
     allocateQty: 0,
     uom: '',
     unitPrice: 0,
-    prLineId: null,
+    siteCode: '',
+    requiredDate: null,
   });
 };
 
@@ -149,20 +199,79 @@ const removeAllocation = (index) => {
   validationError.value = '';
 };
 
+const onLineSelect = (index) => {
+  const row = localAllocations[index];
+  const line = prOpenLines.value.find((l) => l.id === row.prLineId);
+  if (!line) {
+    return;
+  }
+
+  row.itemCode = line.itemCode;
+  row.itemName = line.itemName;
+  row.uom = line.uom;
+  row.unitPrice = line.estUnitPrice;
+  row.siteCode = line.siteCode;
+  row.requiredDate = line.requiredDate;
+  row.allocateQty = 0;
+  validateAllocation(index);
+};
+
+// Remaining qty for a PR line, minus what other rows already allocate against it.
+const remainingFor = (prLineId, currentIndex) => {
+  const line = prOpenLines.value.find((l) => l.id === prLineId);
+  if (!line) {
+    return 0;
+  }
+
+  const consumedByOthers = localAllocations.reduce((sum, a, i) => {
+    if (i !== currentIndex && a.prLineId === prLineId) {
+      return sum + (Number(a.allocateQty) || 0);
+    }
+    return sum;
+  }, 0);
+
+  return Number(line.qtyOpenForPo) - consumedByOthers;
+};
+
 const validateAllocation = (index) => {
   const allocation = localAllocations[index];
   validationError.value = '';
 
-  if (allocation.allocateQty <= 0) {
+  if (!allocation.prLineId) {
+    validationError.value = 'Select a PR line for this allocation';
+    return false;
+  }
+
+  if (!allocation.allocateQty || allocation.allocateQty <= 0) {
     validationError.value = 'Allocation quantity must be greater than 0';
     return false;
   }
 
-  // TODO: Validate against PR line remaining qty
-  // This will be checked when calling API
+  const remaining = remainingFor(allocation.prLineId, index);
+  if (allocation.allocateQty > remaining) {
+    validationError.value = `Allocate qty ${allocation.allocateQty} exceeds remaining ${remaining} for ${allocation.itemCode}`;
+    return false;
+  }
 
   return true;
 };
+
+const validateAllocations = () => {
+  if (localAllocations.length === 0) {
+    validationError.value = 'Add at least one line allocation';
+    return false;
+  }
+
+  for (let i = 0; i < localAllocations.length; i++) {
+    if (!validateAllocation(i)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+defineExpose({ validateAllocations });
 </script>
 
 <style scoped>
@@ -222,6 +331,21 @@ input[type='number'] {
 }
 
 input[type='number']:focus {
+  border-color: var(--primary);
+}
+
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  font-family: inherit;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+select:focus {
   border-color: var(--primary);
 }
 
