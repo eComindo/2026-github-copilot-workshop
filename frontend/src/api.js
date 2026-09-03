@@ -1,6 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
-async function apiFetch(path, options = {}) {
+export async function apiFetch(path, options = {}) {
   const headers = { ...(options.headers || {}) };
   if (options.body) {
     headers['Content-Type'] = 'application/json';
@@ -16,7 +16,10 @@ async function apiFetch(path, options = {}) {
 
   if (!response.ok) {
     const message = data?.message || `Request failed: ${response.status}`;
-    throw new Error(message);
+    const error = new Error(message);
+    error.statusCode = response.status;
+    error.payload = data;
+    throw error;
   }
 
   return data;
@@ -51,4 +54,16 @@ export const api = {
       method: 'POST',
     }),
   getRequisitionOpenLines: (id) => apiFetch(`/api/requisitions/${id}/open-lines`),
+  listPurchaseOrders: () => apiFetch('/api/purchase-orders'),
+  createPurchaseOrder: (payload) =>
+    apiFetch('/api/purchase-orders', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  getPurchaseOrder: (id) => apiFetch(`/api/purchase-orders/${id}`),
+  submitPurchaseOrder: (id) =>
+    apiFetch(`/api/purchase-orders/${id}/submit`, {
+      method: 'POST',
+    }),
+  getPurchaseOrderOpenLines: (id) => apiFetch(`/api/purchase-orders/${id}/open-lines`),
 };
