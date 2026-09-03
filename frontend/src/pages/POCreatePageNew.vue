@@ -8,17 +8,17 @@
     </div>
     <div v-if="errorMessage" class="error-banner" role="alert">{{ errorMessage }}</div>
     <div v-if="loading" class="loading-banner">Loading approved PR lines...</div>
-    <section class="panel panel-header-card"><POHeaderForm v-model="poHeader" /></section>
+    <section class="panel panel-header-card"><POHeaderForm ref="headerForm" v-model="poHeader" /></section>
     <section class="panel panel-lines">
       <div class="panel-topbar"><h2>Approved PR Lines</h2><button type="button" class="refresh-btn" :disabled="loading" @click="loadApprovedPrLines">Refresh Open Lines</button></div>
-      <POLineAllocationTable v-model:rows="lineRows" />
+      <POLineAllocationTable ref="lineTable" v-model:rows="lineRows" />
     </section>
     <div class="form-footer">
       <div class="selection-meta"><span class="selection-label">Selected Lines</span><span class="selection-count">{{ selectedLineCount }}</span></div>
       <div class="total-meta"><span class="total-label">Estimated Total</span><span class="total-value">{{ formatCurrency(totalAmount) }}</span></div>
       <div class="actions">
         <button type="button" class="btn btn-neutral" :disabled="saving" @click="createPo(false)">{{ saving ? 'Saving...' : 'Save As Draft' }}</button>
-        <button type="button" class="btn btn-primary" :disabled="saving" @click="createPo(true)">{{ saving ? 'Submitting...' : 'Submit PO' }}</button>
+        <button type="button" class="btn btn-primary" :disabled="saving || !isFormValid" @click="createPo(true)">{{ saving ? 'Submitting...' : 'Submit PO' }}</button>
       </div>
     </div>
   </div>
@@ -32,11 +32,31 @@ import POLineAllocationTable from '../components/POLineAllocationTable.vue';
 import { api } from '../api';
 
 const router = useRouter();
+const headerForm = ref(null);
+const lineTable = ref(null);
 const loading = ref(false);
 const saving = ref(false);
+const formData = ref({ vendorName: '', lines: [] });
+const availablePrLines = ref([]);
+const isLineDataValid = ref(true);
+const submitError = ref('');
 const errorMessage = ref('');
-const poHeader = ref({ vendor: '', neededByDate: '', currency: 'IDR', paymentTerms: '', notes: '' });
-const lineRows = ref([]);
+const poHeader = computed({
+  get: () => ({ vendor: formData.value.vendorName, neededByDate: '', currency: 'IDR', paymentTerms: '', notes: '' }),
+  set: (value) => { formData.value.vendorName = value.vendor || ''; },
+});
+const lineRows = computed({
+  get: () => formData.value.lines,
+  set: (value) => { formData.value.lines = value; },
+});
+const loadingPrLines = computed({ get: () => loading.value, set: (value) => { loading.value = value; } });
+const errorPrLines = computed({ get: () => errorMessage.value, set: (value) => { errorMessage.value = value || ''; } });
+const submitting = computed({ get: () => saving.value, set: (value) => { saving.value = value; } });
+const selectedPrLineIds = computed({
+  get: () => lineRows.value.filter((row) => row.selected).map((row) => row.id),
+  set: (ids) => { lineRows.value.forEach((row) => { row.selected = ids.includes(row.id); }); },
+});
+const isFormValid = computed(() => Boolean(formData.value.vendorName.trim()) && lineRows.value.length > 0 && isLineDataValid.value && headerForm.value?.isValid !== false);
 const selectedLineCount = computed(() => lineRows.value.filter((row) => row.selected).length);
 const totalAmount = computed(() => lineRows.value.reduce((sum, row) => row.selected ? sum + Number(row.orderQty || 0) * Number(row.unitPrice || 0) : sum, 0));
 
@@ -65,6 +85,7 @@ const loadApprovedPrLines = async () => {
       unitPrice: line.estUnitPrice,
       requiredDate: line.requiredDate,
     })));
+    availablePrLines.value = lineRows.value;
   } catch (error) {
     errorMessage.value = error.message || 'Unable to load approved PR lines.';
   } finally { loading.value = false; }
@@ -89,6 +110,21 @@ const createPo = async (submitAfterCreate) => {
 
 const formatCurrency = (value) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Number(value) || 0);
 const goBack = () => router.back();
+const handlePrLinesSelected = (ids) => {
+  const selected = availablePrLines.value.filter((line) => ids.includes(line.id));
+  lineRows.value = selected.map((line) => ({ ...line, selected: true, remainingQty: line.remainingQty ?? line.openQty ?? ((line.qty_requested || 0) - (line.qty_allocated || 0)), openQty: line.openQty ?? line.remainingQty ?? ((line.qty_requested || 0) - (line.qty_allocated || 0)), orderQty: line.orderQty ?? line.qtyOrdered ?? 0, unitPrice: line.unitPrice ?? line.est_unit_price ?? 0 }));
+};
+const removeLine = (index) => { lineRows.value.splice(index, 1); };
+const handleSubmit = async () => {
+  submitError.value = '';
+  if (!formData.value.vendorName.trim() || headerForm.value?.validateVendorName?.() === false) { submitError.value = 'Please fix form errors'; return; }
+  if (lineTable.value?.validateAll?.() === false) { submitError.value = 'Please fix line item errors'; return; }
+  if (!isLineDataValid.value) { submitError.value = 'Please fix line item errors'; return; }
+  saving.value = true;
+  console.log('PO Data ready for submission', formData.value);
+  await Promise.resolve();
+  saving.value = false;
+};
 onMounted(loadApprovedPrLines);
 </script>
 

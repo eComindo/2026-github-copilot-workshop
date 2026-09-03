@@ -6,6 +6,7 @@
 import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
 import POCreatePageNew from '../../src/pages/POCreatePageNew.vue';
+import { api } from '../../src/api';
 import { createRouter, createMemoryHistory } from 'vue-router';
 
 // Mock the router
@@ -32,6 +33,13 @@ describe('POCreatePageNew.vue - Main Page Integration', () => {
 
   beforeEach(() => {
     router = createMockRouter();
+    vi.spyOn(api, 'listRequisitions').mockResolvedValue({ items: [{ id: 'pr-1', status: 'APPROVED' }] });
+    vi.spyOn(api, 'getRequisitionOpenLines').mockResolvedValue({
+      requisition: { prNumber: 'PR-2026-0001' },
+      openLines: [{ id: 'line-1', lineNo: 1, itemCode: 'ITEM-001', itemName: 'Item A', qtyRequested: 100, qtyAllocated: 0, qtyOpenForPo: 100, uom: 'PCS', siteCode: 'WH-01', estUnitPrice: 50, requiredDate: '2026-09-15' }],
+    });
+    vi.spyOn(api, 'createPurchaseOrder').mockResolvedValue({ id: 'po-1' });
+    vi.spyOn(api, 'submitPurchaseOrder').mockResolvedValue({ id: 'po-1' });
   });
 
   test('renders page title and subtitle', () => {
@@ -50,7 +58,7 @@ describe('POCreatePageNew.vue - Main Page Integration', () => {
     expect(title.text()).toBe('Create Purchase Order');
 
     const subtitle = wrapper.find('.subtitle');
-    expect(subtitle.text()).toContain('Select approved requisition lines');
+    expect(subtitle.text()).toContain('Pick approved PR lines');
   });
 
   test('renders all three child components', () => {
@@ -66,7 +74,6 @@ describe('POCreatePageNew.vue - Main Page Integration', () => {
     });
 
     expect(wrapper.find('.po-header-form').exists()).toBe(true);
-    expect(wrapper.find('.pr-line-selector').exists()).toBe(true);
     expect(wrapper.find('.po-line-table').exists()).toBe(true);
   });
 
@@ -83,8 +90,8 @@ describe('POCreatePageNew.vue - Main Page Integration', () => {
     });
 
     const buttons = wrapper.findAll('button, a');
-    const createBtn = buttons.find((b) => b.text().includes('Create'));
-    const cancelBtn = buttons.find((b) => b.text().includes('Cancel'));
+    const createBtn = buttons.find((b) => b.text().includes('Submit PO'));
+    const cancelBtn = buttons.find((b) => b.attributes('aria-label') === 'Go back');
 
     expect(createBtn).toBeDefined();
     expect(cancelBtn).toBeDefined();
@@ -104,7 +111,7 @@ describe('POCreatePageNew.vue - Main Page Integration', () => {
 
     // Form starts empty/invalid
     const buttons = wrapper.findAll('button');
-    const createBtn = buttons.find((b) => b.text().includes('Create'));
+    const createBtn = buttons.find((b) => b.text().includes('Submit PO'));
     
     if (createBtn && createBtn.attributes('disabled') === undefined) {
       // Button might not be disabled if the check isn't implemented

@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -60,6 +60,12 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'update:vendor-name']);
 const vendorError = ref(null);
+const localVendor = ref(props.vendorName || props.modelValue?.vendor || '');
+
+watch(() => props.vendorName, (value) => { localVendor.value = value || ''; });
+watch(() => props.modelValue?.vendor, (value) => {
+  if (!props.vendorName) localVendor.value = value || '';
+});
 
 const form = computed({
   get: () => props.modelValue,
@@ -67,8 +73,9 @@ const form = computed({
 });
 
 const vendorValue = computed({
-  get: () => props.vendorName || props.modelValue?.vendor || '',
+  get: () => localVendor.value,
   set: (value) => {
+    localVendor.value = value;
     vendorError.value = null;
     emit('update:modelValue', { ...props.modelValue, vendor: value });
     emit('update:vendor-name', value);
