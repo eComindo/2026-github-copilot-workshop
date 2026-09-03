@@ -60,11 +60,11 @@ function validateCreatePayload(payload) {
       return `lines[${i}] itemCode, itemName, uom, and siteCode are required`;
     }
 
-    if (!Number(line.qtyOrdered) || Number(line.qtyOrdered) <= 0) {
+    if (!Number.isFinite(Number(line.qtyOrdered)) || Number(line.qtyOrdered) <= 0) {
       return `lines[${i}].qtyOrdered must be greater than 0`;
     }
 
-    if (Number(line.unitPrice) < 0) {
+    if (!Number.isFinite(Number(line.unitPrice)) || Number(line.unitPrice) < 0) {
       return `lines[${i}].unitPrice must be greater than or equal to 0`;
     }
   }
@@ -170,9 +170,21 @@ export async function createPurchaseOrder(db, payload) {
   try {
     await client.query('BEGIN');
 
-    // Lock and validate every referenced PR line
+    // Aggregate duplicate PR line references so one request cannot bypass
+    // the remaining quantity check by splitting an allocation across rows.
+    const requestedByPrLine = new Map();
     for (let i = 0; i < payload.lines.length; i++) {
       const line = payload.lines[i];
+      const requested = requestedByPrLine.get(line.prLineId) || { quantity: 0, index: i };
+      requestedByPrLine.set(line.prLineId, {
+        quantity: requested.quantity + Number(line.qtyOrdered),
+        index: requested.index,
+      });
+    }
+
+    // Lock and validate every referenced PR line
+    for (const [prLineId, allocation] of requestedByPrLine) {
+      const requestedQty = allocation.quantity;
 
       // Lock the PR line row to prevent concurrent over-allocation
       const prLineResult = await client.query(
@@ -181,11 +193,11 @@ export async function createPurchaseOrder(db, payload) {
          JOIN purchase_requisitions pr ON pr.id = pl.pr_id
          WHERE pl.id = $1
          FOR UPDATE`,
-        [line.prLineId]
+        [prLineId]
       );
 
       if (prLineResult.rowCount === 0) {
-        const err = new Error(`lines[${i}]: PR line not found`);
+        const err = new Error(`lines[${allocation.index}]: PR line not found`);
         err.statusCode = 422;
         throw err;
       }
@@ -193,15 +205,15 @@ export async function createPurchaseOrder(db, payload) {
       const prLine = prLineResult.rows[0];
 
       if (prLine.pr_status !== 'APPROVED') {
-        const err = new Error(`lines[${i}]: PR must be APPROVED before allocation`);
+        const err = new Error(`lines[${allocation.index}]: PR must be APPROVED before allocation`);
         err.statusCode = 422;
         throw err;
       }
 
       const remaining = Number(prLine.qty_requested) - Number(prLine.qty_allocated);
-      if (Number(line.qtyOrdered) > remaining) {
+      if (requestedQty > remaining) {
         const err = new Error(
-          `lines[${i}]: allocation qty ${line.qtyOrdered} exceeds remaining ${remaining}`
+          `lines[${allocation.index}]: allocation qty ${requestedQty} exceeds remaining ${remaining}`
         );
         err.statusCode = 422;
         throw err;
