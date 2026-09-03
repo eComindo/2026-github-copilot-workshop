@@ -3,12 +3,16 @@ import DashboardPage from '../pages/DashboardPage.vue';
 import RequisitionListPage from '../pages/RequisitionListPage.vue';
 import RequisitionCreatePage from '../pages/RequisitionCreatePage.vue';
 import RequisitionDetailPage from '../pages/RequisitionDetailPage.vue';
+import POListPage from '../pages/POListPage.vue';
+import POCreatePage from '../pages/POCreatePage.vue';
 
 const routes = [
   { path: '/', name: 'dashboard', component: DashboardPage },
   { path: '/requisitions', name: 'requisitions-list', component: RequisitionListPage },
   { path: '/requisitions/new', name: 'requisitions-create', component: RequisitionCreatePage },
   { path: '/requisitions/:id', name: 'requisitions-detail', component: RequisitionDetailPage, props: true },
+  { path: '/purchase-orders', name: 'purchase-orders-list', component: POListPage },
+  { path: '/purchase-orders/new', name: 'purchase-orders-create', component: POCreatePage },
 ];
 
 const router = createRouter({

@@ -6,13 +6,76 @@ import {
   submitPurchaseOrder,
 } from '../services/purchase-order-service.js';
 
+const createPurchaseOrderSchema = {
+  description: 'Create a new purchase order',
+  tags: ['Purchase Orders'],
+  body: {
+    type: 'object',
+    required: ['vendor_name', 'lines'],
+    properties: {
+      vendor_name: { type: 'string' },
+      lines: {
+        type: 'array',
+        minItems: 1,
+        items: {
+          type: 'object',
+          required: ['pr_line_id', 'allocated_qty', 'unit_price'],
+          properties: {
+            pr_line_id: { type: 'string', format: 'uuid' },
+            allocated_qty: { type: 'number', minimum: 0.01 },
+            unit_price: { type: 'number', minimum: 0 },
+          },
+        },
+      },
+    },
+  },
+};
+
+const listPurchaseOrdersSchema = {
+  description: 'List all purchase orders',
+  tags: ['Purchase Orders'],
+};
+
+const getPurchaseOrderSchema = {
+  description: 'Get a purchase order by ID',
+  tags: ['Purchase Orders'],
+  params: {
+    type: 'object',
+    properties: {
+      id: { type: 'string', format: 'uuid' },
+    },
+  },
+};
+
+const submitPurchaseOrderSchema = {
+  description: 'Submit a purchase order',
+  tags: ['Purchase Orders'],
+  params: {
+    type: 'object',
+    properties: {
+      id: { type: 'string', format: 'uuid' },
+    },
+  },
+};
+
+const openLinesSchema = {
+  description: 'Get open lines for a purchase order',
+  tags: ['Purchase Orders'],
+  params: {
+    type: 'object',
+    properties: {
+      id: { type: 'string', format: 'uuid' },
+    },
+  },
+};
+
 export default async function purchaseOrderRoutes(fastify) {
-  fastify.get('/api/purchase-orders', async (request, reply) => {
+  fastify.get('/api/purchase-orders', { schema: listPurchaseOrdersSchema }, async (request, reply) => {
     const items = await listPurchaseOrders(fastify.db);
     return { items };
   });
 
-  fastify.post('/api/purchase-orders', async (request, reply) => {
+  fastify.post('/api/purchase-orders', { schema: createPurchaseOrderSchema }, async (request, reply) => {
     try {
       const purchaseOrder = await createPurchaseOrder(fastify.db, request.body);
       reply.code(201);
@@ -27,7 +90,7 @@ export default async function purchaseOrderRoutes(fastify) {
     }
   });
 
-  fastify.post('/api/purchase-orders/:id/submit', async (request, reply) => {
+  fastify.post('/api/purchase-orders/:id/submit', { schema: submitPurchaseOrderSchema }, async (request, reply) => {
     try {
       const purchaseOrder = await submitPurchaseOrder(fastify.db, request.params.id);
       if (!purchaseOrder) {
@@ -46,7 +109,7 @@ export default async function purchaseOrderRoutes(fastify) {
     }
   });
 
-  fastify.get('/api/purchase-orders/:id', async (request, reply) => {
+  fastify.get('/api/purchase-orders/:id', { schema: getPurchaseOrderSchema }, async (request, reply) => {
     const purchaseOrder = await getPurchaseOrderById(fastify.db, request.params.id);
     if (!purchaseOrder) {
       reply.code(404);
@@ -56,7 +119,7 @@ export default async function purchaseOrderRoutes(fastify) {
     return purchaseOrder;
   });
 
-  fastify.get('/api/purchase-orders/:id/open-lines', async (request, reply) => {
+  fastify.get('/api/purchase-orders/:id/open-lines', { schema: openLinesSchema }, async (request, reply) => {
     const payload = await getOpenPoLines(fastify.db, request.params.id);
     if (!payload) {
       reply.code(404);

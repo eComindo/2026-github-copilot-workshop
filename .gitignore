@@ -17,3 +17,5 @@ frontend/coverage/
 coverage-final.json
 clover.xml
 *.tsbuildinfo
+
+graphify-out/cache/
