@@ -17,7 +17,18 @@
   background: var(--bg);
 }
 
+[data-theme="dark"] {
+  --bg: #121212;
+  --white: #1e1e1e;
+  --text: #eeeeee;
+  --text-muted: #aaaaaa;
+  --border: #333333;
+  --table-header: #2a2a2a;
+}
+
 * { box-sizing: border-box; }
+html { color-scheme: light dark; }
+html[data-theme="dark"] { color-scheme: dark; }
 body { margin: 0; }
 a { color: var(--primary); text-decoration: none; }
 
@@ -333,6 +344,10 @@ td a {
 .status-badge.draft { background: #f3f3f3; color: #888; }
 .status-badge.submitted { background: #fff3e0; color: #e65100; }
 .status-badge.approved { background: #e8f5e9; color: #2e7d32; }
+
+[data-theme="dark"] .status-badge.draft { background: #3a3a3a; color: #bbbbbb; }
+[data-theme="dark"] .status-badge.submitted { background: #4a3b20; color: #ffcc80; }
+[data-theme="dark"] .status-badge.approved { background: #234323; color: #a5d6a7; }
 
 /* ===== Utility ===== */
 .muted { color: var(--text-muted); font-size: 13px; }
