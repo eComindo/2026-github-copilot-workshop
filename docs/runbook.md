@@ -5,11 +5,11 @@ canonical scope is in [plan.md](./plan.md).
 
 ## Scope Guardrails
 
-- [ ] Treat Home/Dashboard and the Purchase Requisition (PR) module as the provided baseline.
-- [ ] Implement only the PO module: list, create, detail, APIs, and validations.
-- [ ] Do not implement Goods Receipt (GR) during the workshop.
-- [ ] Keep route handlers thin; put PO rules in the PO service.
-- [ ] Do not add enterprise features such as SSO, workflow engines, reporting, or notifications.
+- [x] Treat Home/Dashboard and the Purchase Requisition (PR) module as the provided baseline.
+- [x] Implement only the PO module: list, create, detail, APIs, and validations.
+- [x] Do not implement Goods Receipt (GR) during the workshop.
+- [x] Keep route handlers thin; put PO rules in the PO service.
+- [x] Do not add enterprise features such as SSO, workflow engines, reporting, or notifications.
 
 ## 1. Prepare the Workspace
 
@@ -59,61 +59,66 @@ canonical scope is in [plan.md](./plan.md).
 
 ## 2. Confirm the PO Contract
 
-- [ ] Add or retain `GET /api/purchase-orders` for the PO list page.
-- [ ] Implement `POST /api/purchase-orders`.
-- [ ] Implement `POST /api/purchase-orders/:id/submit`.
-- [ ] Implement `GET /api/purchase-orders/:id`.
-- [ ] Implement `GET /api/purchase-orders/:id/open-lines`.
-- [ ] Return `404` when a requested PO does not exist.
-- [ ] Return `422` with a clear message for invalid PO requests or transitions.
+- [x] Add or retain `GET /api/purchase-orders` for the PO list page.
+- [x] Implement `POST /api/purchase-orders`.
+- [x] Implement `POST /api/purchase-orders/:id/submit`.
+- [x] Implement `GET /api/purchase-orders/:id`.
+- [x] Implement `GET /api/purchase-orders/:id/open-lines`.
+- [x] Return `404` when a requested PO does not exist.
+- [x] Return `422` with a clear message for invalid PO requests or transitions.
 
 ### Create Request Requirements
 
-- [ ] Require a non-empty `vendorName`.
-- [ ] Require at least one line.
-- [ ] For every line, require `prLineId`, `itemCode`, `itemName`, `uom`, and `siteCode`.
-- [ ] Require `qtyOrdered > 0`.
-- [ ] Require `unitPrice >= 0`.
-- [ ] Accept `requiredDate` as optional.
+- [x] Require a non-empty `vendorName`.
+- [x] Require at least one line.
+- [x] For every line, require `prLineId`, `itemCode`, `itemName`, `uom`, and `siteCode`.
+- [x] Require `qtyOrdered > 0`.
+- [x] Require `unitPrice >= 0`.
+- [x] Accept `requiredDate` as optional.
 
 ## 3. Implement PO Business Rules
 
-- [ ] Create each PO in `DRAFT` status.
-- [ ] Allow allocation only from an `APPROVED` PR line.
-- [ ] Calculate PR remaining quantity as `qty_requested - qty_allocated`.
-- [ ] Reject an allocation when `qtyOrdered` exceeds the PR line's remaining quantity.
-- [ ] Lock every referenced PR line and validate all lines in one database transaction.
-- [ ] Create one `po_lines` record per request line.
-- [ ] Create one `pr_line_allocations` record per PO line.
-- [ ] Increment `pr_lines.qty_allocated` by the allocated quantity in the same transaction.
-- [ ] Roll back the full transaction if any line fails validation.
-- [ ] Permit only the `DRAFT -> SUBMITTED` PO status transition.
-- [ ] Return only lines where `qty_ordered - qty_received > 0` from the PO open-lines endpoint.
+- [x] Create each PO in `DRAFT` status.
+- [x] Allow allocation only from an `APPROVED` PR line.
+- [x] Calculate PR remaining quantity as `qty_requested - qty_allocated`.
+- [x] Reject an allocation when `qtyOrdered` exceeds the PR line's remaining quantity, including combined allocations for the same PR line in one request.
+- [x] Lock every referenced PR line and validate all lines in one database transaction.
+- [x] Create one `po_lines` record per request line.
+- [x] Create one `pr_line_allocations` record per PO line.
+- [x] Increment `pr_lines.qty_allocated` by the allocated quantity in the same transaction.
+- [x] Roll back the full transaction if any line fails validation.
+- [x] Permit only the `DRAFT -> SUBMITTED` PO status transition.
+- [x] Return only lines where `qty_ordered - qty_received > 0` from the PO open-lines endpoint.
 
 ## 4. Build the PO UI
 
-- [ ] Add a PO list page using `GET /api/purchase-orders`.
-- [ ] Add a PO create page that uses approved PR open lines as allocation sources.
-- [ ] Show the PR line's remaining quantity before allocation.
-- [ ] Prevent obviously invalid quantities in the form, while retaining server-side validation.
-- [ ] Add a PO detail page showing header, lines, allocations, status, and open quantity.
-- [ ] Add a submit action visible only for DRAFT POs.
-- [ ] Surface API validation messages to the user.
-- [ ] Follow existing baseline navigation, layout, CSS variables, and component patterns.
+- [x] Add a PO list page using `GET /api/purchase-orders`.
+- [x] Add a PO create page that uses approved PR open lines as allocation sources.
+- [x] Show the PR line's remaining quantity before allocation.
+- [x] Prevent obviously invalid quantities in the form, while retaining server-side validation.
+- [x] Add a PO detail page showing header, lines, allocations, status, and open quantity.
+- [x] Add a submit action visible only for DRAFT POs.
+- [x] Surface API validation messages to the user.
+- [x] Follow existing baseline navigation, layout, CSS variables, and component patterns.
 
 ## 5. Validate the Delivery
 
-- [ ] Run unit tests:
+- [x] Run focused PO unit tests:
 
   ```bash
   npm run test:backend
   npm run test:frontend
   ```
 
-- [ ] Add Jest coverage for:
-  - [ ] allocation greater than the PR line remaining quantity is rejected;
-  - [ ] allocation equal to the remaining quantity is allowed;
-  - [ ] submitting a non-DRAFT PO is rejected.
+- [x] Add Jest coverage for:
+  - [x] allocation greater than the PR line remaining quantity is rejected;
+  - [x] allocation equal to the remaining quantity is allowed;
+  - [x] submitting a non-DRAFT PO is rejected.
+
+- [x] Add Vitest coverage for:
+  - [x] PO creation request mapping and client-side allocation validation;
+  - [x] PO list loading and error handling;
+  - [x] PO detail loading and draft submission.
 
 - [ ] Add a Playwright test for:
   - [ ] seeded approved PR line;
@@ -121,7 +126,7 @@ canonical scope is in [plan.md](./plan.md).
   - [ ] PO submission;
   - [ ] PO detail assertions.
 
-- [ ] Run the end-to-end suite with the app and database running:
+- [ ] Run the end-to-end suite with the app and database running after adding a PO E2E specification:
 
   ```bash
   npm run test:e2e
@@ -132,11 +137,11 @@ canonical scope is in [plan.md](./plan.md).
 ## 6. Review and Handoff
 
 - [ ] Confirm the Dashboard and PR baseline still work.
-- [ ] Confirm no GR implementation was added.
-- [ ] Review changed files for focused PO-only scope.
+- [x] Confirm no GR implementation was added.
+- [x] Review changed files for focused PO-only scope.
 - [ ] Open a pull request and request a Copilot review.
 - [ ] Create a GitHub Issue for the optional bookmark exercise; do not include it in the PO backlog.
-- [ ] Demo: approved PR line -> PO create -> PO submit -> PO detail.
+- [x] Demo flow is available: approved PR line -> PO create -> PO submit -> PO detail.
 
 ## Troubleshooting
 

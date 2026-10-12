@@ -24,11 +24,22 @@
         <tbody>
           <tr v-for="(line, index) in lines" :key="line.key">
             <td>{{ index + 1 }}</td>
-            <td><input v-model="line.prNumber" placeholder="PR-0001" /></td>
-            <td><input v-model="line.prLineNo" type="number" min="1" /></td>
-            <td><input v-model="line.itemCode" placeholder="Type..." /></td>
-            <td><input v-model="line.itemName" placeholder="Type..." /></td>
-            <td><input v-model="line.uom" placeholder="PCS" /></td>
+            <td>
+              <select
+                :value="line.prLineId"
+                required
+                @change="$emit('select-line', index, $event.target.value)"
+              >
+                <option value="">Select PR line</option>
+                <option v-for="source in availableLines" :key="source.id" :value="source.id">
+                  {{ source.prNumber }} / Line {{ source.lineNo }}
+                </option>
+              </select>
+            </td>
+            <td>{{ line.prLineNo || '-' }}</td>
+            <td><input :value="line.itemCode" placeholder="Type..." readonly /></td>
+            <td><input :value="line.itemName" placeholder="Type..." readonly /></td>
+            <td><input :value="line.uom" placeholder="PCS" readonly /></td>
             <td>{{ line.remainingQty }}</td>
             <td>
               <input
@@ -67,9 +78,13 @@ defineProps({
     type: Array,
     required: true,
   },
+  availableLines: {
+    type: Array,
+    default: () => [],
+  },
 });
 
-defineEmits(['add-line', 'remove-line']);
+defineEmits(['add-line', 'remove-line', 'select-line']);
 </script>
 
 <style scoped>
@@ -85,7 +100,8 @@ table {
   min-width: 1080px;
 }
 
-table input {
+table input,
+table select {
   width: 100%;
   padding: 8px;
   border: 1px solid var(--border);
@@ -94,7 +110,8 @@ table input {
   font-size: 13px;
 }
 
-table input:focus {
+table input:focus,
+table select:focus {
   border-color: var(--primary);
   outline: none;
 }

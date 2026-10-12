@@ -9,7 +9,7 @@
       "source_file": "backend/jest.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 8,
+      "community": 15,
       "norm_label": "jest.config.js",
       "id": "backend_jest_config"
     },
@@ -19,7 +19,7 @@
       "source_file": "backend/src/app.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 0,
       "norm_label": "app.js",
       "id": "backend_src_app_js_src_app"
     },
@@ -89,7 +89,7 @@
       "source_file": "backend/src/routes/purchase-order-routes.js",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 3,
+      "community": 0,
       "norm_label": "purchaseorderroutes()",
       "id": "routes_purchase_order_routes_purchaseorderroutes"
     },
@@ -99,7 +99,7 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "requisition-routes.js",
       "id": "routes_requisition_routes"
     },
@@ -109,7 +109,7 @@
       "source_file": "backend/src/routes/requisition-routes.js",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 3,
+      "community": 0,
       "norm_label": "requisitionroutes()",
       "id": "routes_requisition_routes_requisitionroutes"
     },
@@ -239,7 +239,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "requisition-service.js",
       "id": "services_requisition_service"
     },
@@ -249,7 +249,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "mapheader()",
       "id": "services_requisition_service_mapheader"
     },
@@ -259,7 +259,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "mapline()",
       "id": "services_requisition_service_mapline"
     },
@@ -269,7 +269,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "createprnumber()",
       "id": "services_requisition_service_createprnumber"
     },
@@ -279,7 +279,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "listrequisitions()",
       "id": "services_requisition_service_listrequisitions"
     },
@@ -289,7 +289,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "getrequisitionbyid()",
       "id": "services_requisition_service_getrequisitionbyid"
     },
@@ -299,7 +299,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L72",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "getrequisitionopenlines()",
       "id": "services_requisition_service_getrequisitionopenlines"
     },
@@ -309,7 +309,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L101",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "validatecreatepayload()",
       "id": "services_requisition_service_validatecreatepayload"
     },
@@ -319,7 +319,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L134",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "createrequisition()",
       "id": "services_requisition_service_createrequisition"
     },
@@ -329,7 +329,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L198",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "submitrequisition()",
       "id": "services_requisition_service_submitrequisition"
     },
@@ -339,7 +339,7 @@
       "source_file": "backend/src/services/requisition-service.js",
       "source_location": "L225",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "approverequisition()",
       "id": "services_requisition_service_approverequisition"
     },
@@ -409,7 +409,7 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "requisition-service.test.js",
       "id": "services_requisition_service_test"
     },
@@ -419,7 +419,7 @@
       "source_file": "backend/tests/services/requisition-service.test.js",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "mockdb()",
       "id": "services_requisition_service_test_mockdb"
     },
@@ -433,7 +433,7 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 6,
+      "community": 12,
       "norm_label": "00-init-mvp-db.sh",
       "id": "init_00_init_mvp_db"
     },
@@ -447,7 +447,7 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 6,
+      "community": 12,
       "norm_label": "00-init-mvp-db.sh script",
       "id": "users_arie_workspace_ecom_copilot_workshops_sample_repos_001_core_procurement_system_docker_postgres_init_00_init_mvp_db_sh__entry"
     },
@@ -457,7 +457,7 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "norm_label": "app.vue",
       "id": "frontend_src_app_vue_src_app"
     },
@@ -467,7 +467,7 @@
       "source_file": "frontend/src/App.vue",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "norm_label": "isrequisitions",
       "id": "src_app_isrequisitions"
     },
@@ -477,7 +477,7 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 5,
       "norm_label": "api.js",
       "id": "src_api"
     },
@@ -487,7 +487,7 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 1,
+      "community": 5,
       "norm_label": "apifetch()",
       "id": "src_api_apifetch"
     },
@@ -497,7 +497,7 @@
       "source_file": "frontend/src/api.js",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 1,
+      "community": 5,
       "norm_label": "api",
       "id": "src_api_api"
     },
@@ -527,7 +527,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "requisitioncreatepage.vue",
       "id": "pages_requisitioncreatepage"
     },
@@ -537,7 +537,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L98",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "router",
       "id": "pages_requisitioncreatepage_router"
     },
@@ -547,7 +547,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L99",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "errormessage",
       "id": "pages_requisitioncreatepage_errormessage"
     },
@@ -557,7 +557,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L101",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "emptyline()",
       "id": "pages_requisitioncreatepage_emptyline"
     },
@@ -567,7 +567,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L114",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "form",
       "id": "pages_requisitioncreatepage_form"
     },
@@ -577,7 +577,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L123",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "addline()",
       "id": "pages_requisitioncreatepage_addline"
     },
@@ -587,7 +587,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L127",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "removeline()",
       "id": "pages_requisitioncreatepage_removeline"
     },
@@ -597,7 +597,7 @@
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L132",
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "norm_label": "handlesubmit()",
       "id": "pages_requisitioncreatepage_handlesubmit"
     },
@@ -617,7 +617,7 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 10,
       "norm_label": "requisitionlistpage.vue",
       "id": "pages_requisitionlistpage"
     },
@@ -627,7 +627,7 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 1,
+      "community": 10,
       "norm_label": "items",
       "id": "pages_requisitionlistpage_items"
     },
@@ -637,7 +637,7 @@
       "source_file": "frontend/src/pages/RequisitionListPage.vue",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 1,
+      "community": 10,
       "norm_label": "errormessage",
       "id": "pages_requisitionlistpage_errormessage"
     },
@@ -677,7 +677,7 @@
       "source_file": "frontend/vite.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 16,
       "norm_label": "vite.config.js",
       "id": "frontend_vite_config"
     },
@@ -687,7 +687,7 @@
       "source_file": "playwright.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 14,
       "norm_label": "playwright.config.js",
       "id": "playwright_config"
     },
@@ -697,9 +697,229 @@
       "source_file": "playwright.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 14,
       "norm_label": "{ defineconfig }",
       "id": "playwright_config_defineconfig"
+    },
+    {
+      "label": "App.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/App.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "app.vue",
+      "id": "src_app"
+    },
+    {
+      "label": "isPurchaseOrders",
+      "file_type": "code",
+      "source_file": "frontend/src/App.vue",
+      "source_location": "L25",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "ispurchaseorders",
+      "id": "src_app_ispurchaseorders"
+    },
+    {
+      "label": "PurchaseOrderHeaderForm.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/components/purchase-orders/PurchaseOrderHeaderForm.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "purchaseorderheaderform.vue",
+      "id": "purchase_orders_purchaseorderheaderform"
+    },
+    {
+      "label": "PurchaseOrderLineAllocationTable.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 11,
+      "norm_label": "purchaseorderlineallocationtable.test.js",
+      "id": "purchase_orders_purchaseorderlineallocationtable_test"
+    },
+    {
+      "label": "line",
+      "file_type": "code",
+      "source_file": "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.test.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 11,
+      "norm_label": "line",
+      "id": "purchase_orders_purchaseorderlineallocationtable_test_line"
+    },
+    {
+      "label": "PurchaseOrderLineAllocationTable.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 11,
+      "norm_label": "purchaseorderlineallocationtable.vue",
+      "id": "purchase_orders_purchaseorderlineallocationtable"
+    },
+    {
+      "label": "DashboardPage.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/DashboardPage.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "dashboardpage.test.js",
+      "id": "pages_dashboardpage_test"
+    },
+    {
+      "label": "PurchaseOrderCreatePage.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "purchaseordercreatepage.test.js",
+      "id": "pages_purchaseordercreatepage_test"
+    },
+    {
+      "label": "{ push }",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "{ push }",
+      "id": "pages_purchaseordercreatepage_test_push"
+    },
+    {
+      "label": "mountPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L23",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "mountpage()",
+      "id": "pages_purchaseordercreatepage_test_mountpage"
+    },
+    {
+      "label": "PurchaseOrderCreatePage.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "purchaseordercreatepage.vue",
+      "id": "pages_purchaseordercreatepage"
+    },
+    {
+      "label": "PurchaseOrderDetailPage.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "purchaseorderdetailpage.test.js",
+      "id": "pages_purchaseorderdetailpage_test"
+    },
+    {
+      "label": "purchaseOrder",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L18",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "purchaseorder",
+      "id": "pages_purchaseorderdetailpage_test_purchaseorder"
+    },
+    {
+      "label": "mountPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L40",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "mountpage()",
+      "id": "pages_purchaseorderdetailpage_test_mountpage"
+    },
+    {
+      "label": "PurchaseOrderDetailPage.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "purchaseorderdetailpage.vue",
+      "id": "pages_purchaseorderdetailpage"
+    },
+    {
+      "label": "PurchaseOrderListPage.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 9,
+      "norm_label": "purchaseorderlistpage.test.js",
+      "id": "pages_purchaseorderlistpage_test"
+    },
+    {
+      "label": "mountPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.test.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 9,
+      "norm_label": "mountpage()",
+      "id": "pages_purchaseorderlistpage_test_mountpage"
+    },
+    {
+      "label": "PurchaseOrderListPage.vue",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.vue",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 9,
+      "norm_label": "purchaseorderlistpage.vue",
+      "id": "pages_purchaseorderlistpage"
+    },
+    {
+      "label": "RequisitionCreatePage.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/RequisitionCreatePage.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 13,
+      "norm_label": "requisitioncreatepage.test.js",
+      "id": "pages_requisitioncreatepage_test"
+    },
+    {
+      "label": "mountPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/RequisitionCreatePage.test.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 13,
+      "norm_label": "mountpage()",
+      "id": "pages_requisitioncreatepage_test_mountpage"
+    },
+    {
+      "label": "RequisitionListPage.test.js",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/RequisitionListPage.test.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "requisitionlistpage.test.js",
+      "id": "pages_requisitionlistpage_test"
+    },
+    {
+      "label": "mountPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/RequisitionListPage.test.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "mountpage()",
+      "id": "pages_requisitionlistpage_test_mountpage"
     }
   ],
   "links": [
@@ -1101,7 +1321,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/services/purchase-order-service.js",
-      "source_location": "L276",
+      "source_location": "L279",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_purchase_order_service",
@@ -1155,7 +1375,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/services/purchase-order-service.js",
-      "source_location": "L213",
+      "source_location": "L216",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_purchase_order_service_createpurchaseorder",
@@ -1188,7 +1408,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/services/purchase-order-service.js",
-      "source_location": "L265",
+      "source_location": "L268",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_purchase_order_service_createpurchaseorder",
@@ -1199,7 +1419,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/src/services/purchase-order-service.js",
-      "source_location": "L299",
+      "source_location": "L302",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_purchase_order_service_submitpurchaseorder",
@@ -1518,6 +1738,60 @@
       "target": "src_app_isrequisitions"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.vue",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "src_app_isrequisitions"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/DashboardPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_dashboardpage_test",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseordercreatepage_test",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderdetailpage_test",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderlistpage_test",
+      "target": "src_api"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -1537,6 +1811,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_requisitionlistpage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/RequisitionListPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_requisitionlistpage_test",
       "target": "src_api"
     },
     {
@@ -1563,6 +1848,50 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/DashboardPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_dashboardpage_test",
+      "target": "src_api_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseordercreatepage_test",
+      "target": "src_api_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderdetailpage_test",
+      "target": "src_api_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderlistpage_test",
+      "target": "src_api_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/RequisitionCreatePage.vue",
       "source_location": "L96",
       "weight": 1.0,
@@ -1579,6 +1908,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_requisitionlistpage",
+      "target": "src_api_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/RequisitionListPage.test.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_requisitionlistpage_test",
       "target": "src_api_api"
     },
     {
@@ -1749,10 +2089,43 @@
       "target": "pages_requisitionlistpage"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/router/index.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "router_index",
+      "target": "pages_purchaseordercreatepage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/router/index.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "router_index",
+      "target": "pages_purchaseorderdetailpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/router/index.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "router_index",
+      "target": "pages_purchaseorderlistpage"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/router/index.js",
-      "source_location": "L14",
+      "source_location": "L20",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "router_index",
@@ -1762,7 +2135,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/router/index.js",
-      "source_location": "L7",
+      "source_location": "L10",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "router_index",
@@ -1777,8 +2150,142 @@
       "confidence_score": 1.0,
       "source": "playwright_config",
       "target": "playwright_config_defineconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.vue",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "src_app_ispurchaseorders"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.test.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "purchase_orders_purchaseorderlineallocationtable_test",
+      "target": "purchase_orders_purchaseorderlineallocationtable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.test.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "purchase_orders_purchaseorderlineallocationtable_test",
+      "target": "purchase_orders_purchaseorderlineallocationtable_test_line"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseordercreatepage_test",
+      "target": "pages_purchaseordercreatepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseordercreatepage_test",
+      "target": "pages_purchaseordercreatepage_test_mountpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderCreatePage.test.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseordercreatepage_test",
+      "target": "pages_purchaseordercreatepage_test_push"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderdetailpage_test",
+      "target": "pages_purchaseorderdetailpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderdetailpage_test",
+      "target": "pages_purchaseorderdetailpage_test_mountpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderDetailPage.test.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderdetailpage_test",
+      "target": "pages_purchaseorderdetailpage_test_purchaseorder"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.test.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderlistpage_test",
+      "target": "pages_purchaseorderlistpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/PurchaseOrderListPage.test.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_purchaseorderlistpage_test",
+      "target": "pages_purchaseorderlistpage_test_mountpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/RequisitionCreatePage.test.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_requisitioncreatepage_test",
+      "target": "pages_requisitioncreatepage_test_mountpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/RequisitionListPage.test.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_requisitionlistpage_test",
+      "target": "pages_requisitionlistpage_test_mountpage"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f97ffbf68abe67c98553c946c4c3426f3596f43b"
+  "built_at_commit": "c392a3d92b5b27b98a39c78c9cc2914bc396a6c4"
 }

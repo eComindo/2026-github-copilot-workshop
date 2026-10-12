@@ -231,6 +231,34 @@ describe('createPurchaseOrder – over-allocation guard', () => {
     expect(client.release).toHaveBeenCalled();
   });
 
+  test('rejects combined allocations that exceed a repeated PR line remaining quantity', async () => {
+    const client = mockClient((sql) => {
+      if (sql === 'BEGIN' || sql === 'ROLLBACK') return { rows: [], rowCount: 0 };
+      if (sql.includes('FOR UPDATE')) {
+        return {
+          rows: [{ id: 'pr-line-001', qty_requested: 10, qty_allocated: 4, pr_status: 'APPROVED' }],
+          rowCount: 1,
+        };
+      }
+      return { rows: [], rowCount: 0 };
+    });
+    const db = mockDb(client);
+    const sourceLine = validPayload().lines[0];
+    const payload = validPayload({
+      lines: [
+        { ...sourceLine, qtyOrdered: 4 },
+        { ...sourceLine, qtyOrdered: 3 },
+      ],
+    });
+
+    await expect(createPurchaseOrder(db, payload))
+      .rejects.toMatchObject({
+        message: 'lines[1]: allocation qty 7 exceeds remaining 6',
+        statusCode: 422,
+      });
+    expect(client.query).toHaveBeenCalledWith('ROLLBACK');
+  });
+
   test('allows allocation when qty equals exact remaining', async () => {
     const client = mockClient((sql) => {
       if (sql === 'BEGIN' || sql === 'COMMIT' || sql === 'ROLLBACK') return { rows: [], rowCount: 0 };
