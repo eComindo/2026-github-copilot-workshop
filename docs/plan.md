@@ -1,9 +1,11 @@
 # Copilot Workshop Plan: Procurement MVP (minimum viable product)
 
+**Status:** Finalized. **Participant delivery:** Purchase Order (PO) module only.
+
 ## 1) Goal
 Build a realistic but small procurement web app to practice using Copilot across SDLC phases.
 
-MVP flow:
+Target product flow:
 1. Purchase Requisition (PR) create + submit + approve
 2. Purchase Order (PO) create from approved PR lines + submit
 3. Goods Receipt (GR) create from PO lines + post
@@ -14,7 +16,7 @@ Out of scope: production hardening, SSO, advanced approval matrix, reporting, no
 Workshop implementation strategy:
 1. Core schema migration + sample seed are pre-provided in repository and bootstrapped via Docker init for participants.
 2. Home/Dashboard + PR module (list/create/detail + PR APIs) are prebuilt and working.
-3. Participant backlog focus is PO module only (PO list/create/detail + PO APIs + PO validations).
+3. Participant backlog is PO only: list, create, and detail pages; PO APIs; and PO validations.
 4. GR module is not implemented during workshop and is left for further exploration.
 5. Bookmark feature is post-backlog and practiced via GitHub Issue-driven development.
 6. DB bootstrap is prepared for Windows/macOS/Linux hosts by using POSIX `sh` init script + LF normalization for `.sh` and `.sql` files.
@@ -137,6 +139,7 @@ Target system APIs (full procurement flow):
 Workshop status: prebuilt in baseline.
 
 ### Purchase Order
+- `GET /api/purchase-orders`
 - `POST /api/purchase-orders`
 - `POST /api/purchase-orders/:id/submit`
 - `GET /api/purchase-orders/:id`
@@ -342,13 +345,30 @@ erDiagram
 
 2. GR received qty <= PO line open qty  
   - Check: `po_lines.qty_received` + new receipt <= `po_lines.qty_ordered`
-  - On GR posting, atomically UPDATE `po_lines SET qty_received = qty_received + qty_received`
+  - On GR posting, atomically increment `po_lines.qty_received` by the received line quantity
   - Also UPDATE `pr_lines.qty_received` via allocation chain
 
 3. Status transitions follow workshop flow only  
   - PR: `DRAFT -> SUBMITTED -> APPROVED`  
   - PO: `DRAFT -> SUBMITTED`  
   - GR: `DRAFT -> POSTED`
+
+### 5.4) PO Creation Contract
+
+`POST /api/purchase-orders` creates a DRAFT PO. Each submitted line must reference one
+approved PR line and must include:
+
+- `prLineId`
+- `itemCode`, `itemName`, `uom`, `siteCode`
+- `qtyOrdered` (> 0)
+- `unitPrice` (>= 0)
+- optional `requiredDate`
+
+The service must validate and lock every referenced PR line in one database transaction.
+For each line, it creates the PO line and allocation record, then increments the linked PR
+line's `qty_allocated`. If validation fails, the transaction rolls back and the API returns
+`422` with a clear message. A PO can be submitted only from `DRAFT`; all other status
+transitions return `422`.
 
 ---
 
@@ -389,7 +409,8 @@ erDiagram
 Suggested minimum:
 1. Jest: reject over-allocation
 2. Jest: reject invalid PO status transition
-3. Playwright: PR baseline data -> PO create -> PO submit -> PO detail assertions
+3. Jest: allow an allocation equal to the PR line's remaining quantity
+4. Playwright: seeded approved PR line -> PO create -> PO submit -> PO detail assertions
 
 ---
 
@@ -433,7 +454,10 @@ VITE_API_BASE_URL=http://localhost:3000
 ## 10) Done Criteria
 - App runs locally with Docker PostgreSQL + Fastify + Vue
 - Baseline Home/Dashboard + PR pages/APIs run without modification
-- PO backlog is implemented (PO list/create/detail + required PO endpoints)
-- PO quantity validations are enforced
-- Jest and Playwright each run at least one PO-focused meaningful test
-- Bookmark feature is captured as a GitHub Issue (or implemented if time allows)
+- PO list, create, and detail pages use the PO REST endpoints
+- A PO can be created only from approved PR lines, and an allocation cannot exceed remaining PR quantity
+- PO creation updates both `pr_line_allocations` and `pr_lines.qty_allocated` atomically
+- PO submission allows only `DRAFT -> SUBMITTED`
+- `GET /api/purchase-orders/:id/open-lines` returns only PO lines with quantity still open for GR
+- Jest covers over-allocation and PO status transition; Playwright covers the PO flow from seeded PR data
+- Bookmark feature is captured as a GitHub Issue; implementation is explicitly optional
