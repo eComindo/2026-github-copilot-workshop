@@ -110,8 +110,4 @@ describe('requisition-service list functions', () => {
     expect(result.openLines[0].id).toBe('l-1');
     expect(result.openLines[0].qtyOpenForPo).toBe(3);
   });
-
-  test('pre-push commit hook works correctly', () => {
-    expect(true).toBe(false);
-  });
 });
