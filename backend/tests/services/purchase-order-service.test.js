@@ -4,6 +4,7 @@ import {
   listPurchaseOrders,
   getOpenPoLines,
   submitPurchaseOrder,
+  setPurchaseOrderBookmark,
 } from '../../src/services/purchase-order-service.js';
 
 // ── Helpers ──────────────────────────────────────────────
@@ -448,6 +449,7 @@ describe('purchase-order-service list functions', () => {
             po_number: 'PO-2026-0001',
             status: 'DRAFT',
             vendor_name: 'PT Maju',
+            is_bookmarked: false,
             created_at: '2026-05-01T10:00:00.000Z',
             updated_at: '2026-05-01T10:00:00.000Z',
           },
@@ -463,10 +465,50 @@ describe('purchase-order-service list functions', () => {
         poNumber: 'PO-2026-0001',
         status: 'DRAFT',
         vendorName: 'PT Maju',
+        isBookmarked: false,
         createdAt: '2026-05-01T10:00:00.000Z',
         updatedAt: '2026-05-01T10:00:00.000Z',
       },
     ]);
+  });
+
+  test('setPurchaseOrderBookmark returns the updated bookmark state', async () => {
+    const db = {
+      query: jest.fn(() => ({
+        rows: [{
+          id: 'po-1',
+          po_number: 'PO-2026-0001',
+          status: 'DRAFT',
+          vendor_name: 'PT Maju',
+          is_bookmarked: true,
+          created_at: '2026-05-01T10:00:00.000Z',
+          updated_at: '2026-05-02T10:00:00.000Z',
+        }],
+        rowCount: 1,
+      })),
+    };
+
+    const result = await setPurchaseOrderBookmark(db, 'po-1', true);
+
+    expect(result.isBookmarked).toBe(true);
+    expect(db.query).toHaveBeenCalledWith(
+      expect.stringContaining('SET is_bookmarked = $2'),
+      ['po-1', true]
+    );
+  });
+
+  test('setPurchaseOrderBookmark returns null when the PO does not exist', async () => {
+    const db = { query: jest.fn(() => ({ rows: [], rowCount: 0 })) };
+
+    await expect(setPurchaseOrderBookmark(db, 'missing-id', false)).resolves.toBeNull();
+  });
+
+  test('setPurchaseOrderBookmark rejects non-boolean values', async () => {
+    const db = { query: jest.fn() };
+
+    await expect(setPurchaseOrderBookmark(db, 'po-1', 'true'))
+      .rejects.toMatchObject({ message: 'isBookmarked must be a boolean', statusCode: 422 });
+    expect(db.query).not.toHaveBeenCalled();
   });
 
   test('getOpenPoLines returns null when PO not found', async () => {
