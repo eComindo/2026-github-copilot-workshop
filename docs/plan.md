@@ -1,9 +1,11 @@
-# Copilot Workshop Plan: Procurement MVP (5 Hours)
+# Copilot Workshop Plan: Procurement MVP (minimum viable product)
+
+**Status:** Finalized. **Participant delivery:** Purchase Order (PO) module only.
 
 ## 1) Goal
 Build a realistic but small procurement web app to practice using Copilot across SDLC phases.
 
-MVP flow:
+Target product flow:
 1. Purchase Requisition (PR) create + submit + approve
 2. Purchase Order (PO) create from approved PR lines + submit
 3. Goods Receipt (GR) create from PO lines + post
@@ -14,7 +16,7 @@ Out of scope: production hardening, SSO, advanced approval matrix, reporting, no
 Workshop implementation strategy:
 1. Core schema migration + sample seed are pre-provided in repository and bootstrapped via Docker init for participants.
 2. Home/Dashboard + PR module (list/create/detail + PR APIs) are prebuilt and working.
-3. Participant backlog focus is PO module only (PO list/create/detail + PO APIs + PO validations).
+3. Participant backlog is PO only: list, create, and detail pages; PO APIs; and PO validations.
 4. GR module is not implemented during workshop and is left for further exploration.
 5. Bookmark feature is post-backlog and practiced via GitHub Issue-driven development.
 6. DB bootstrap is prepared for Windows/macOS/Linux hosts by using POSIX `sh` init script + LF normalization for `.sh` and `.sql` files.
@@ -137,6 +139,7 @@ Target system APIs (full procurement flow):
 Workshop status: prebuilt in baseline.
 
 ### Purchase Order
+- `GET /api/purchase-orders`
 - `POST /api/purchase-orders`
 - `POST /api/purchase-orders/:id/submit`
 - `GET /api/purchase-orders/:id`
@@ -156,83 +159,84 @@ Workshop status: out of implementation scope (further exploration).
 ## 5) Data Model (MVP)
 
 The model is intentionally small and only supports PR -> PO -> GR flow.
+All primary keys are UUID. Schema source of truth: `db/migrations/001_init_procurement_mvp.sql`.
 
 ### 5.1) Core Tables
 
 1. `purchase_requisitions` (PR header)
-  - `id` (PK)
-  - `pr_number` (UNIQUE)
-  - `requester_name`
-  - `department`
-  - `title`
-  - `needed_by_date`
-  - `notes` (nullable)
+  - `id` UUID (PK)
+  - `pr_number` VARCHAR(30) (UNIQUE)
+  - `requester_name` VARCHAR(120)
+  - `department_name` VARCHAR(120)
+  - `title` VARCHAR(255)
+  - `notes` TEXT (nullable)
+  - `needed_by_date` DATE
   - `status` (`DRAFT | SUBMITTED | APPROVED`)
   - `created_at`, `updated_at`
 
 2. `pr_lines` (PR item lines)
-  - `id` (PK)
-  - `requisition_id` (FK -> `purchase_requisitions.id`)
-  - `line_no`
-  - `item_code`, `item_name`
-  - `qty_requested` (numeric > 0)
-  - `uom`
-  - `est_unit_price` (numeric >= 0)
-  - `site`
-  - `required_date`
-  - `budget_center`
+  - `id` UUID (PK)
+  - `pr_id` UUID (FK -> `purchase_requisitions.id`)
+  - `line_no` INT
+  - `item_code` VARCHAR(60), `item_name` VARCHAR(255)
+  - `qty_requested` NUMERIC(14,2) (> 0)
+  - `qty_allocated` NUMERIC(14,2) (>= 0, default 0) — denormalized, updated on PO creation
+  - `qty_received` NUMERIC(14,2) (>= 0, default 0) — denormalized, updated on GR posting
+  - `uom` VARCHAR(20)
+  - `est_unit_price` NUMERIC(14,2) (>= 0)
+  - `site_code` VARCHAR(50)
+  - `required_date` DATE
+  - `budget_center` VARCHAR(60)
   - `created_at`, `updated_at`
-  - UNIQUE(`requisition_id`, `line_no`)
+  - UNIQUE(`pr_id`, `line_no`)
 
 3. `purchase_orders` (PO header)
-  - `id` (PK)
-  - `po_number` (UNIQUE)
-  - `vendor_name`
-  - `po_date`
-  - `currency_code`
-  - `payment_terms`
-  - `notes` (nullable)
+  - `id` UUID (PK)
+  - `po_number` VARCHAR(30) (UNIQUE)
+  - `vendor_name` VARCHAR(255)
   - `status` (`DRAFT | SUBMITTED`)
   - `created_at`, `updated_at`
 
 4. `po_lines` (PO item lines)
-  - `id` (PK)
-  - `purchase_order_id` (FK -> `purchase_orders.id`)
-  - `line_no`
-  - `item_code`, `item_name`
-  - `qty_ordered` (numeric > 0)
-  - `uom`
-  - `unit_price` (numeric >= 0)
-  - `delivery_address`
-  - `delivery_date`
+  - `id` UUID (PK)
+  - `po_id` UUID (FK -> `purchase_orders.id`)
+  - `line_no` INT
+  - `item_code` VARCHAR(60), `item_name` VARCHAR(255)
+  - `qty_ordered` NUMERIC(14,2) (> 0)
+  - `qty_received` NUMERIC(14,2) (>= 0, default 0) — denormalized, updated on GR posting
+  - `uom` VARCHAR(20)
+  - `unit_price` NUMERIC(14,2) (>= 0)
+  - `site_code` VARCHAR(50)
+  - `required_date` DATE
   - `created_at`, `updated_at`
-  - UNIQUE(`purchase_order_id`, `line_no`)
+  - UNIQUE(`po_id`, `line_no`)
 
 5. `pr_line_allocations` (bridge PR line -> PO line)
-  - `id` (PK)
-  - `pr_line_id` (FK -> `pr_lines.id`)
-  - `po_line_id` (FK -> `po_lines.id`)
-  - `qty_allocated` (numeric > 0)
+  - `id` UUID (PK)
+  - `pr_line_id` UUID (FK -> `pr_lines.id`)
+  - `po_line_id` UUID (FK -> `po_lines.id`)
+  - `allocated_qty` NUMERIC(14,2) (> 0)
   - `created_at`
   - UNIQUE(`pr_line_id`, `po_line_id`)
 
 6. `goods_receipts` (GR header)
-  - `id` (PK)
-  - `gr_number` (UNIQUE)
-  - `purchase_order_id` (FK -> `purchase_orders.id`)
-  - `receipt_date`
-  - `notes` (nullable)
+  - `id` UUID (PK)
+  - `gr_number` VARCHAR(30) (UNIQUE)
+  - `po_id` UUID (FK -> `purchase_orders.id`)
   - `status` (`DRAFT | POSTED`)
+  - `receipt_date` DATE
+  - `notes` TEXT (nullable)
   - `created_at`, `updated_at`
 
 7. `gr_lines` (GR item lines)
-  - `id` (PK)
-  - `goods_receipt_id` (FK -> `goods_receipts.id`)
-  - `po_line_id` (FK -> `po_lines.id`)
-  - `line_no`
-  - `qty_received` (numeric > 0)
-  - `created_at`, `updated_at`
-  - UNIQUE(`goods_receipt_id`, `line_no`)
+  - `id` UUID (PK)
+  - `gr_id` UUID (FK -> `goods_receipts.id`)
+  - `po_line_id` UUID (FK -> `po_lines.id`)
+  - `line_no` INT
+  - `qty_received` NUMERIC(14,2) (> 0)
+  - `actual_site_code` VARCHAR(50)
+  - `created_at`
+  - UNIQUE(`gr_id`, `line_no`)
 
 ### 5.2) ERD (MVP)
 
@@ -247,10 +251,10 @@ erDiagram
    po_lines ||--o{ gr_lines : received_by
 
    purchase_requisitions {
-    bigint id PK
+    uuid id PK
     string pr_number UK
     string requester_name
-    string department
+    string department_name
     string title
     date needed_by_date
     string notes
@@ -260,15 +264,17 @@ erDiagram
    }
 
    pr_lines {
-    bigint id PK
-    bigint requisition_id FK
+    uuid id PK
+    uuid pr_id FK
     int line_no
     string item_code
     string item_name
     numeric qty_requested
+    numeric qty_allocated
+    numeric qty_received
     string uom
     numeric est_unit_price
-    string site
+    string site_code
     date required_date
     string budget_center
     timestamp created_at
@@ -276,75 +282,93 @@ erDiagram
    }
 
    purchase_orders {
-    bigint id PK
+    uuid id PK
     string po_number UK
     string vendor_name
-    date po_date
-    string currency_code
-    string payment_terms
-    string notes
     string status
     timestamp created_at
     timestamp updated_at
    }
 
    po_lines {
-    bigint id PK
-    bigint purchase_order_id FK
+    uuid id PK
+    uuid po_id FK
     int line_no
     string item_code
     string item_name
     numeric qty_ordered
+    numeric qty_received
     string uom
     numeric unit_price
-    string delivery_address
-    date delivery_date
+    string site_code
+    date required_date
     timestamp created_at
     timestamp updated_at
    }
 
    pr_line_allocations {
-    bigint id PK
-    bigint pr_line_id FK
-    bigint po_line_id FK
-    numeric qty_allocated
+    uuid id PK
+    uuid pr_line_id FK
+    uuid po_line_id FK
+    numeric allocated_qty
     timestamp created_at
    }
 
    goods_receipts {
-    bigint id PK
+    uuid id PK
     string gr_number UK
-    bigint purchase_order_id FK
+    uuid po_id FK
+    string status
     date receipt_date
     string notes
-    string status
     timestamp created_at
     timestamp updated_at
    }
 
    gr_lines {
-    bigint id PK
-    bigint goods_receipt_id FK
-    bigint po_line_id FK
+    uuid id PK
+    uuid gr_id FK
+    uuid po_line_id FK
     int line_no
     numeric qty_received
+    string actual_site_code
     timestamp created_at
-    timestamp updated_at
    }
 ```
 
 ### 5.3) Rule Mapping to Data Model
 
 1. PO allocated qty <= PR line remaining qty  
-  - Check: SUM(`pr_line_allocations.qty_allocated`) per `pr_line_id` <= `pr_lines.qty_requested`
+  - Check: `pr_lines.qty_allocated` + new allocation <= `pr_lines.qty_requested`
+  - On PO creation, atomically UPDATE `pr_lines SET qty_allocated = qty_allocated + allocated_qty`
+  - Bridge record: `pr_line_allocations.allocated_qty`
 
 2. GR received qty <= PO line open qty  
-  - Check: SUM(`gr_lines.qty_received`) per `po_line_id` <= `po_lines.qty_ordered`
+  - Check: `po_lines.qty_received` + new receipt <= `po_lines.qty_ordered`
+  - On GR posting, atomically increment `po_lines.qty_received` by the received line quantity
+  - Also UPDATE `pr_lines.qty_received` via allocation chain
 
 3. Status transitions follow workshop flow only  
   - PR: `DRAFT -> SUBMITTED -> APPROVED`  
   - PO: `DRAFT -> SUBMITTED`  
   - GR: `DRAFT -> POSTED`
+
+### 5.4) PO Creation Contract
+
+`POST /api/purchase-orders` creates a DRAFT PO. Each submitted line must reference one
+approved PR line and must include:
+
+- `prLineId`
+- `itemCode`, `itemName`, `uom`, `siteCode`
+- `qtyOrdered` (> 0)
+- `unitPrice` (>= 0)
+- optional `requiredDate`
+
+The service must validate and lock every referenced PR line in one database transaction.
+For each line, it creates the PO line and allocation record, then increments the linked PR
+line's `qty_allocated`. If validation fails, the transaction rolls back and the API returns
+`422` with a clear message. A PO can be submitted only from `DRAFT`; all other status
+transitions return `422`.
 
 ---
 
@@ -385,7 +409,8 @@ erDiagram
 Suggested minimum:
 1. Jest: reject over-allocation
 2. Jest: reject invalid PO status transition
-3. Playwright: PR baseline data -> PO create -> PO submit -> PO detail assertions
+3. Jest: allow an allocation equal to the PR line's remaining quantity
+4. Playwright: seeded approved PR line -> PO create -> PO submit -> PO detail assertions
 
 ---
 
@@ -429,7 +454,10 @@ VITE_API_BASE_URL=http://localhost:3000
 ## 10) Done Criteria
 - App runs locally with Docker PostgreSQL + Fastify + Vue
 - Baseline Home/Dashboard + PR pages/APIs run without modification
-- PO backlog is implemented (PO list/create/detail + required PO endpoints)
-- PO quantity validations are enforced
-- Jest and Playwright each run at least one PO-focused meaningful test
-- Bookmark feature is captured as a GitHub Issue (or implemented if time allows)
+- PO list, create, and detail pages use the PO REST endpoints
+- A PO can be created only from approved PR lines, and an allocation cannot exceed remaining PR quantity
+- PO creation updates both `pr_line_allocations` and `pr_lines.qty_allocated` atomically
+- PO submission allows only `DRAFT -> SUBMITTED`
+- `GET /api/purchase-orders/:id/open-lines` returns only PO lines with quantity still open for GR
+- Jest covers over-allocation and PO status transition; Playwright covers the PO flow from seeded PR data
+- Bookmark feature is captured as a GitHub Issue; implementation is explicitly optional

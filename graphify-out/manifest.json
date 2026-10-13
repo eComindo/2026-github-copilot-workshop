@@ -1,0 +1,182 @@
+{
+  "backend/jest.config.js": {
+    "mtime": 1789993699.5612476,
+    "ast_hash": "6a62080ac296ab34cc8caa6b82fca604",
+    "semantic_hash": "6a62080ac296ab34cc8caa6b82fca604"
+  },
+  "backend/src/app.js": {
+    "mtime": 1791761386.4572353,
+    "ast_hash": "d0a6548d455b3ce5b0716db55d92d959",
+    "semantic_hash": "d0a6548d455b3ce5b0716db55d92d959"
+  },
+  "backend/src/config.js": {
+    "mtime": 1772615059.6723273,
+    "ast_hash": "befe927351af7dff400f558b621ac69a",
+    "semantic_hash": "befe927351af7dff400f558b621ac69a"
+  },
+  "backend/src/plugins/db.js": {
+    "mtime": 1772615059.6725502,
+    "ast_hash": "a603dc234f2eb4f9b9b9bb48ccd06c4a",
+    "semantic_hash": "a603dc234f2eb4f9b9b9bb48ccd06c4a"
+  },
+  "backend/src/routes/purchase-order-routes.js": {
+    "mtime": 1791761386.457718,
+    "ast_hash": "3e096edd89932d635ed8847bcb2e908e",
+    "semantic_hash": "3e096edd89932d635ed8847bcb2e908e"
+  },
+  "backend/src/routes/requisition-routes.js": {
+    "mtime": 1791761386.4582288,
+    "ast_hash": "95b9aea3f9aeb61ca97624cba9512fd8",
+    "semantic_hash": "95b9aea3f9aeb61ca97624cba9512fd8"
+  },
+  "backend/src/server.js": {
+    "mtime": 1772615059.6731725,
+    "ast_hash": "c83e18e819917eb0392d8a931313dc3e",
+    "semantic_hash": "c83e18e819917eb0392d8a931313dc3e"
+  },
+  "backend/src/services/purchase-order-service.js": {
+    "mtime": 1791796800.1140559,
+    "ast_hash": "f1bd81909971363a453f634b7b19d439",
+    "semantic_hash": "f1bd81909971363a453f634b7b19d439"
+  },
+  "backend/src/services/requisition-service.js": {
+    "mtime": 1772615059.6737938,
+    "ast_hash": "1e998133fc20c789b692c5d97cc4f9d6",
+    "semantic_hash": "1e998133fc20c789b692c5d97cc4f9d6"
+  },
+  "backend/tests/services/purchase-order-service.test.js": {
+    "mtime": 1791796800.12384,
+    "ast_hash": "3e360791295400be59bb2f144e2a81b7",
+    "semantic_hash": "3e360791295400be59bb2f144e2a81b7"
+  },
+  "backend/tests/services/requisition-service.test.js": {
+    "mtime": 1791761386.459378,
+    "ast_hash": "727217b73dd8e9c412dabe6e7e57f06d",
+    "semantic_hash": "727217b73dd8e9c412dabe6e7e57f06d"
+  },
+  "db/migrations/001_init_procurement_mvp.sql": {
+    "mtime": 1771664688.3734457,
+    "ast_hash": "c253341516ef76b6c768b2222866ba58",
+    "semantic_hash": "c253341516ef76b6c768b2222866ba58"
+  },
+  "db/seeds/002_seed_procurement_mvp.sql": {
+    "mtime": 1772076890.533863,
+    "ast_hash": "a86455acd43cb1b14e7ad705bd5d88e0",
+    "semantic_hash": "a86455acd43cb1b14e7ad705bd5d88e0"
+  },
+  "docker/postgres/init/00-init-mvp-db.sh": {
+    "mtime": 1772615059.6746855,
+    "ast_hash": "850bad8a05f5a65c597b8d8a6d723764",
+    "semantic_hash": "850bad8a05f5a65c597b8d8a6d723764"
+  },
+  "frontend/src/App.vue": {
+    "mtime": 1791797017.3229167,
+    "ast_hash": "770fe4f6cbb0979592133080fdee2e99",
+    "semantic_hash": "770fe4f6cbb0979592133080fdee2e99"
+  },
+  "frontend/src/api.js": {
+    "mtime": 1791796800.07408,
+    "ast_hash": "b52712dd316738e30070471d9bb3fad3",
+    "semantic_hash": "b52712dd316738e30070471d9bb3fad3"
+  },
+  "frontend/src/main.js": {
+    "mtime": 1772615059.6808026,
+    "ast_hash": "3ff901c9b605c0792af51a665d2a268d",
+    "semantic_hash": "3ff901c9b605c0792af51a665d2a268d"
+  },
+  "frontend/src/pages/DashboardPage.vue": {
+    "mtime": 1782371441.6913035,
+    "ast_hash": "c846ce9eda3c414126ad13a998010adc",
+    "semantic_hash": "c846ce9eda3c414126ad13a998010adc"
+  },
+  "frontend/src/pages/RequisitionCreatePage.vue": {
+    "mtime": 1772615059.683183,
+    "ast_hash": "417f2c97af6bea7681a661c41bb47956",
+    "semantic_hash": "417f2c97af6bea7681a661c41bb47956"
+  },
+  "frontend/src/pages/RequisitionDetailPage.vue": {
+    "mtime": 1772615059.6833682,
+    "ast_hash": "4e71d454f6ed4f8343743c0c595b4dd6",
+    "semantic_hash": "4e71d454f6ed4f8343743c0c595b4dd6"
+  },
+  "frontend/src/pages/RequisitionListPage.vue": {
+    "mtime": 1772615059.683638,
+    "ast_hash": "a6a73a39bcefeb790dd812000218875d",
+    "semantic_hash": "a6a73a39bcefeb790dd812000218875d"
+  },
+  "frontend/src/router/index.js": {
+    "mtime": 1791797017.3158274,
+    "ast_hash": "bf06a0861b3ebbf68f4ee83d14fb7e7c",
+    "semantic_hash": "bf06a0861b3ebbf68f4ee83d14fb7e7c"
+  },
+  "frontend/vite.config.js": {
+    "mtime": 1790582636.9235947,
+    "ast_hash": "9115e324d53b38692b1b3913144cfc92",
+    "semantic_hash": "9115e324d53b38692b1b3913144cfc92"
+  },
+  "playwright.config.js": {
+    "mtime": 1772615059.690933,
+    "ast_hash": "1dff95dba3fb3a024ea7b63de0b61920",
+    "semantic_hash": "1dff95dba3fb3a024ea7b63de0b61920"
+  },
+  "frontend/src/components/purchase-orders/PurchaseOrderHeaderForm.vue": {
+    "mtime": 1791796800.083097,
+    "ast_hash": "3dfd31d5bccaf82233943fa530459512",
+    "semantic_hash": "3dfd31d5bccaf82233943fa530459512"
+  },
+  "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.test.js": {
+    "mtime": 1791796209.6241388,
+    "ast_hash": "4dc18257383915db5073c37999c10b46",
+    "semantic_hash": "4dc18257383915db5073c37999c10b46"
+  },
+  "frontend/src/components/purchase-orders/PurchaseOrderLineAllocationTable.vue": {
+    "mtime": 1791796800.0940962,
+    "ast_hash": "b7722ed92ad94cb1776a8c495d9a3ce3",
+    "semantic_hash": "b7722ed92ad94cb1776a8c495d9a3ce3"
+  },
+  "frontend/src/pages/DashboardPage.test.js": {
+    "mtime": 1791796203.7628963,
+    "ast_hash": "b7da3b66bf77379ea74bdaf7eeeff6fa",
+    "semantic_hash": "b7da3b66bf77379ea74bdaf7eeeff6fa"
+  },
+  "frontend/src/pages/PurchaseOrderCreatePage.test.js": {
+    "mtime": 1791797030.0238676,
+    "ast_hash": "76d57ab387b5d505b5d8fde3b884bb6f",
+    "semantic_hash": "76d57ab387b5d505b5d8fde3b884bb6f"
+  },
+  "frontend/src/pages/PurchaseOrderCreatePage.vue": {
+    "mtime": 1791797030.0138981,
+    "ast_hash": "c56961d15758b09c04b220a6574afb41",
+    "semantic_hash": "c56961d15758b09c04b220a6574afb41"
+  },
+  "frontend/src/pages/PurchaseOrderDetailPage.test.js": {
+    "mtime": 1791797030.0418746,
+    "ast_hash": "c8780f72b13c894469395a181c228eee",
+    "semantic_hash": "c8780f72b13c894469395a181c228eee"
+  },
+  "frontend/src/pages/PurchaseOrderDetailPage.vue": {
+    "mtime": 1791797017.306813,
+    "ast_hash": "7aa69dd05c895fa0b5413065dd6c101d",
+    "semantic_hash": "7aa69dd05c895fa0b5413065dd6c101d"
+  },
+  "frontend/src/pages/PurchaseOrderListPage.test.js": {
+    "mtime": 1791797030.0335681,
+    "ast_hash": "81048c03d96c93e5de6758ff2ec82689",
+    "semantic_hash": "81048c03d96c93e5de6758ff2ec82689"
+  },
+  "frontend/src/pages/PurchaseOrderListPage.vue": {
+    "mtime": 1791797017.2976732,
+    "ast_hash": "80a418ab7286b6082b0c3aac2156d490",
+    "semantic_hash": "80a418ab7286b6082b0c3aac2156d490"
+  },
+  "frontend/src/pages/RequisitionCreatePage.test.js": {
+    "mtime": 1791796203.7797856,
+    "ast_hash": "d6a683e7640510e20bfd4e700ef4e3a9",
+    "semantic_hash": "d6a683e7640510e20bfd4e700ef4e3a9"
+  },
+  "frontend/src/pages/RequisitionListPage.test.js": {
+    "mtime": 1791796203.772141,
+    "ast_hash": "bf77e96a1c0a77b96aa982f464863691",
+    "semantic_hash": "bf77e96a1c0a77b96aa982f464863691"
+  }
+}

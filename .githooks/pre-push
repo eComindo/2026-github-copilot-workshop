@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+echo "Running tests before push..."
+
+if ! npm test; then
+  echo "Push blocked: tests failed." >&2
+  exit 1
+fi
