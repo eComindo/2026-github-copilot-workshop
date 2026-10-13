@@ -3,6 +3,7 @@ import {
   getOpenPoLines,
   getPurchaseOrderById,
   listPurchaseOrders,
+  setPurchaseOrderBookmark,
   submitPurchaseOrder,
 } from '../services/purchase-order-service.js';
 
@@ -30,6 +31,29 @@ export default async function purchaseOrderRoutes(fastify) {
   fastify.post('/api/purchase-orders/:id/submit', async (request, reply) => {
     try {
       const purchaseOrder = await submitPurchaseOrder(fastify.db, request.params.id);
+      if (!purchaseOrder) {
+        reply.code(404);
+        return { message: 'Purchase order not found' };
+      }
+
+      return purchaseOrder;
+    } catch (error) {
+      if (error.statusCode) {
+        reply.code(error.statusCode);
+        return { message: error.message };
+      }
+
+      throw error;
+    }
+  });
+
+  fastify.put('/api/purchase-orders/:id/bookmark', async (request, reply) => {
+    try {
+      const purchaseOrder = await setPurchaseOrderBookmark(
+        fastify.db,
+        request.params.id,
+        request.body?.isBookmarked
+      );
       if (!purchaseOrder) {
         reply.code(404);
         return { message: 'Purchase order not found' };

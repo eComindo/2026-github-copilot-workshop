@@ -8,6 +8,7 @@ function mapHeader(row) {
     poNumber: row.po_number,
     status: row.status,
     vendorName: row.vendor_name,
+    isBookmarked: row.is_bookmarked ?? false,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -76,7 +77,7 @@ function validateCreatePayload(payload) {
 
 export async function listPurchaseOrders(db) {
   const { rows } = await db.query(
-    `SELECT id, po_number, status, vendor_name, created_at, updated_at
+    `SELECT id, po_number, status, vendor_name, is_bookmarked, created_at, updated_at
      FROM purchase_orders
      ORDER BY created_at DESC`
   );
@@ -269,6 +270,24 @@ export async function createPurchaseOrder(db, payload) {
   } finally {
     client.release();
   }
+}
+
+export async function setPurchaseOrderBookmark(db, id, isBookmarked) {
+  if (typeof isBookmarked !== 'boolean') {
+    const err = new Error('isBookmarked must be a boolean');
+    err.statusCode = 422;
+    throw err;
+  }
+
+  const { rows } = await db.query(
+    `UPDATE purchase_orders
+     SET is_bookmarked = $2, updated_at = NOW()
+     WHERE id = $1
+     RETURNING id, po_number, status, vendor_name, is_bookmarked, created_at, updated_at`,
+    [id, isBookmarked]
+  );
+
+  return rows.length > 0 ? mapHeader(rows[0]) : null;
 }
 
 // ── Submit PO (DRAFT → SUBMITTED) ───────────────────────
