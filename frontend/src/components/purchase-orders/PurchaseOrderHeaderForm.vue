@@ -5,7 +5,13 @@
     <div class="form-row">
       <div class="form-group">
         <label for="supplier">Supplier</label>
-        <input id="supplier" v-model="form.supplierName" placeholder="Select supplier" required />
+        <input
+          id="supplier"
+          v-model="form.supplierName"
+          data-testid="po-supplier"
+          placeholder="Select supplier"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="po-date">PO Date</label>

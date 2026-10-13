@@ -43,7 +43,12 @@ onMounted(load);
         </div>
       </div>
       <div v-if="purchaseOrder?.status === 'DRAFT'" class="btn-group">
-        <button class="btn btn-primary" :disabled="isSubmitting" @click="submitPurchaseOrder">
+        <button
+          class="btn btn-primary"
+          data-testid="po-submit"
+          :disabled="isSubmitting"
+          @click="submitPurchaseOrder"
+        >
           {{ isSubmitting ? 'Submitting...' : 'Submit PO' }}
         </button>
       </div>
@@ -64,7 +69,11 @@ onMounted(load);
         </div>
         <div class="form-group">
           <label>Status</label>
-          <span class="status-badge" :class="purchaseOrder.status.toLowerCase()">{{ purchaseOrder.status }}</span>
+          <span
+            class="status-badge"
+            :class="purchaseOrder.status.toLowerCase()"
+            data-testid="po-status"
+          >{{ purchaseOrder.status }}</span>
         </div>
         <div class="form-group">
           <label>Created</label>

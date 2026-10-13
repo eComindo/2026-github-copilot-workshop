@@ -27,6 +27,7 @@
             <td>
               <select
                 :value="line.prLineId"
+                :data-testid="`po-pr-line-${index}`"
                 required
                 @change="$emit('select-line', index, $event.target.value)"
               >
@@ -40,10 +41,11 @@
             <td><input :value="line.itemCode" placeholder="Type..." readonly /></td>
             <td><input :value="line.itemName" placeholder="Type..." readonly /></td>
             <td><input :value="line.uom" placeholder="PCS" readonly /></td>
-            <td>{{ line.remainingQty }}</td>
+            <td :data-testid="`po-remaining-qty-${index}`">{{ line.remainingQty }}</td>
             <td>
               <input
                 v-model.number="line.qtyAllocated"
+                :data-testid="`po-allocate-qty-${index}`"
                 type="number"
                 min="0"
                 :max="line.remainingQty"

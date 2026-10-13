@@ -10,8 +10,8 @@
       </div>
     </div>
 
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-    <form @submit.prevent="saveDraft">
+    <p v-if="errorMessage" class="error" data-testid="po-error">{{ errorMessage }}</p>
+    <form data-testid="po-create-form" @submit.prevent="saveDraft">
       <PurchaseOrderHeaderForm :form="form" />
       <PurchaseOrderLineAllocationTable
         :lines="form.lines"
@@ -23,7 +23,12 @@
 
       <div class="btn-group">
         <RouterLink class="btn btn-outline" to="/">Cancel</RouterLink>
-        <button class="btn btn-primary" type="submit" :disabled="isSaving || isLoadingLines">
+        <button
+          class="btn btn-primary"
+          data-testid="po-save-draft"
+          type="submit"
+          :disabled="isSaving || isLoadingLines"
+        >
           {{ isSaving ? 'Saving...' : 'Save as Draft' }}
         </button>
       </div>
