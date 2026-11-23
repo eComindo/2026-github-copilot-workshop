@@ -9,6 +9,7 @@ Build a procurement management system with core modules for:
 A procurement system manages how a company buys things, with control and traceability from request to receiving.
 
 Complete product context is available in the `docs/product-context.md` file.
+Project progress document is available in the `docs/project-progress.md` file.
 
 ## API Requirements
 Maintain compatibility with endpoints listed in `docs/product-context.md`.
