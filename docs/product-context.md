@@ -35,14 +35,16 @@ Bootstrap entrypoint script:
 
 ---
 
-## 2) Final Tech Stack
-- Backend: Fastify (JavaScript), REST API
-- Database: PostgreSQL in Docker (`postgres:16-alpine`)
-- Frontend: Vue 3 + Vite (JavaScript)
+## 2) Tech Stack (Do Not Change)
+- Backend: Fastify + JavaScript
+- API style: REST JSON
+- Database: PostgreSQL (Docker local, image: `postgres:16-alpine`)
+- Frontend: Vue 3 + Vite + JavaScript
 - Unit test: Jest
-- E2E/UI test: Playwright
+- E2E test: Playwright
+- Do not use Prisma for database. Always use model classes.
 
-Why this works for workshop:
+Why that selection:
 - Fastify is lightweight and easy to scaffold with Copilot
 - REST keeps backend/frontend contract simple
 - PostgreSQL in Docker is stable and realistic for local teams
@@ -52,6 +54,14 @@ Why this works for workshop:
 ---
 
 ## 3) Architecture
+
+### Scope Constraints (Strict)
+- Baseline provided in repo: database schema + Home/Dashboard + PR module (list/create/detail + required PR APIs).
+- Participant implementation scope: PO module only (PO list/create/detail + PO APIs + PO validations).
+- GR module is out of implementation scope during the workshop and treated as further exploration.
+- Keep business scope minimal and teachable.
+- Avoid enterprise-only features (SSO, workflow engine, reporting, notifications, advanced compliance).
+- Prefer clarity and small modules over abstraction-heavy architecture.
 
 ```mermaid
 flowchart LR
@@ -352,37 +362,7 @@ erDiagram
 
 ---
 
-## 6) Workshop Agenda (5 Hours)
-
-### Hour 1 — Setup + Baseline Boot
-- Clone repo, start PostgreSQL via Docker Compose
-- Apply pre-provided core migration script
-- Configure backend/frontend `.env` and run baseline app
-- Verify Home/Dashboard + PR module are already working
-
-### Hour 2 — PO Backlog: API + Data Rules
-- Implement PO create/submit/detail/open-lines endpoints
-- Implement allocation validation (allocated qty <= PR remaining qty)
-- Keep handlers thin and move rules to PO service
-
-### Hour 3 — PO Backlog: UI Pages
-- Build PO list/create/detail pages on top of baseline navigation
-- Connect pages to PO APIs
-- Validate create-from-approved-PR-line flow
-
-### Hour 4 — PO-focused Testing + GitHub Review
-- Add Jest tests focused on PO rules and status transitions
-- Add Playwright flow for PO pages integrated with baseline PR data
-- Open PR and use Copilot review + code quality checks
-
-### Hour 5 — Optional Extension + Exploration
-- Implement Bookmark feature from GitHub Issue (optional, post-backlog)
-- Demo completed PO backlog
-- GR module left as self-paced exploration using this plan
-
----
-
-## 7) Testing Strategy
+## 6) Testing Strategy
 - Jest for service-level and route validation tests
 - Playwright for PO-focused end-to-end journey on top of baseline PR
 
@@ -393,7 +373,7 @@ Suggested minimum:
 
 ---
 
-## 8) Local Run Baseline
+## 7) Local Run Baseline
 
 ### Docker
 ```yaml
@@ -421,7 +401,7 @@ VITE_API_BASE_URL=http://localhost:3000
 
 ---
 
-## 9) Copilot Usage by SDLC Phase
+## 8) Copilot Usage by SDLC Phase
 1. Requirements: turn broad business asks into strict MVP boundaries
 2. Design: generate schema and endpoint skeletons
 3. Build: scaffold handlers/services/components
@@ -430,7 +410,7 @@ VITE_API_BASE_URL=http://localhost:3000
 
 ---
 
-## 10) Done Criteria
+## 9) Done Criteria
 - App runs locally with Docker PostgreSQL + Fastify + Vue
 - Baseline Home/Dashboard + PR pages/APIs run without modification
 - PO backlog is implemented (PO list/create/detail + required PO endpoints)
